@@ -1,27 +1,39 @@
-import express from "express";
-import { Request, Response, Application } from "express";
+import express, { Request, Response, Application } from "express";
 import dotenv from "dotenv";
+import mongoose from "mongoose";
 
-// ================== ROUTER IMPORTS ==================
+import userRoutes from '../routes/user.js';
 import jobRouter from "../routes/jobRouter.js";
-
+// app config
 const serverPort: number = 8000;
+const application: Application = express();
+application.use(express.json());
+application.use(express.urlencoded({ extended: true }));
 dotenv.config();
+// routes
+application.use("/api/users", userRoutes);
+application.use("api/v1/jobs", jobRouter);
+// db
+const uri = `mongodb://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_NAME}:27017/`;
+mongoose
+  .connect(uri)
+  .then(() => {
+    console.log("[LOG] Connected to MongoDB");
+  })
+  .catch((error) => {
+    console.error(`[ERROR] ${error}`);
+    process.exit();
+  });
 
-const app: Application = express();
-
-app.get("/", (request: Request, response: Response): void => {
-	response.send("hello world");
+application.get("/", (request: Request, response: Response): void => {
+  response.send("hello world");
 });
-
-// ================== BASE URL ==================
-app.use("api/v1/jobs", jobRouter);
 
 //  ================== "NOT FOUND" MIDDLEWARE  ==================
-app.use("*", (request: Request, response: Response): void => {
-	response.status(404).json({ msg: "not found" });
+application.use("*", (request: Request, response: Response): void => {
+  response.status(404).json({ msg: "not found" });
 });
 
-app.listen(serverPort, () => {
-	console.log(`server is running at port ${serverPort}`);
+application.listen(serverPort, () => {
+  console.log(`server is running at port ${serverPort}`);
 });
