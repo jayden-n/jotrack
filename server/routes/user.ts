@@ -1,7 +1,7 @@
 import express, { Router, Request, Response } from "express";
 import bcrypt from "bcrypt";
 
-import UserModel from '../models/User.js'
+import UserModel from "../models/User.js";
 
 import IUser from "../interface/IUser.js";
 import IUserMethods from "../interface/IUserMethods.js";
@@ -42,13 +42,14 @@ router.put("/:eid", async (request: Request, response: Response) => {
       request.body.password !== null &&
       request.body.password !== existingPassword
     )
-      request.body.password = bcrypt.hash(request.body.password, 10);
+      request.body.password = await bcrypt.hash(request.body.password, 10);
 
-    const user: IUser | null = await UserModel.findByIdAndUpdate(
-      request.params.eid,
+    const user: IUser | null = await UserModel.findOneAndUpdate(
+      { _id: request.params.eid },
       {
         ...request.body,
-      }
+      },
+      { new: true }
     );
     if (!user) response.status(401);
     response.status(200).send(user);

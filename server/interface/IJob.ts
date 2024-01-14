@@ -1,5 +1,5 @@
 import { ObjectId } from "mongoose";
-import { JOB_STATUS, JOB_TYPE } from "../utils/constants.ts";
+import { JOB_STATUS, JOB_TYPE } from "../utils/constants.js";
 
 export interface IJobs {
 	company: String;

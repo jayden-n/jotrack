@@ -52,6 +52,35 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "updateUser",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"updatedFirstName\",\n    \"lastName\": \"updatedLastName\",\n    \"email\": \"updatedEmail@doman.ca\",\n    \"password\": \"updatedPassword\",\n    \"bio\": \"updatedBio\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/users/{{userId}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
