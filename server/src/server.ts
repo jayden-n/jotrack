@@ -1,7 +1,9 @@
 import express, { Request, Response, Application } from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+
 import userRoutes from '../routes/user.js';
+import jobRouter from "../routes/jobRouter.js";
 // app config
 const serverPort: number = 8000;
 const application: Application = express();
@@ -10,6 +12,7 @@ application.use(express.urlencoded({ extended: true }));
 dotenv.config();
 // routes
 application.use("/api/users", userRoutes);
+application.use("api/v1/jobs", jobRouter);
 // db
 const uri = `mongodb://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_NAME}:27017/`;
 mongoose
