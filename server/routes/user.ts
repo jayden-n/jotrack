@@ -1,10 +1,10 @@
 import express, { Router, Request, Response } from "express";
 import bcrypt from "bcrypt";
 
-import UserModel from "../models/User.js";
+import UserModel from '../models/User.js'
 
 import IUser from "../interface/IUser.js";
-import IUserMethod from "../interface/IUserMethods.js";
+import IUserMethods from "../interface/IUserMethods.js";
 
 const router: Router = express.Router();
 
@@ -18,7 +18,7 @@ router.post("/", async (request: Request, response: Response) => {
     const hashedPassword: string = await bcrypt.hash(request.body.password, 10);
     request.body.password = hashedPassword;
 
-    const user: IUser & IUserMethod = new UserModel({
+    const user: IUser & IUserMethods = new UserModel({
       ...request.body,
     });
 

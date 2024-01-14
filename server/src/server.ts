@@ -1,7 +1,7 @@
 import express, { Request, Response, Application } from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import userRoutes from "../routes/user.js";
+import userRoutes from '../routes/user.js';
 // app config
 const serverPort: number = 8000;
 const application: Application = express();
