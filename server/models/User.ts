@@ -1,6 +1,9 @@
-import { Schema, model, connect } from "mongoose";
+import {
+  Schema,
+  model,
+} from "mongoose";
 
-import IUser from "../interface/IUser";
+import IUser from "../interface/IUser.js";
 
 const userSchema: Schema = new Schema<IUser>({
   firstName: {
@@ -20,7 +23,6 @@ const userSchema: Schema = new Schema<IUser>({
     type: String,
     required: true,
     minLength: 8,
-    maxLength: 25,
   },
   bio: {
     type: String,
