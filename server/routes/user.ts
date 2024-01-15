@@ -1,10 +1,10 @@
 import express, { Router, Request, Response } from "express";
 import bcrypt from "bcrypt";
 
-import UserModel from "../models/User.js";
+import UserModel from "../models/User.ts";
 
-import IUser from "../interface/IUser.js";
-import IUserMethods from "../interface/IUserMethods.js";
+import IUser from "../interface/IUser.ts";
+import IUserMethods from "../interface/IUserMethods.ts";
 
 const router: Router = express.Router();
 

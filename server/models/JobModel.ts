@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
-import { IJobs } from "../interface/IJob.js";
-import { JOB_STATUS, JOB_TYPE } from "../utils/constants.js";
+import { IJobs } from "../interface/IJob.ts";
+import { JOB_STATUS, JOB_TYPE } from "../utils/constants.ts";
 
 export interface IJobModel extends IJobs, Document {}
 
