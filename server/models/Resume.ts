@@ -1,7 +1,8 @@
 import {model, Schema} from "mongoose";
 
-import IResume from "../interface/resume/IResume.js";
+import IResume from "../interface/IResume.js";
 
+// todo: finish
 const resumeSchema: Schema = new Schema<IResume>({
 
     userId: {

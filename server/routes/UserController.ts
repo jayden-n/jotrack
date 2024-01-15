@@ -2,8 +2,7 @@ import express, {Request, Response, Router} from "express";
 
 import UserModel from "../models/User.js";
 
-import IUser from "../interface/user/IUser.js";
-import IUserMethods from "../interface/user/IUserMethods.js";
+import IUser from "../interface/IUser.js";
 
 const route: Router = express.Router();
 
@@ -14,7 +13,7 @@ route.get("/", async (request: Request, response: Response): Promise<void> => {
 
 route.post("/", async (request: Request, response: Response): Promise<void> => {
     try {
-        const user: IUser & IUserMethods = new UserModel({
+        const user: IUser = new UserModel({
             ...request.body,
         });
 
