@@ -17,7 +17,7 @@
    ```
 
 ## Running
-1. Build MERN stack Docker images and run the as Docker containers.
+1. Build MERN stack Docker images and run them as Docker containers.
     ```shell
     docker-compose -f docker-compose.yml -p jotrack up -d
     ```
