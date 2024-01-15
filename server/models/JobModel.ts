@@ -5,7 +5,6 @@ import { JOB_STATUS, JOB_TYPE } from "../utils/constants.js";
 export interface IJobModel extends IJobs, Document {}
 
 const JobSchema: Schema<IJobModel> = new mongoose.Schema({
-	// NOTE: since i think the client-side's form submission will utilize the "required" attribute so there's no need to add for our models here...
 	company: String,
 	position: String,
 
@@ -13,12 +12,12 @@ const JobSchema: Schema<IJobModel> = new mongoose.Schema({
 	jobStatus: {
 		type: String,
 		enum: Object.values(JOB_STATUS) as string[],
-		default: JOB_STATUS.PENDING as string,
+		default: JOB_STATUS.PENDING as "PENDING",
 	},
 	jobType: {
 		type: String,
 		enum: Object.values(JOB_TYPE) as string[],
-		default: JOB_TYPE.FULL_TIME as string,
+		default: JOB_TYPE.FULL_TIME as "FULL_TIME",
 	},
 	jobLocation: {
 		type: String,
