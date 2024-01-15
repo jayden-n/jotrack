@@ -1,6 +1,7 @@
 import express, {Application, Request, Response} from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import fileUpload from 'express-fileupload';
 
 import userRoutes from '../routes/UserController.js';
 import jobRouter from "../routes/jobRouter.js";
@@ -8,6 +9,7 @@ import jobRouter from "../routes/jobRouter.js";
 const application: Application = express();
 application.use(express.json());
 application.use(express.urlencoded({extended: true}));
+application.use(fileUpload());
 dotenv.config();
 // routes
 application.use("/api/users", userRoutes);
