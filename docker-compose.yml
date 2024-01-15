@@ -34,18 +34,18 @@ services:
     networks:
       - jotrack
 
-  # client:
-  #   image: client
-  #   build:
-  #     context: ./client
-  #     dockerfile: ./Dockerfile
-  #   container_name: client 
-  #   ports:
-  #     - "3000:3000"
-  #   depends_on:
-  #     - server
-  #   networks:
-  #     - jotrack
+  client:
+    image: client
+    build:
+      context: ./client
+      dockerfile: ./Dockerfile
+    container_name: client
+    ports:
+      - "5173:5173"
+    depends_on:
+      - server
+    networks:
+      - jotrack
 
 networks:
   jotrack:

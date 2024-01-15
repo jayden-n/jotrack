@@ -22,12 +22,12 @@
     ```
 4. Pull and run a Mongo Docker image.
     ```shell
-    docker run -d -p 27017:27017 --name mongodb -v data:/data/db -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=password mongo:latest
+    docker run -d -p 27017:27017 --name mongodb -v ./data:/data/db -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=password mongo:latest
     ```
 
 ## Running
-1. Build TypeScript into JavaScript and run.
+
+1. Compile TypeScript into JavaScript and start the application.
     ```shell
-    npm run build
-    npm start
+    npm run build && npm start
     ```

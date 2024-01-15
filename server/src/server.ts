@@ -2,10 +2,9 @@ import express, {Application, Request, Response} from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 
-import userRoutes from '../routes/user.js';
+import userRoutes from '../routes/UserController.js';
 import jobRouter from "../routes/jobRouter.js";
 // app config
-const serverPort: number = 8000;
 const application: Application = express();
 application.use(express.json());
 application.use(express.urlencoded({extended: true}));
@@ -34,6 +33,6 @@ application.use("*", (request: Request, response: Response): void => {
     response.status(404).json({msg: "not found"});
 });
 
-application.listen(serverPort, () => {
-    console.log(`[LOG] Server is running at port ${serverPort}`);
+application.listen(process.env.PORT, () => {
+    console.log(`[LOG] Server is running at port ${process.env.PORT}`);
 });

@@ -2,22 +2,13 @@
 
 ## Installation
 
-1. Install dependencies
-    ```shell
-    cd server
-    npm i
-    cd ../client
-    npm i
-    cd ../
-    ```
-
-2. Make a duplicate of .env.template.
+1. Make a duplicate of .env.template.
 
    ```shell
    cp server/.env.template server/.env
    ```
 
-3. Change `MONGODB_NAME` in .env file according to this configuration.
+2. Change `MONGODB_NAME` in .env file according to this configuration.
    ```makefile
    # mongodb container in a network
    MONGODB_USERNAME=admin
