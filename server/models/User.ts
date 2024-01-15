@@ -1,7 +1,7 @@
 import {model, Schema} from "mongoose";
 import bcrypt from "bcrypt";
 
-import IUser from "../interface/IUser.js";
+import IUser from "../interface/user/IUser.js";
 
 const userSchema: Schema = new Schema<IUser>({
     firstName: {
@@ -21,6 +21,20 @@ const userSchema: Schema = new Schema<IUser>({
         type: String,
         required: true,
         minLength: 8,
+    },
+    address: {
+        street: {
+            type: String,
+        },
+        city: {
+            type: String,
+        },
+        province: {
+            type: String,
+        },
+        country: {
+            type: String,
+        },
     },
     role: {
         type: String,

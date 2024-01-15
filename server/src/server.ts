@@ -25,12 +25,12 @@ mongoose
     });
 
 application.get("/", (request: Request, response: Response): void => {
-    response.send("hello world");
+    response.status(200).send({user: "http://localhost:8080/api/users"});
 });
 
 //  ================== "NOT FOUND" MIDDLEWARE  ==================
 application.use("*", (request: Request, response: Response): void => {
-    response.status(404).json({msg: "not found"});
+    response.status(404).send({});
 });
 
 application.listen(process.env.PORT, () => {

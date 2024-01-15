@@ -2,8 +2,8 @@ import express, {Request, Response, Router} from "express";
 
 import UserModel from "../models/User.js";
 
-import IUser from "../interface/IUser.js";
-import IUserMethods from "../interface/IUserMethods.js";
+import IUser from "../interface/user/IUser.js";
+import IUserMethods from "../interface/user/IUserMethods.js";
 
 const route: Router = express.Router();
 
@@ -24,7 +24,7 @@ route.post("/", async (request: Request, response: Response): Promise<void> => {
         });
     } catch (error) {
         console.error(`[ERROR] ${error}`);
-        response.status(400).send({});
+        response.status(400).send({"message": "email duplicated"});
     }
 });
 

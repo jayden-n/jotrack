@@ -5,8 +5,15 @@ interface IUser extends Document {
     lastName: string;
     email: string;
     password: string;
-    bio?: string;
     role: string;
+    address: {
+        street: string,
+        city: string,
+        province: string,
+        country: string
+    }
+    bio?: string;
+    defaultResumeId: string;
 }
 
 export default IUser;
