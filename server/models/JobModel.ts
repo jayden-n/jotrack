@@ -8,7 +8,6 @@ const JobSchema: Schema<IJobModel> = new mongoose.Schema({
 	company: String,
 	position: String,
 
-	// todo: fixme: 2 fields give error
 	jobStatus: {
 		type: String,
 		enum: Object.values(JOB_STATUS) as string[],

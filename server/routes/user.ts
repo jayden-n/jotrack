@@ -7,12 +7,12 @@ import IUserMethods from "../interface/IUserMethods.js";
 
 const router: Router = express.Router();
 
-router.get("/", async (request: Request, response: Response) => {
+router.get("/", async (request: Request, response: Response): Promise<void> => {
     const userList: {} = await UserModel.find({});
     response.status(200).send({...userList});
 });
 
-router.post("/", async (request: Request, response: Response) => {
+router.post("/", async (request: Request, response: Response): Promise<void> => {
     try {
         const user: IUser & IUserMethods = new UserModel({
             ...request.body,
@@ -28,7 +28,7 @@ router.post("/", async (request: Request, response: Response) => {
     }
 });
 
-router.put("/:eid", async (request: Request, response: Response) => {
+router.put("/:eid", async (request: Request, response: Response): Promise<void> => {
     try {
         const user: IUser | null = await UserModel.findOneAndUpdate(
             {_id: request.params.eid},

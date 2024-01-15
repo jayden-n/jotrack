@@ -22,21 +22,38 @@ const userSchema: Schema = new Schema<IUser>({
         required: true,
         minLength: 8,
     },
+    role: {
+        type: String,
+        enum: ["admin", "user"],
+        default: "user"
+    },
     bio: {
         type: String,
     },
 });
 
 userSchema.pre('save', async function (this: IUser, next): Promise<void> {
-    if (!this.isModified('password')) {
+    if (!this.isModified('password'))
         return next();
-    }
 
     try {
-        const hashedPassword = await bcrypt.hash(this.password, 10);
-        this.password = hashedPassword;
+        this.password = await bcrypt.hash(this.password, 10);
         next();
     } catch (error) {
+        console.error(`[ERROR] ${error}`)
+        return next(error);
+    }
+});
+
+userSchema.pre('findOneAndUpdate', async function (this: { _update: IUser }, next): Promise<void> {
+    if (!this._update || !this._update.password)
+        return next();
+
+    try {
+        this._update.password = await bcrypt.hash(this._update.password, 10);
+        next();
+    } catch (error) {
+        console.error(`[ERROR] ${error}`);
         return next(error);
     }
 });
