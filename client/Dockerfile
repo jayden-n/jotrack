@@ -2,7 +2,7 @@ FROM node:20-alpine
 
 LABEL authors="jeromedelosreyes"
 
-WORKDIR /server
+WORKDIR /client
 
 COPY package*.json ./
 
@@ -10,8 +10,6 @@ RUN npm i
 
 COPY . .
 
-EXPOSE 8000
-
-RUN npm run build
-
-CMD ["npm", "start"]
+EXPOSE 5173
+# change for production ig
+CMD ["npm", "run", "dev"]

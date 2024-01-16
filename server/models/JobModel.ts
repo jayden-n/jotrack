@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
-import { IJobs } from "../interface/IJob.ts";
-import { JOB_STATUS, JOB_TYPE } from "../utils/constants.ts";
+import { IJobs } from "../interface/IJob.js";
+import { JOB_STATUS, JOB_TYPE } from "../utils/constants.js";
 
 export interface IJobModel extends IJobs, Document {}
 
@@ -8,7 +8,6 @@ const JobSchema: Schema<IJobModel> = new mongoose.Schema({
 	company: String,
 	position: String,
 
-	// todo: fixme: 2 fields give error
 	jobStatus: {
 		type: String,
 		enum: Object.values(JOB_STATUS) as string[],
