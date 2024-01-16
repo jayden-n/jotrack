@@ -22,7 +22,7 @@ const router = createBrowserRouter([
 	// also check out the docs for nested routes if needed
 ]);
 
-const App = () => {
+const App: React.FC = () => {
 	return <RouterProvider router={router} />;
 };
 export default App;
