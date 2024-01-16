@@ -16,14 +16,9 @@
 						"header": [],
 						"url": {
 							"raw": "localhost:8000/api/users",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "8000",
-							"path": [
-								"api",
-								"users"
-							]
+							"path": ["api", "users"]
 						}
 					},
 					"response": []
@@ -44,14 +39,9 @@
 						},
 						"url": {
 							"raw": "localhost:8000/api/users",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "8000",
-							"path": [
-								"api",
-								"users"
-							]
+							"path": ["api", "users"]
 						}
 					},
 					"response": []
@@ -72,15 +62,9 @@
 						},
 						"url": {
 							"raw": "localhost:8000/api/users/{{userId}}",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "8000",
-							"path": [
-								"api",
-								"users",
-								"{{userId}}"
-							]
+							"path": ["api", "users", "{{userId}}"]
 						}
 					},
 					"response": []
@@ -92,15 +76,9 @@
 						"header": [],
 						"url": {
 							"raw": "localhost:8000/api/users/{{userId}}",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "8000",
-							"path": [
-								"api",
-								"users",
-								"{{userId}}"
-							]
+							"path": ["api", "users", "{{userId}}"]
 						}
 					},
 					"response": []
@@ -112,15 +90,9 @@
 						"header": [],
 						"url": {
 							"raw": "localhost:8000/api/users/{{userId}}",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "8000",
-							"path": [
-								"api",
-								"users",
-								"{{userId}}"
-							]
+							"path": ["api", "users", "{{userId}}"]
 						}
 					},
 					"response": []
@@ -147,14 +119,9 @@
 						},
 						"url": {
 							"raw": "localhost:8000/api/resumes",
-							"host": [
-								"localhost"
-							],
+							"host": ["localhost"],
 							"port": "8000",
-							"path": [
-								"api",
-								"resumes"
-							]
+							"path": ["api", "resumes"]
 						}
 					},
 					"response": []
@@ -168,9 +135,7 @@
 				"header": [],
 				"url": {
 					"raw": "localhost:8000",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "8000"
 				}
 			},
