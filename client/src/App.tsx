@@ -7,6 +7,8 @@ import UserDashboardPage from "./pages/user/UserDashboardPage";
 import AdminDashboard from "./pages/admin/Dashboard";
 import AllJobsPage from "./pages/user/AllJobsPage";
 import HomePage from "./pages/visitor/HomePage";
+import AdminJobs from "./pages/admin/Jobs"
+import AdminUsers from "./pages/admin/Users"
 
 const router = createBrowserRouter([
 	{
@@ -39,6 +41,14 @@ const router = createBrowserRouter([
 			{
 				path: "/admin/dashboard",
 				element: <AdminDashboard />,
+			},
+			{
+				path: "/admin/jobs",
+				element: <AdminJobs />,
+			},
+			{
+				path: "/admin/users",
+				element: <AdminUsers />,
 			},
 		],
 	},

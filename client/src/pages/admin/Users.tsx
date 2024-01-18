@@ -1,5 +1,12 @@
 import React from "react";
-
+import NavBar from './NavBar';
 export default function Users() {
-	return <div>Users</div>;
+	return (
+		<div>
+			<NavBar/>
+			<div>
+				user page
+			</div>
+		</div>
+	);
 }

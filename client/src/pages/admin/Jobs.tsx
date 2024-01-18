@@ -1,7 +1,13 @@
 import React from 'react'
+import NavBar from './NavBar';
 
 export default function Jobs() {
   return (
-    <div>Jobs</div>
+    <div>
+      <NavBar/>
+      <div>
+        jobs page
+      </div>
+    </div>
   )
 }

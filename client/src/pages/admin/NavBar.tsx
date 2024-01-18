@@ -4,22 +4,33 @@ import {Link} from 'react-router-dom'
 export default function NavBar() {
   return (
     <div>
-        <nav>
-            <ul>
-                <li>
-                    <Link to={'/dashboard'}>JoTrack</Link>
+        <nav className='bg-white ring-1 p-10 '>
+            <ul className='text-purple flex items-center text-lg'>
+
+                <li className='font-outfit text-3xl font-extrabold pr-10'>
+                    <Link to={'/admin/dashboard'}>
+                        <span className='text-5xl'>J</span>oTrack</Link>
                 </li>
-                <li>
-                    <Link to={'/dashboard'}>Dashboard</Link>
+
+                <li className='px-10 '>
+                    <Link to={'/admin/dashboard'} className='font-outfit '
+                    >Dashboard</Link>
                 </li>
-                <li>
-                    <Link to={'/jobs'}>Jobs</Link>
+
+                <li className='px-10'>
+                    <Link to={'/admin/jobs'} className='font-outfit'
+                    >Jobs</Link>
                 </li>
-                <li>
-                    <Link to={'users'}>Users</Link>
+                
+                <li className='px-10'>
+                    <Link to={'/admin/users'} className='font-outfit '
+                    >Users</Link>
                 </li>
-                <li>
-                    <button>Logout</button>
+
+                <li className='ml-auto'>
+                    <Link to={'/dashboard'} className='bg-btnPurple text-white font-outfit font-normal text-md px-10 py-2
+                        rounded-md  hover:opacity-90 ring-0.5 
+                        '>Logout</Link>
                 </li>
             </ul>
         </nav>
