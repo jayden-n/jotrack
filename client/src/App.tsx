@@ -9,6 +9,8 @@ import AllJobsPage from "./pages/user/AllJobsPage";
 import HomePage from "./pages/visitor/HomePage";
 import AdminJobs from "./pages/admin/Jobs"
 import AdminUsers from "./pages/admin/Users"
+import AddJob from "./pages/admin/AddJob"
+
 
 const router = createBrowserRouter([
 	{
@@ -45,6 +47,12 @@ const router = createBrowserRouter([
 			{
 				path: "/admin/jobs",
 				element: <AdminJobs />,
+				
+			},
+			{
+				path: "/admin/jobs/add",
+				element: <AddJob />,
+				
 			},
 			{
 				path: "/admin/users",

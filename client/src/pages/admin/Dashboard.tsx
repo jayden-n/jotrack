@@ -66,7 +66,7 @@ export default function Dashboard() {
           <div className='w-full'>
             <div className='flex items-center justify-between mb-2'>
               <p className='text-lg font-semibold font-outfit'>Password</p>
-              <button className='border px-8 py-0.5 hover:bg-indigo  border-gray text-sm rounded-lg bg-white font-outfit font-normal'
+              <button className='border px-8 py-0.5 hover:bg-indigo  border-gray text-sm rounded-lg bg-white font-outfit text-normal'
              >
                 Change
               </button>

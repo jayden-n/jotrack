@@ -15,7 +15,8 @@ export default {
       'indigo': '#e8eaf6',
       'blue': '#1976d2',
       'btnPurple': 'rgba(93, 21, 118, 0.82)',
-      'indigoHover': '#9fa8da'
+      'indigoHover': '#9fa8da',
+      'green': '#03B303'
     },
     listStyleType: {
       none: 'none',
