@@ -16,9 +16,7 @@ export default function NavBar() {
 
                 <li className='px-10  '>
                     
-                    <Link to={'/admin/dashboard'} 
-                       
-                    className={`font-outfit ${hoverStyle}`}
+                    <Link to={'/admin/dashboard'}  className={`font-outfit ${hoverStyle}`}
                     >Dashboard</Link>
                 </li>
 
@@ -34,7 +32,8 @@ export default function NavBar() {
             </li>
 
                 <li className='ml-auto'>
-                    <Link to={'/dashboard'} className='bg-btnPurple text-white font-outfit text-normal text-md px-10 py-2
+                    <Link to={'/dashboard'} 
+                    className='bg-btnPurple text-white font-outfit text-normal text-md px-10 py-2
                         rounded-md  hover:opacity-90 ring-0.5 
                         '>Logout</Link>
                 </li>
