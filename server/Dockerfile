@@ -1,17 +1,4 @@
-FROM node:20-alpine
-
+FROM ubuntu:latest
 LABEL authors="jeromedelosreyes"
 
-WORKDIR /server
-
-COPY package*.json ./
-
-RUN npm i
-
-COPY . .
-
-EXPOSE 8000
-
-RUN npm run build
-
-CMD ["npm", "start"]
+ENTRYPOINT ["top", "-b"]
