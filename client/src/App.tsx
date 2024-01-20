@@ -7,10 +7,13 @@ import UserDashboardPage from "./pages/user/UserDashboardPage";
 import AdminDashboard from "./pages/admin/Dashboard";
 import AllJobsPage from "./pages/user/AllJobsPage";
 import HomePage from "./pages/visitor/HomePage";
-import AdminJobs from "./pages/admin/Jobs"
-import AdminUsers from "./pages/admin/Users"
-import AddJob from "./pages/admin/AddJob"
-
+import AdminJobs from "./pages/admin/Jobs";
+import AdminUsers from "./pages/admin/Users";
+import AddJob from "./pages/admin/AddJob";
+import UserApplications from "./pages/user/UserApplications";
+import UserBuildResume from "./pages/user/UserBuildResume";
+import Dashboard from "./pages/admin/Dashboard";
+import DashboardLayout from "./pages/admin/DashboardLayout";
 
 const router = createBrowserRouter([
 	{
@@ -22,15 +25,15 @@ const router = createBrowserRouter([
 				element: <LandingPage />,
 			},
 			{
-				path: "/login",
+				path: "login",
 				element: <LoginPage />,
 			},
 			{
-				path: "/register",
+				path: "register",
 				element: <RegisterPage />,
 			},
 			{
-				path: "/dashboard",
+				path: "user/dashboard",
 				element: <UserDashboardPage />,
 				// nested routes
 				children: [
@@ -38,25 +41,38 @@ const router = createBrowserRouter([
 						element: <AllJobsPage />,
 						index: true,
 					},
+					{
+						path: "applications",
+						element: <UserApplications />,
+					},
+					{
+						path: "build-resume",
+						element: <UserBuildResume />,
+					},
 				],
 			},
 			{
-				path: "/admin/dashboard",
+				path: "admin/dashboard",
 				element: <AdminDashboard />,
-			},
-			{
-				path: "/admin/jobs",
-				element: <AdminJobs />,
-				
-			},
-			{
-				path: "/admin/jobs/add",
-				element: <AddJob />,
-				
-			},
-			{
-				path: "/admin/users",
-				element: <AdminUsers />,
+				children: [
+					{
+						// index: this will always be the default page
+						index: true,
+						element: <DashboardLayout />,
+					},
+					{
+						path: "jobs",
+						element: <AdminJobs />,
+					},
+					{
+						path: "jobs/add",
+						element: <AddJob />,
+					},
+					{
+						path: "users",
+						element: <AdminUsers />,
+					},
+				],
 			},
 		],
 	},
