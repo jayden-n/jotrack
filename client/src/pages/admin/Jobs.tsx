@@ -10,7 +10,7 @@ export default function Jobs() {
 					Job Listings
 				</p>
 				<Link
-					to={'/admin/jobs/add'}
+					to={'/admin/dashboard/jobs/add'}
 					className="bg-green font-outfit text-white text-normal text-center py-1
                         rounded-md  hover:opacity-90 ring-0.5 col-end-6  w-full md:w-2/5 "
 				>
