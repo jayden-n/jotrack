@@ -1,0 +1,71 @@
+### variables
+@hostname=localhost
+@port=8000
+
+@userId={{userId}}
+@jobId={{jobId}}
+
+### create user
+
+POST http://{{hostname}}:{{port}}/api/auth/signup HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "email@domain.com",
+  "password": "password",
+  "role": "user",
+  "firstName": "firstName",
+  "lastName": "lastName"
+}
+
+### log-in user
+
+POST http://{{hostname}}:{{port}}/api/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "email@domain.com",
+  "password": "password"
+}
+
+### retrieves users
+
+GET http://{{hostname}}:{{port}}/api/users HTTP/1.1
+
+### create user
+
+PUT http://{{hostname}}:{{port}}/api/users/{{userId}} HTTP/1.1
+
+### removes user
+
+DELETE http://{{hostname}}:{{port}}/api/users/{{userId}} HTTP/1.1
+
+### retrieves jobs
+
+GET http://{{hostname}}:{{port}}/api/jobs HTTP/1.1
+
+### creates job
+
+POST http://{{hostname}}:{{port}}/api/jobs HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "title",
+  "description": "description",
+  "companyName": "companyName"
+}
+
+### update job
+
+PUT http://{{hostname}}:{{port}}/api/jobs/{{jobId}} HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "updatedTitle",
+  "description": "updatedDescription",
+  "companyName": "updatedCompanyName"
+}
+
+### delete job
+
+DELETE http://{{hostname}}:{{port}}/api/jobs/{{jobId}} HTTP/1.1

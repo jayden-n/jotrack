@@ -1,33 +1,70 @@
-# Server
+# JoTrack Backend
+
+## Database Design
+
+![UML of the database](docs/assets/images/database-design.drawio.png)
 
 ## Installation
 
-1. Go to server directory and make a duplicate of .env.template.
-    ```shell
-    cd server
-    cp .env.template .env
-    ```
+1. Install dependencies
 
-2. Change `MONGODB_NAME` in .env file according to this configuration.
-    ```makefile
-    # mongodb container
-    MONGODB_USERNAME=admin
-    MONGODB_PASSWORD=password
-    MONGODB_NAME=localhost # change
-    ```
+   ```shell
+   npm i
+   ```
 
-3. Install dependencies.
-    ```shell
-    npm i
-    ```
-4. Pull and run a Mongo Docker image.
-    ```shell
-    docker run -d -p 27017:27017 --name mongodb -v ./data:/data/db -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=password mongo:latest
-    ```
+2. Make copy of `.env.template` file.
+
+   ```shell
+   cp .env.template .env
+   ```
+
+3. Populate fields in `.env` file.
+
+   ```makefile
+   # ...
+   # jwt
+   JWT_SECRET="your_jwt_secret" # change
+   ```
 
 ## Running
 
-1. Compile TypeScript into JavaScript and start the application.
-    ```shell
-    npm run build && npm start
-    ```
+1. Instantiate a PostgreSQL Docker image and run it as a Docker container.
+
+   ```shell
+   docker compose up postgresql-jotrack -d
+   ```
+
+2. Initiate and deploy a database migration.
+
+   ```shell
+   npx prisma migrate dev
+   ```
+
+3. Deploy the database migration.
+
+   ```shell
+   npx prisma migrate deploy
+   ```
+
+4. Start the application
+
+   ```shell
+   npm run start:dev
+   ```
+
+## API Endpoints
+
+### Auth - `/api/auth`
+
+| Endpoint  | Method | Description     |
+| --------- | ------ | --------------- |
+| `/signup` | `POST` | Signs up a user |
+| `/signin` | `POST` | Signs in a user |
+
+### Users - `/api/users`
+
+| Endpoint      | Method   | Description      |
+| ------------- | -------- | ---------------- |
+| N/A           | `GET`    | Retrieves users  |
+| `/{{userId}}` | `GET`    | Retrieves a user |
+| `/{{userId}}` | `DELETE` | removes a user   |
