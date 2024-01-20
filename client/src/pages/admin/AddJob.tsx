@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import {Link} from 'react-router-dom';
 import NavBar from './NavBar';
 
 export default function AddJob() {
@@ -12,14 +11,18 @@ export default function AddJob() {
 
   const onAdd = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-
+    if(!companyName || !position || !location || !description || !requirements){
+      alert('All fields must be filled')
+    }
+   else{
     setCompanyName('');
     setPosition('');
     setLocation('');
     setDescription('');
     setRequirements('');
 
-    alert('Job Added.') //replace later with a popup
+    alert('Job Added.')//replace later with a popup
+   } 
   }
 
   const bulletPoint =(e: React.KeyboardEvent<HTMLTextAreaElement>) => {

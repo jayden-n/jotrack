@@ -10,7 +10,7 @@ import HomePage from "./pages/visitor/HomePage";
 import AdminJobs from "./pages/admin/Jobs"
 import AdminUsers from "./pages/admin/Users"
 import AddJob from "./pages/admin/AddJob"
-
+import UserActivity from "./pages/admin/UserActivity";
 
 const router = createBrowserRouter([
 	{
@@ -57,6 +57,10 @@ const router = createBrowserRouter([
 			{
 				path: "/admin/users",
 				element: <AdminUsers />,
+			},
+			{
+				path: "/admin/users/activity",
+				element: <UserActivity />,
 			},
 		],
 	},
