@@ -13,6 +13,7 @@ export default {
 			blue: '#1976d2',
 			btnPurple: 'rgba(93, 21, 118, 0.82)',
 			indigoHover: '#9fa8da',
+			btnLightpink: '#FCF6FF',
 			green: '#03B303',
 		},
 		listStyleType: {
