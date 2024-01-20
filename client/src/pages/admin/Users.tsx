@@ -1,5 +1,5 @@
-import React from "react";
-import NavBar from "./NavBar";
+import React from 'react';
+import NavBar from './NavBar';
 // import SearchIcon from '../../components/assets/search.png'
 export default function Users() {
 	return (
