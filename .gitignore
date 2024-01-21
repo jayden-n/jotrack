@@ -1,6 +1,7 @@
 # node related
 package*.json
 # IDE and OS
-.idea
-.vscode
+.idea/
+.vscode/
 .DS_Store
+node_modules/
