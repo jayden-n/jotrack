@@ -22,6 +22,8 @@
 
    ```makefile
    # ...
+   # db
+   DATABASE_URL="postgresql://admin:password@localhost:5432/postgresql-jotrack?schema=public" # change
    # jwt
    JWT_SECRET="your_jwt_secret" # change
    ```
@@ -31,7 +33,7 @@
 1. Instantiate a PostgreSQL Docker image and run it as a Docker container.
 
    ```shell
-   docker compose up postgresql-jotrack -d
+   docker run -d -p 5432:5432 --name postgresql-jotrack -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=password -e POSTGRES_DB=postgresql-jotrack postgres:13
    ```
 
 2. Initiate and deploy a database migration.

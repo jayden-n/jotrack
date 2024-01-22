@@ -2,22 +2,21 @@
 
 ## Installation
 
-1. Make a duplicate of .env.template.
+1. Navigate to the `server` directory and make a duplicate of `.env.template`.
 
    ```shell
-   cp server/.env.template server/.env
+   cd server && cp .env.template .env
    ```
 
-2. Change `MONGODB_NAME` in .env file according to this configuration.
-   ```makefile
-   # mongodb container in a network
-   MONGODB_USERNAME=admin
-   MONGODB_PASSWORD=password
-   MONGODB_NAME=mongodb # change
+2. Initialize a database migration
+
+   ```shell
+   npx prisma migrate dev
    ```
 
 ## Running
-1. Build MERN stack Docker images and run them as Docker containers.
-    ```shell
-    docker-compose -f docker-compose.yml -p jotrack up -d
-    ```
+
+1. Build application docker images and run them as docker containers.
+   ```shell
+   docker-compose -f docker-compose.yml -p jotrack up -d
+   ```

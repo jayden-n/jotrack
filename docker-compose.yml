@@ -1,51 +1,50 @@
 version: '3.8'
 
 services:
-
-  mongodb:
-    image: mongo:latest
-    container_name: mongodb
-    ports:
-      - "27017:27017"
+  postgresql-jotrack:
+    image: postgres:15
+    container_name: postgresql-jotrack
     environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: password
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgresql-jotrack
     volumes:
-      - ./server/data:/data/db
-    restart: unless-stopped
+      - ./server/data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
     networks:
       - jotrack
 
   server:
-    image: server:latest
+    image: server:1.0
     build:
       context: ./server
       dockerfile: ./Dockerfile
     container_name: server
     env_file:
       - ./server/.env
+    environment:
+      DATABASE_URL: postgresql://admin:password@postgresql-jotrack:5432/postgresql-jotrack
     ports:
       - "8000:8000"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: password
     depends_on:
-      - mongodb
+      - postgresql-jotrack
     networks:
       - jotrack
 
-  client:
-    image: client
-    build:
-      context: ./client
-      dockerfile: ./Dockerfile
-    container_name: client
-    ports:
-      - "5173:5173"
-    depends_on:
-      - server
-    networks:
-      - jotrack
+# todo
+  # client:
+  #   image: client
+  #   build:
+  #     context: ./client
+  #     dockerfile: ./Dockerfile
+  #   container_name: client
+  #   ports:
+  #     - "5173:5173"
+  #   depends_on:
+  #     - server
+  #   networks:
+  #     - jotrack
 
 networks:
   jotrack:

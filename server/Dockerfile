@@ -1,13 +1,27 @@
-FROM node:20
-LABEL author="@jdelreyes"
+FROM node:20 AS builder
 
-# Create app directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json ./
+COPY prisma ./prisma/
 
 RUN npm install
 
 COPY . .
 
-CMD [ "npm", "run", "start" ]
+RUN npm run build
+
+FROM node:20
+
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/prisma ./prisma
+
+ENV SERVER_PORT=8000
+ENV DATABASE_URL=postgresql://admin:password@postgresql-jotrack:5432/postgresql-jotrack?schema=public
+ENV JWT_SECRET=your_jwt_secret
+
+EXPOSE 8000
+
+CMD [  "npm", "run", "start:migrate:prod" ]
