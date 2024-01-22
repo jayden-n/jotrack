@@ -5,14 +5,16 @@ import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import UserDashboardPage from './pages/user/UserDashboardPage';
 import AdminDashboard from './pages/admin/Dashboard';
-import AllJobsPage from './pages/user/AllJobsPage';
 import HomePage from './pages/visitor/HomePage';
 import AdminJobs from './pages/admin/Jobs';
 import AdminUsers from './pages/admin/Users';
 import AddJob from './pages/admin/AddJob';
-import UserApplications from './pages/user/UserApplications';
-import UserBuildResume from './pages/user/UserBuildResume';
 import DashboardLayout from './pages/admin/DashboardLayout';
+import UserInfoPage from './pages/user/UserInfoPage';
+import UserAllJobsPage from './pages/user/UserAllJobsPage';
+import UserApplicationsPage from './pages/user/UserApplicationsPage';
+import UserBuildResumePage from './pages/user/UserBuildResumePage';
+import UserViewResumePage from './pages/user/UserViewResumePage';
 
 const router = createBrowserRouter([
 	{
@@ -37,16 +39,24 @@ const router = createBrowserRouter([
 				// nested routes
 				children: [
 					{
-						element: <AllJobsPage />,
 						index: true,
+						element: <UserInfoPage />,
+					},
+					{
+						path: 'all-jobs',
+						element: <UserAllJobsPage />,
 					},
 					{
 						path: 'applications',
-						element: <UserApplications />,
+						element: <UserApplicationsPage />,
 					},
 					{
 						path: 'build-resume',
-						element: <UserBuildResume />,
+						element: <UserBuildResumePage />,
+					},
+					{
+						path: 'view-resume',
+						element: <UserViewResumePage />,
 					},
 				],
 			},
