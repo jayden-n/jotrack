@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 // Define a type for the user role
 type UserRole = 'admin' | 'user' | null;
 
-const LoginPage = () => {
+const RegisterPage = () => {
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 	const [firstname, setFirstname] = useState<string>('');
@@ -243,4 +243,4 @@ const LoginPage = () => {
 	);
 };
 
-export default LoginPage;
+export default RegisterPage;
