@@ -19,6 +19,16 @@ const LoginPage = () => {
 		setPassword(event.target.value);
 	};
 
+	// When Admin button is clicked
+	const handleAdminClick = () => {
+		setRole('admin');
+	};
+
+	// When User button is clicked
+	const handleUserClick = () => {
+		setRole('user');
+	};
+
 	// Corrected type for the submit event
 	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -81,13 +91,13 @@ const LoginPage = () => {
 				<div className="flex justify-center mb-28 space-x-14 md:w-auto">
 					<button
 						className={`px-12 py-4 text-3xl bg-white font-regular rounded-xl ${role === 'admin' ? 'bg-btnLightpink' : 'bg-transparent'}`}
-						onClick={() => setRole('admin')}
+						onClick={handleAdminClick}
 					>
 						Admin
 					</button>
 					<button
 						className={`px-16 py-4 text-3xl bg-white font-regular rounded-xl ${role === 'user' ? 'bg-btnLightpink' : 'bg-transparent'}`}
-						onClick={() => setRole('user')}
+						onClick={handleUserClick}
 					>
 						User
 					</button>
@@ -98,10 +108,16 @@ const LoginPage = () => {
 						className="w-full md:w-auto px-6 py-2 text-5xl font-regular text-white bg-btnPurple"
 						style={{ height: '87px', width: '999px', maxWidth: '999px'}}
 						onClick={() => {
-							if (role === 'user') { // Correctly using the state variable
-								navigate('/dashboard');
+							if (!email) {
+								alert("email field cannot be blank");
+							} else if (!password) {
+								alert("password field cannot be blank");
+							} else if (!role) {
+								alert("role need to be selected")
+							} else if (role === 'user') { // Correctly using the state variable
+								navigate('user/dashboard');
 							} else if (role === 'admin') {
-								navigate('/admin/dashboard');
+								navigate('admin/dashboard');
 							} else{
 								alert("Role was not selected");
 							}
