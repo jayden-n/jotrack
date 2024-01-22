@@ -1,10 +1,8 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// Define a type for the user role
-type UserRole = 'admin' | 'user' | null;
-
 const RegisterPage = () => {
+	const [error, setError] = useState<string>('');
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 	const [firstname, setFirstname] = useState<string>('');
@@ -63,14 +61,52 @@ const RegisterPage = () => {
 	// Corrected type for the submit event
 	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
+		setError(''); // Clear any existing errors
 		// Handle the form submission here, using email and password states
 		console.log({ email, password, firstname, lastname, address, postal, city, country, province, phone });
+
+		// Check for empty fields and set the error state if any are found
+		if (!firstname) {
+			setError("First name field cannot be blank.");
+			return;
+		} else if (!lastname) {
+			setError("Last name field cannot be blank.");
+			return;
+		} else if (!email) {
+			setError("Email field cannot be blank.");
+			return;
+		} else if (!password) {
+			setError("Password field cannot be blank.");
+			return;
+		} else if (!address) {
+			setError("Address field cannot be blank.");
+			return;
+		} else if (!postal) {
+			setError("Postal code field cannot be blank.");
+			return;
+		} else if (!city) {
+			setError("City field cannot be blank.");
+			return;
+		} else if (!country) {
+			setError("Country field cannot be blank.");
+			return;
+		} else if (!province) {
+			setError("Province field cannot be blank.");
+			return;
+		} else if (!phone) {
+			setError("Phone field cannot be blank.");
+			return;
+		}
+
+		// If all fields are valid, navigate to the dashboard
+		navigate('user/dashboard');
 	};
 
 
 	return (
 		<div className="flex h-screen bg-e6e0e0">
 			<form onSubmit={handleSubmit} className="w-full flex flex-col md:flex-row">
+
 				<div className="flex flex-col justify-between p-10 bg-white w-full md:w-1/2" style={{ maxWidth: '500px' }}>
 					<div>
 						<div className="flex justify-center">
@@ -100,7 +136,7 @@ const RegisterPage = () => {
 					<div className="mb-6 flex justify-center">
 						<div className="mr-8 flex justify-center">
 						<input
-							type="firstname"
+							type="text"
 							value={firstname}
 							placeholder="first name"
 							className="mb-6 p-4 text-3xl bg-white border-none rounded shadow-inner w-full md:w-auto"
@@ -109,7 +145,7 @@ const RegisterPage = () => {
 						/>
 						</div>
 						<input
-							type="lastname"
+							type="text"
 							value={lastname}
 							placeholder="last name"
 							className="mb-6 p-4 text-3xl bg-white border-none rounded shadow-inner w-full md:w-auto"
@@ -142,7 +178,7 @@ const RegisterPage = () => {
 					<div className="mb-6 flex justify-center">
 						<div className="mr-8 flex justify-center">
 						<input
-							type="address"
+							type="text"
 							value={address}
 							placeholder="address"
 							className="mb-6 p-4 text-3xl bg-white border-none rounded shadow-inner w-full md:w-auto"
@@ -151,7 +187,7 @@ const RegisterPage = () => {
 						/>
 						</div>
 						<input
-							type="postal"
+							type="text"
 							value={postal}
 							placeholder="postal code"
 							className="mb-6 p-4 text-3xl bg-white border-none rounded shadow-inner w-full md:w-auto"
@@ -163,7 +199,7 @@ const RegisterPage = () => {
 					<div className="mb-6 flex justify-center">
 						<div className="mr-8 flex justify-center">
 						<input
-							type="city"
+							type="text"
 							value={city}
 							placeholder="city"
 							className="mb-6 p-4 text-3xl bg-white border-none rounded shadow-inner w-full md:w-auto"
@@ -172,7 +208,7 @@ const RegisterPage = () => {
 						/>
 						</div>
 						<input
-							type="country"
+							type="text"
 							value={country}
 							placeholder="country"
 							className="mb-6 p-4 text-3xl bg-white border-none rounded shadow-inner w-full md:w-auto"
@@ -184,7 +220,7 @@ const RegisterPage = () => {
 					<div className="mb-6 flex justify-center">
 						<div className="mr-8 flex justify-center">
 						<input
-							type="province"
+							type="text"
 							value={province}
 							placeholder="province"
 							className="mb-6 p-4 text-3xl bg-white border-none rounded shadow-inner w-full md:w-auto"
@@ -193,7 +229,7 @@ const RegisterPage = () => {
 						/>
 						</div>
 						<input
-							type="phone"
+							type="text"
 							value={phone}
 							placeholder="phone number"
 							className="mb-6 p-4 text-3xl bg-white border-none rounded shadow-inner w-full md:w-auto"
@@ -207,35 +243,13 @@ const RegisterPage = () => {
 							type="submit"
 							className="w-full md:w-auto px-6 py-2 text-5xl font-regular text-white bg-btnPurple"
 							style={{ height: '87px', width: '999px', maxWidth: '999px'}}
-							onClick={() => {
-								if (!firstname) { // Correctly using the state variable
-									alert("first name field cannot be blank");
-								} else if (!lastname) {
-									alert("last name field cannot be blank");
-								} else if (!email) {
-									alert("email field cannot be blank");
-								} else if (!password) {
-									alert("password field cannot be blank");
-								} else if (!address) {
-									alert("address field cannot be blank");
-								} else if (!postal) {
-									alert("postal code field cannot be blank");
-								} else if (!city) {
-									alert("city field cannot be blank");
-								} else if (!country) {
-									alert("country field cannot be blank");
-								} else if (!province) {
-									alert("province field cannot be blank");
-								} else if (!phone) {
-									alert("phone field cannot be blank");
-								} else{
-									navigate('user/dashboard');
-								}
-							}
-							}
 						>
 							Sign up
 						</button>
+					</div>
+					<div className="flex justify-center w-full md:w-auto">
+						{/* Error message display */}
+						{error && <div className="text-red-500 text-center mt-2">{error}</div>}
 					</div>
 				</div>
 			</form>
