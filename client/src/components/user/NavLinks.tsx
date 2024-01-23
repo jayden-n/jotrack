@@ -18,12 +18,18 @@ const NavLinks: React.FC = () => {
 					<NavLink
 						to={path}
 						key={text}
+						// Set activeClassName to the desired class when the NavLink is active
+
 						// end: do not set current child to be "active"
 						end
-						className={`flex items-center py-6 px-0 pl-10 capitalize ${transition} hover:pl-14`}
+						className={({ isActive }) =>
+							isActive
+								? `flex items-center py-6 px-0 pl-10 capitalize ${transition} hover:pl-14 rounded-r-full bg-notTooWhite`
+								: `flex items-center py-6 px-0 pl-10 capitalize ${transition} hover:pl-14`
+						}
 					>
 						<span
-							className={` mr-3 grid place-items-center text-2xl ${transition}`}
+							className={`mr-3 grid place-items-center text-2xl ${transition}`}
 						>
 							{icon}
 						</span>
@@ -34,4 +40,5 @@ const NavLinks: React.FC = () => {
 		</div>
 	);
 };
+
 export default NavLinks;
