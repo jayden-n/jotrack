@@ -54,16 +54,16 @@ const RegisterPage = () => {
 			</div>
 			<div className="grid place-items-center p-10 md:col-span-3">
 				<form onSubmit={handleSubmit} className="grid grid-cols-1 mt-20 md:grid-cols-2 gap-8 md:max-w-1xl lg:max-w-3xl mx-auto">
-					<input type="text" value={firstname} placeholder="First name" className="p-4 text-2xl bg-white border-none rounded shadow-inner w-full" onChange={handleFirstnameChange} />
-					<input type="text" value={lastname} placeholder="Last name" className="p-4 text-2xl bg-white border-none rounded shadow-inner w-full" onChange={handleLastnameChange} />
-					<input type="email" value={email} placeholder="Email" className="p-4 text-2xl bg-white border-none rounded shadow-inne w-fullr" onChange={handleEmailChange} />
-					<input type="password" value={password} placeholder="Password" className="p-4 text-2xl bg-white border-none rounded shadow-inner w-full" onChange={handlePasswordChange} />
-					<input type="text" value={address} placeholder="Address" className="p-4 text-2xl bg-white border-none rounded shadow-inner w-full" onChange={handleAddressChange} />
-					<input type="text" value={postal} placeholder="Postal code" className="p-4 text-2xl bg-white border-none rounded shadow-inner w-full" onChange={handlePostalChange} />
-					<input type="text" value={city} placeholder="City" className="p-4 text-2xl bg-white border-none rounded shadow-inner w-full " onChange={handleCityChange} />
-					<input type="text" value={country} placeholder="Country" className="p-4 text-2xl bg-white border-none rounded shadow-inner w-full" onChange={handleCountryChange} />
-					<input type="text" value={province} placeholder="Province" className="p-4 text-2xl bg-white border-none rounded shadow-inner w-full" onChange={handleProvinceChange} />
-					<input type="text" value={phone} placeholder="Phone number" className="p-4 text-2xl bg-white border-none rounded shadow-inner w-full" onChange={handlePhoneChange} />
+					<input type="text" value={firstname} placeholder="first name" className="p-4 text-2xl bg-white border-none rounded shadow-inner w-full" onChange={handleFirstnameChange} />
+					<input type="text" value={lastname} placeholder="last name" className="p-4 text-2xl bg-white border-none rounded shadow-inner w-full" onChange={handleLastnameChange} />
+					<input type="email" value={email} placeholder="email" className="p-4 text-2xl bg-white border-none rounded shadow-inne w-fullr" onChange={handleEmailChange} />
+					<input type="password" value={password} placeholder="password" className="p-4 text-2xl bg-white border-none rounded shadow-inner w-full" onChange={handlePasswordChange} />
+					<input type="text" value={address} placeholder="address" className="p-4 text-2xl bg-white border-none rounded shadow-inner w-full" onChange={handleAddressChange} />
+					<input type="text" value={postal} placeholder="postal code" className="p-4 text-2xl bg-white border-none rounded shadow-inner w-full" onChange={handlePostalChange} />
+					<input type="text" value={city} placeholder="city" className="p-4 text-2xl bg-white border-none rounded shadow-inner w-full " onChange={handleCityChange} />
+					<input type="text" value={country} placeholder="country" className="p-4 text-2xl bg-white border-none rounded shadow-inner w-full" onChange={handleCountryChange} />
+					<input type="text" value={province} placeholder="province" className="p-4 text-2xl bg-white border-none rounded shadow-inner w-full" onChange={handleProvinceChange} />
+					<input type="text" value={phone} placeholder="phone number" className="p-4 text-2xl bg-white border-none rounded shadow-inner w-full" onChange={handlePhoneChange} />
 					<button type="submit" className="text-2xl text-white bg-btnPurple py-3 px-52 justify-self-center mt-4 md:col-span-2">Sign up</button>
 					{error && <div className="text-red-500 py-2 px-6 justify-self-center md:col-span-2">{error}</div>}
 				</form>
