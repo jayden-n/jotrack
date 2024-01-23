@@ -2,7 +2,12 @@
 export default {
 	content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
 	theme: {
-		extend: {},
+		extend: {
+			fontFamily: {
+				outfit: ['outfit', 'sans-serif'],
+			},
+		},
+
 		colors: {
 			purple: '#5D1576',
 			gray: 'rgba(0, 0, 0, 0.54)',

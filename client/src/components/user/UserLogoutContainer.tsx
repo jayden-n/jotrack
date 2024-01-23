@@ -21,7 +21,7 @@ const UserLogoutContainer: React.FC = () => {
 			>
 				<FaUserCircle className="mr-0.5" />
 				{/* NOTE: fetch from server: {user.firstName} {user.lastName} */}
-				hello, username
+				hello, username!
 				<FaCaretDown size={20} />
 			</button>
 
