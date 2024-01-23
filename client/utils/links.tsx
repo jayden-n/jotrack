@@ -1,4 +1,4 @@
-import { FaWpforms } from 'react-icons/fa';
+import { FaWpforms, FaRegEye } from 'react-icons/fa';
 import { MdAdminPanelSettings, MdQueryStats } from 'react-icons/md';
 import { IoBarChartSharp } from 'react-icons/io5';
 import { ImProfile } from 'react-icons/im';
@@ -27,6 +27,6 @@ export const links = [
 	{
 		text: 'view resume',
 		path: 'view-resume',
-		icon: <MdAdminPanelSettings />,
+		icon: <FaRegEye />,
 	},
 ];

@@ -3,6 +3,7 @@ import { NavigateFunction, Outlet, useNavigate } from 'react-router-dom';
 import BigSideBar from '../../components/user/BigSideBar';
 import UserNavBar from '../../components/user/UserNavBar';
 import MobileSideBar from '../../components/user/MobileSideBar';
+import { toast } from 'react-toastify';
 
 interface DashboardContextProps {
 	showSidebar: boolean;
@@ -27,6 +28,7 @@ const UserDashboardPage: React.FC = () => {
 
 	const logoutUser: () => Promise<void> = async () => {
 		navigate('/');
+		toast.success('Logged out successfully!');
 	};
 
 	return (
