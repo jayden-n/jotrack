@@ -27,7 +27,11 @@ const UserLogoutContainer: React.FC = () => {
 
 			{/* button toggle */}
 			<div
-				className={showLogout ? `${dropdown} visible` : `${dropdown} invisible`}
+				className={
+					showLogout
+						? `${dropdown} visible hover:bg-violet`
+						: `${dropdown} invisible`
+				}
 			>
 				<button
 					type="button"

@@ -23,6 +23,10 @@ export default {
 			green: '#03B303',
 			red: '#FF0000',
 			notTooWhite: '#fcf6ff',
+			violet: '#6A1B9A',
+			formGrey: '#f5f5f5',
+			formSky: '#0ea5e9',
+			hoverSky: '#0369a1',
 		},
 		listStyleType: {
 			none: 'none',

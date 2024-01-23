@@ -11,8 +11,8 @@ const BigSideBar: React.FC = () => {
 			<div
 				className={
 					showSidebar
-						? 'min-h-screen h-full w-[250px] transition-all duration-300 ease-in-out ml-[-250px]'
-						: 'min-h-screen h-full w-[250px] transition-all duration-300 ease-in-out '
+						? 'min-h-screen h-full w-[260px] transition-all duration-300 ease-in-out ml-[-260px]'
+						: 'min-h-screen h-full w-[260px] transition-all duration-300 ease-in-out '
 				}
 			>
 				<div className="sticky top-0">
