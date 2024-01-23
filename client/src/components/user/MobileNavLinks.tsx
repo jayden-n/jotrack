@@ -23,7 +23,11 @@ const MobileNavLinks: React.FC = () => {
 						// end: do not set current child to be "active"
 						end
 						onClick={toggleSidebar}
-						className={`flex items-center py-6 px-0 capitalize w-96 ${transition} border-b-[1px] border-purple hover:pl-6 text-lg`}
+						className={({ isActive }) =>
+							isActive
+								? `flex items-center py-6 px-0 capitalize w-96 ${transition} pl-8 border-purple hover:pl-14 text-lg rounded-r-full bg-notTooWhite`
+								: `flex items-center py-6 px-0 capitalize w-96 ${transition} pl-8 border-purple hover:pl-14 text-lg`
+						}
 					>
 						<span
 							className={`text-2xl mr-4 grid place-items-center ${transition}`}

@@ -18,7 +18,7 @@ const MobileSideBar: React.FC = () => {
 					{/* close btn */}
 					<button
 						type="button"
-						className="cursor-pointer absolute top-[8px] left-[5px] text-4xl text-purple bg-transparent"
+						className="cursor-pointer absolute top-[8px] left-[5px] text-4xl text-red bg-transparent"
 						onClick={toggleSidebar}
 					>
 						<FaTimes />

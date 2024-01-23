@@ -21,6 +21,8 @@ export default {
 			indigoHover: '#9fa8da',
 			btnLightpink: '#FCF6FF',
 			green: '#03B303',
+			red: '#FF0000',
+			notTooWhite: '#fcf6ff',
 		},
 		listStyleType: {
 			none: 'none',
