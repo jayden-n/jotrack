@@ -33,7 +33,8 @@ const RegisterPage = () => {
 			setError("Please fill in all fields.");
 			return;
 		}
-		navigate('user/dashboard');
+		navigate('/user/dashboard');
+		console.log({firstname, lastname, email, password, address, postal, city, country, province,phone})
 	};
 
 	return (
@@ -44,7 +45,7 @@ const RegisterPage = () => {
 					<button className="text-5xl font-extrabold text-purple mb-14" onClick={() => navigate('/')}>JoTrack</button>
 					</div>
 					<hr className="border-t border-gray-300 mb-14" />
-					<h2 className="text-3xl font-semibold text-center mb-14">Sign up</h2>
+					<h2 className="text-3xl font-semibold text-center mb-32">Sign up</h2>
 					<p className="text-1xl text-gray text-center opacity-60 mb-8">Already an Member?</p>
 					<div className="flex justify-center items-center">
 					<button className="text-2xl text-white bg-btnPurple py-3 px-24" onClick={() => navigate('/login')}>Sign in</button>
