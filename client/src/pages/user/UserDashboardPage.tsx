@@ -40,7 +40,7 @@ const UserDashboardPage: React.FC = () => {
 				logoutUser,
 			}}
 		>
-			<main className="grid grid-cols-1 md:grid-cols-[auto_1fr]">
+			<main className="grid grid-cols-1 md:grid-cols-[auto_1fr] font-poppins">
 				<MobileSideBar />
 				<BigSideBar />
 
