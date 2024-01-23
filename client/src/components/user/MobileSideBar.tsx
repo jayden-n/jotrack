@@ -14,7 +14,7 @@ const MobileSideBar: React.FC = () => {
 	return (
 		<aside className="md:hidden">
 			<div className={sidebarContainer}>
-				<div className="relative bg-white w-[90vw] h-[95vh] rounded py-16 px-8 flex items-center flex-col">
+				<div className="relative bg-white w-[90vw] h-[95vh] rounded-md py-16 px-8 flex items-center flex-col">
 					{/* close btn */}
 					<button
 						type="button"

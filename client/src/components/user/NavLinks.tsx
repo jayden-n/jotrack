@@ -23,11 +23,11 @@ const NavLinks: React.FC = () => {
 						className={`flex items-center py-6 px-0 pl-10 capitalize ${transition} hover:pl-14`}
 					>
 						<span
-							className={` mr-3 grid place-items-center md:text-3xl ${transition}`}
+							className={` mr-3 grid place-items-center text-2xl ${transition}`}
 						>
 							{icon}
 						</span>
-						{text}
+						<span className="text-lg"> {text}</span>
 					</NavLink>
 				);
 			})}

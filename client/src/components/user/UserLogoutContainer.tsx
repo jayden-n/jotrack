@@ -11,6 +11,7 @@ const UserLogoutContainer: React.FC = () => {
 
 	const dropdown =
 		'absolute top-[45px] left-0 w-full text-center rounded cursor-pointer px-2 py-2 text-white bg-purple';
+
 	return (
 		<div className="relative flex items-center justify-center">
 			<button
