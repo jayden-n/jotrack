@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 type UserRole = 'admin' | 'user' | null;
 
 const LoginPage = () => {
+	const [error, setError] = useState<string>('');
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 	const [role, setRole] = useState<UserRole>(null);
@@ -32,103 +33,52 @@ const LoginPage = () => {
 	// Corrected type for the submit event
 	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		// Handle the form submission here, using email and password states
-		console.log({ email, password, role });
+		setError('');
+		if (!email || !password || !role) {
+			setError("Please fill in all fields.");
+			return;
+		}
+		if (role === 'user'){
+			console.log({ email, password, role });
+			navigate('/user/dashboard');
+		}
+		else if (role === 'admin'){
+			console.log({ email, password, role });
+			navigate('/admin/dashboard');
+		}
 	};
 
 
 	return (
-		<div className="flex h-screen bg-e6e0e0">
-			<form onSubmit={handleSubmit} className="w-full flex flex-col md:flex-row">
-			<div className="flex flex-col justify-between p-10 bg-white w-full md:w-1/2" style={{ maxWidth: '500px' }}>
+		<div className="grid h-screen grid-cols-1 md:grid-cols-4 bg-e6e0e0">
+			<div className="flex flex-col justify-center md:col-span-1 bg-white p-10">
 				<div>
-					<div className="flex justify-center">
-					<button
-						className="text-5xl font-extrabold text-purple justify-center items-center my-20"
-						onClick={() => navigate('/')}
-					>
-						<h1> JoTrack</h1>
-					</button>
+					<div className="flex justify-center items-center">
+						<button className="text-5xl font-extrabold text-purple mb-14" onClick={() => navigate('/')}>JoTrack</button>
 					</div>
-					<hr className="border-t border-gray-300 my-8" style={{ width: '402px' }} />
-					<h2 className="text-4xl font-semibold text-center my-12">Sign in</h2>
-					<p className="text-2xl font-orienta text-gray opacity-32 text-center mt-20">Don't Have An Account?</p>
-					<div className="flex justify-center">
-					<button
-						className="text-4xl font-regular text-white bg-btnPurple my-10 mx-auto w-full px-6 py-3"
-						onClick={() => navigate('/register')}
-						style={{ width: '382px', height: '87px' }}
-					>
-						Sign up
-					</button>
+					<hr className="border-t border-gray-300 mb-14" />
+					<h2 className="text-3xl font-semibold text-center mb-32">Sign in</h2>
+					<p className="text-1xl text-gray text-center opacity-60 mb-8">Don't Have An Account?</p>
+					<div className="flex justify-center items-center">
+						<button className="text-2xl text-white bg-btnPurple py-3 px-24" onClick={() => navigate('/register')}>Sign up</button>
 					</div>
 				</div>
+			</div>
 
-			</div>
-			<div className="flex flex-col justify-center items-center w-full md:w-1/2 flex-1 p-10 content-center">
-				<h2 className="text-4xl font-semibold mb-20 text-center">Log into your account</h2>
-				<div className="mb-14 flex justify-center">
-					<input
-						type="email"
-						value={email}
-						placeholder="Email"
-						className="mb-6 p-4 text-3xl bg-white border-none rounded shadow-inner w-full md:w-auto"
-						onChange={handleEmailChange}
-						style={{ width: '798px', height: '107px' }}
-					/>
-				</div>
-				<div className="flex justify-center">
-					<input
-						type="password"
-						value={password}
-						placeholder="Password"
-						className="mb-6 p-4 text-3xl bg-white border-none rounded shadow-inner w-full md:w-auto"
-						onChange={handlePasswordChange}
-						style={{ width: '798px', height: '107px' }}
-					/>
-				</div>
-				<hr className="border-t border-gray-300 my-8 mb-14 mx-auto w-1/3" />
-				<div className="flex justify-center mb-28 space-x-14 md:w-auto">
-					<button
-						className={`px-12 py-4 text-3xl bg-white font-regular rounded-xl ${role === 'admin' ? 'bg-btnLightpink' : 'bg-transparent'}`}
-						onClick={handleAdminClick}
-					>
-						Admin
-					</button>
-					<button
-						className={`px-16 py-4 text-3xl bg-white font-regular rounded-xl ${role === 'user' ? 'bg-btnLightpink' : 'bg-transparent'}`}
-						onClick={handleUserClick}
-					>
-						User
-					</button>
-				</div>
-				<div className="flex justify-center w-full md:w-auto">
-					<button
-						type="submit"
-						className="w-full md:w-auto px-6 py-2 text-5xl font-regular text-white bg-btnPurple"
-						style={{ height: '87px', width: '999px', maxWidth: '999px'}}
-						onClick={() => {
-							if (!email) {
-								alert("email field cannot be blank");
-							} else if (!password) {
-								alert("password field cannot be blank");
-							} else if (!role) {
-								alert("role need to be selected")
-							} else if (role === 'user') { // Correctly using the state variable
-								navigate('user/dashboard');
-							} else if (role === 'admin') {
-								navigate('admin/dashboard');
-							} else{
-								alert("Role was not selected");
-							}
-						}
-					}
-					>
-						Sign in
-					</button>
-				</div>
-			</div>
+			<div className="grid place-items-center p-10 md:col-span-3">
+				<form onSubmit={handleSubmit} className="grid grid-cols-1 mt-20 gap-8 md:max-w-1xl lg:max-w-3xl mx-auto">
+					<h2 className="text-3xl font-semibold text-center mb-8 justify-self-center md:col-span-2">Log into your account</h2>
+					<input type="email" value={email} placeholder="email" className="p-4 text-2xl bg-white border-none rounded shadow-inne w-full justify-self-center mt-4 md:col-span-2" onChange={handleEmailChange} />
+					<input type="password" value={password} placeholder="password" className="p-4 text-2xl bg-white border-none rounded shadow-inner w-full justify-self-center mb-6 mt-4 md:col-span-2" onChange={handlePasswordChange} />
+					<hr className="border-t border-gray-300 my-8 mb-4 mx-auto w-1/2 justify-self-center mt-4 md:col-span-2" />
+					<div className="flex justify-center gap-4 md:col-span-2">
+					<button type="button" className={`w-36 py-3 text-2xl bg-white font-regular rounded-xl ${role === 'admin' ? 'bg-gray' : 'bg-transparent'}`} onClick={handleAdminClick}>Admin</button>
+					<button type="button" className={`w-36 py-3 text-2xl bg-white font-regular rounded-xl ${role === 'user' ? 'bg-gray' : 'bg-transparent'}`} onClick={handleUserClick}>User</button>
+					</div>
+					<button type="submit" className="text-2xl text-white bg-btnPurple py-3 px-52 justify-self-center mt-8 md:col-span-2">Sign in</button>
+					{error && <div className="text-red-500 py-2 px-6 justify-self-center md:col-span-2">{error}</div>}
 			</form>
+			</div>
 		</div>
 	);
 };
