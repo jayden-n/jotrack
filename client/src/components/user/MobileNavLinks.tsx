@@ -26,7 +26,7 @@ const MobileNavLinks: React.FC = () => {
 						className={({ isActive }) =>
 							isActive
 								? `flex items-center py-6 px-0 capitalize w-96 ${transition} pl-8 border-purple hover:pl-14 text-lg rounded-r-full bg-notTooWhite`
-								: `flex items-center py-6 px-0 capitalize w-96 ${transition} pl-8 border-purple hover:pl-14 text-lg`
+								: `flex items-center py-6 px-0 capitalize w-96 ${transition} pl-8 border-purple hover:pl-14 text-lg rounded-r-full hover:bg-notTooWhite`
 						}
 					>
 						<span

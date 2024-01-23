@@ -25,7 +25,7 @@ const NavLinks: React.FC = () => {
 						className={({ isActive }) =>
 							isActive
 								? `flex items-center py-6 px-0 pl-10 capitalize ${transition} hover:pl-14 rounded-r-full bg-notTooWhite`
-								: `flex items-center py-6 px-0 pl-10 capitalize ${transition} hover:pl-14`
+								: `flex items-center py-6 px-0 pl-10 capitalize ${transition} hover:pl-14 rounded-r-full hover:bg-notTooWhite`
 						}
 					>
 						<span
