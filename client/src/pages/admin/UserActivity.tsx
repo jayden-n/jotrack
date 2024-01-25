@@ -7,7 +7,7 @@ export default function UserActivity() {
 
   return (
     <div>
-        <NavBar/>
+
         <div className=" mt-10">
             
             <div className='grid grid-cols-9  '>

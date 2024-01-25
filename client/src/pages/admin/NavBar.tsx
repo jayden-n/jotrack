@@ -1,29 +1,35 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+
 import { RiArrowDropDownLine } from 'react-icons/ri';
 
 export default function NavBar() {
-  const [dropDown, setDropDown] = useState<boolean>(false);
+	const [dropDown, setDropDown] = useState<boolean>(false);
+    
+    const dropDownOnClick = () => { 
+        setDropDown(!dropDown);
+        
+    };
 
-  const dropDownOnClick = () => {
-    setDropDown(!dropDown);
-	
-  };
+    const closeDropDown = () => {
+        console.log('Closing dropdown');
+        setDropDown(false);
+      }
 
-  const closeDropDown = () => {
-	setDropDown(false)
 
-  }
-  const hoverStyle = 'hover:bg-indigo hover:p-2 hover:rounded-xl';
-  const active = 'active:bg-lightgrey'
-  const dropDownStyle: React.CSSProperties = {
+	  const dropDownStyle: React.CSSProperties = {
 
-	transition: 'transform 0.3s ease-in-out', // fix transition later
-	
-  };
+        transition: 'transform 0.3s ease-in-out', // fix transition later
+        
+    };
+
   
-//   ============================================= DropDown Menu =============================================
-  const DropDownMenu = () => {
+
+
+  
+  const DropDownMenu: React.FC = () => {
+
+
     return (
 		<div className={`absolute top-full right-1 mt-2 ${dropDownStyle}`}>
         <ul className={`bg-black  flex  items-center p-4 rounded-md `}>
@@ -58,6 +64,9 @@ export default function NavBar() {
       </div>
     );
   };
+
+  
+	const hoverStyle = 'hover:bg-indigo hover:p-2 hover:shadow-md hover:rounded-xl  focus:text-gray  ';
 // ============================================= Nav bar ======================================================
   return (
     <div>
@@ -65,7 +74,7 @@ export default function NavBar() {
       <nav className="bg-white ring-1 p-10 relative">
         <ul className="text-purple flex items-center list-none text-lg">
           <li className="font-outfit text-3xl font-extrabold pr-10">
-            <Link to={'/admin/dashboard'}>
+            <Link to={'/admin'}>
               <span className="text-5xl">J</span>oTrack
             </Link>
           </li>
@@ -80,19 +89,19 @@ export default function NavBar() {
 			{/* ======================================= */}
 
           <li className="px-10 hidden md:flex ">
-            <Link to={'/admin'} className={`font-outfit ${hoverStyle}`}>
+            <Link to={'/admin'} className={`font-outfit  text-xl ${hoverStyle}`}>
               Dashboard
             </Link>
           </li>
 
           <li className="px-10 hidden md:flex">
-            <Link to={'/admin/jobs'} className={`font-outfit ${hoverStyle}`}>
+            <Link to={'/admin/jobs'} className={`font-outfit text-xl ${hoverStyle}`}>
               Jobs
             </Link>
           </li>
 
           <li className="px-10 hidden md:flex">
-            <Link to={'/admin/users'} className={`font-outfit ${hoverStyle}`}>
+            <Link to={'/admin/users'} className={`font-outfit  text-xl ${hoverStyle}`}>
               Users
             </Link>
           </li>

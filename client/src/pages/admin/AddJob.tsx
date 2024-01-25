@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { toast } from 'react-toastify';
 
 const AddJob: React.FC = () => {
 	const [companyName, setCompanyName] = useState<string>("");
@@ -8,7 +8,6 @@ const AddJob: React.FC = () => {
 	const [location, setLocation] = useState<string>("");
 	const [description, setDescription] = useState<string>("");
 	const [requirements, setRequirements] = useState<string>("");
-
 
 		const onAdd = (e: React.FormEvent<HTMLButtonElement>) => {
 			e.preventDefault();
@@ -27,7 +26,7 @@ const AddJob: React.FC = () => {
 				setDescription('');
 				setRequirements('');
 
-				alert('Job Added.'); //replace later with a popup
+				toast.success('Job successfully added.');
 			}
 		};
 
@@ -46,14 +45,15 @@ const AddJob: React.FC = () => {
 
 		return (
 			<div>
-				<div className="mt-20 mb-5 mx-4 md:mx-0">
-					<form className="grid grid-col-1 md:grid-cols-9">
-						<div className="md:col-start-2 md:col-end-5 row-span-full w-full">
+				<div className="md:mt-20 mt-10 mb-5 mx-4 md:mx-0">
+					<form className="grid grid-col-1 md:grid-cols-9 ">
+						<div className="md:col-start-2 md:col-end-5  row-span-full w-full">
 							<input
 								placeholder="Company Name"
 								type="text"
 								value={companyName}
-								className="mb-5 w-full p-3 border border-gray"
+								className="md:mb-10 md:p-4 mb-5 p-3 w-full border rounded-md shadow-md 
+								shadow-black-500/50 border-gray"
 								onChange={(e) => setCompanyName(e.target.value)}
 							/>
 
@@ -61,7 +61,8 @@ const AddJob: React.FC = () => {
 								placeholder="Position"
 								type="text"
 								value={position}
-								className="mb-5 w-full p-3 border  border-gray"
+								className=" md:mb-10 md:p-4 mb-5 w-full p-3 border rounded-md shadow-md 
+								shadow-black-500/50  border-gray"
 								onChange={(e) => setPosition(e.target.value)}
 							/>
 
@@ -69,34 +70,37 @@ const AddJob: React.FC = () => {
 								placeholder="Location"
 								type="text"
 								value={location}
-								className="mb-5 w-full p-3 border  border-gray"
+								className=" md:mb-10 md:p-4  mb-5 w-full p-3 border rounded-md shadow-md 
+								shadow-black-500/50  border-gray"
 								onChange={(e) => setLocation(e.target.value)}
 							/>
 
 							<textarea
 								placeholder="Description..."
 								value={description}
-								className="mb-5 w-full md:h-3/5 p-3 border border-gray"
+								className=" md:mb-0 mb-5 md:p-4 w-full md:h-2/5 p-3 border rounded-md 
+								shadow-md shadow-black-500/50 border-gray"
 								onChange={(e) => setDescription(e.target.value)}
 							/>
 						</div>
 
-						<div className="md:col-start-6 md:col-end-9 md:row-span-full row-start-3">
+						<div className="md:col-start-6 md:col-end-9 ">
 							<textarea
 								placeholder="Requirements"
 								value={requirements}
-								className="w-full p-3 border border-gray"
+								className=" w-full p-3 border border-gray rounded-md 
+								shadow-md shadow-black-500/50"
 								rows={9}
 								onKeyDown={bulletPoint}
 								onChange={(e) => setRequirements(e.target.value)}
 							/>
 						</div>
 
-						<div className="md:col-start-7 md:col-end-9  md:row-start-0  row-start-5 mt-12 md:ml-12 ">
+						<div className="md:col-start-3 md:col-end-8 md:mt-0 mt-5  ">
 							<button
 								onClick={onAdd}
-								className="bg-green font-outfit text-white text-normal text-md w-full py-1
-                                  rounded-md hover:opacity-90 ring-0.5"
+								className="bg-green font-outfit text-white text-normal text-xl w-full py-3
+                                  rounded-lg hover:opacity-90 shadow-lg ring-1"
 							>
 								Add Job
 							</button>

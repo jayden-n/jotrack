@@ -11,7 +11,7 @@ const UserSearch: React.FC = () => {
 
     const getData = async () => {
         try{
-            // set data from fetchUserData function
+            // fetch data
 
 
         }catch(error){
@@ -26,46 +26,13 @@ const UserSearch: React.FC = () => {
         setDetails(!details)
     }
     
-   const DisplayDetails = () => {
-    return(
-        <div className='bg-white'>
-                <div  className='grid grid-cols-3'>
-                    <div className='col-1'>
-                        <p className=' '>User ID </p>
-                        <p className=''>Name </p>
-                        <p className=''>Email</p>
-                        <p className=''>Address</p>
-                        <p className=''>Phone</p>
-                    </div>
-                    {/* user data display here */}
-                    <div className='col-2 col-span-2'>
-                        <p className=''>1</p>
-                        <p className=' '>anyname </p>
-                        <p className=''>who@gmail.com </p>
-                        <p className=''>123 St North, 123lk3, toronto ON</p>
-                        <p className=''>5555555</p>
-                    </div>    
-                  
-                </div>
-
-                <div className='flex justify-center items-center'>
-                    <Link to={"/admin/users/activity"}
-                    className='bg-green font-outfit text-white text-normal text-center p-1.5
-                    rounded-lg  hover:opacity-90 ring-0.5  w-3/5  '
-                    >
-                        User Activity
-                    </Link>
-                </div>
-      </div>          
-    )
-   }
 
    // ==================================================== End =======================================================
 
 
     return (
         <div className='grid grid-col-1 md:grid-cols-7 mt-10 '>
-            {/* in progress */}
+           
             {/* ================================== User details button ================================= */}
                 {/* <div className='flex justify-end items-center mb-10 mr-4'>
                     <button 
@@ -78,11 +45,9 @@ const UserSearch: React.FC = () => {
                     {details && <DisplayDetails/>}
                 </div> */}  
 
-
-                {/* Done */}
             {/*  ================================== User Applications  ================================= */}
 
-            <div className='md:col-span-3 md:ml-10 bg-white rounded-lg w:2/5 mx-3 md:mx-0 md:w-full'>
+            <div className=' md:col-span-3 md:ml-10 bg-white rounded-lg w:2/5 mx-3 md:mx-0 md:w-full'>
                 <table className=' w-full text-center'>
 
                     <thead className='border-b text-sm md:text-lg  border-lightgrey'>
@@ -100,7 +65,8 @@ const UserSearch: React.FC = () => {
                             <td className=' md:p-2 p-1 border-l-2 border-lightgrey text-center'>
                                 <span className='md:text-lg text-sm '>Pending</span>
 
-                                <button className='bg-updateBtnColor  text-white rounded-lg md:py-1 md:px-5 text-xs p-1 float-end'>
+                                <button className='bg-updateBtnColor hover:opacity-90 ring-0.5
+                                 text-white rounded-lg md:py-2 md:px-5 text-sm p-1 float-end'>
                                     Update</button>
                             </td>
                         </tr>
@@ -123,11 +89,11 @@ const UserSearch: React.FC = () => {
                   </div>
                 {/* user data display here */}
                 <div className='col-start-2 col-span-2'>
-                    <p className='mb-10 '>{} </p>
-                    <p className='mb-10'>{} </p>
-                    <p className='mb-10'>{}</p>
-                    <p className='mb-10'>{}</p>
-                    <p className='mb-10'>{}</p>
+                    <p className='mb-10 '>1 </p>
+                    <p className='mb-10'>any name </p>
+                    <p className='mb-10'>name@gmail.com</p>
+                    <p className='mb-10'>123 Any St North, Toronto, L8M3F4, ON</p>
+                    <p className='mb-10'>55555555</p>
                 </div>    
                   
                 </div>
