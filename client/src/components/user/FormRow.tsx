@@ -21,7 +21,7 @@ const FormRow: React.FC<FormRowProps> = ({
 				type={type}
 				id={name}
 				name={name}
-				className="w-full shadow-md py-1 px-3 rounded-md border border-[1] text-gray h-[45px]"
+				className="w-full shadow-md py-1 px-3 rounded-md border border-[1] text-gray h-[50px]"
 				defaultValue={defaultValue || ''}
 				required
 			/>

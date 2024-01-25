@@ -29,8 +29,7 @@ export default {
 			hoverSky: '#0369a1',
 			orange: '#FB7F0A',
 			bgOrange: '#fef3c7',
-
-
+			passwordGrey: '#E8E8E8',
 			// slate colors
 			slate300: '#CBD5E1',
 			slate500: '#64748B',
@@ -41,6 +40,9 @@ export default {
 			indigo300: '#A5B4FC',
 			indigo400: '#518CF8',
 			indigo500: '#6366F1',
+			indigo600: '#4f46e5',
+			// violet colors:
+			violet600: '#7c3aed',
 		},
 		listStyleType: {
 			none: 'none',

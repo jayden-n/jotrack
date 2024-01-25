@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { FiLock } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 
-const TARGET_TEXT = 'update encrypt info';
+const TARGET_TEXT = 'update password';
 const CYCLES_PER_LETTER = 2;
 const SHUFFLE_TIME = 50;
 
@@ -56,7 +56,7 @@ const EncryptButton = () => {
 			}}
 			onMouseEnter={scramble}
 			onMouseLeave={stopScramble}
-			className="group relative cursor-pointer overflow-hidden  w-full rounded-md border-[1px] border-slate500 bg-slate700 px-4 py-2 font-mono  mt-6 sm:mt-0 font-medium uppercase text-slate300 transition-colors hover:text-indigo300 "
+			className="group relative  cursor-pointer overflow-hidden h-[50px]  w-full rounded-md border-[1px] border-slate500 bg-slate700 px-4 py-2 font-mono  mt-6 sm:mt-0 font-medium uppercase text-slate300 transition-colors hover:text-indigo300 "
 		>
 			<div className="relative z-10 flex items-center justify-center gap-2">
 				<FiLock />

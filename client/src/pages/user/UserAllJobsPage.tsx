@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigation } from 'react-router-dom';
 import JobsContainer from '../../components/user/JobsContainer';
 
-const AllJobsPage: React.FC = () => {
+const UserAllJobsPage: React.FC = () => {
 	const navigation = useNavigation();
 	// displaying state when button is submitting
 	const isSubmitting = navigation.state === 'submitting';
@@ -13,4 +13,4 @@ const AllJobsPage: React.FC = () => {
 		</>
 	);
 };
-export default AllJobsPage;
+export default UserAllJobsPage;
