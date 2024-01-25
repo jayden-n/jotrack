@@ -5,7 +5,6 @@ import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import UserDashboardPage from './pages/user/UserDashboardPage';
 import AdminDashboard from './pages/admin/Dashboard';
-import AllJobsPage from './pages/user/UserAllJobsPage';
 import HomePage from './pages/visitor/HomePage';
 import AdminJobs from './pages/admin/Jobs';
 import AdminUsers from './pages/admin/Users';
@@ -16,6 +15,8 @@ import UserBuildResume from './pages/user/UserBuildResume';
 import DashboardLayout from './pages/admin/DashboardLayout';
 import UserInfoPage from './pages/user/UserInfoPage';
 import UserViewResume from './pages/user/UserViewResume';
+import UserUpdatePasswordPage from './pages/user/UserUpdatePasswordPage';
+import UserAllJobsPage from './pages/user/UserAllJobsPage';
 
 const router = createBrowserRouter([
 	{
@@ -44,8 +45,12 @@ const router = createBrowserRouter([
 						index: true,
 					},
 					{
+						path: 'update-password/:id',
+						element: <UserUpdatePasswordPage />,
+					},
+					{
 						path: 'all-jobs',
-						element: <AllJobsPage />,
+						element: <UserAllJobsPage />,
 					},
 					{
 						path: 'applications',
