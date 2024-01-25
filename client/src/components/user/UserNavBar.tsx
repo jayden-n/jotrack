@@ -12,7 +12,7 @@ const UserNavBar: React.FC = () => {
 		console.log('Button clicked'); // Add this line
 	};
 	return (
-		<nav className="h-24 flex items-center justify-center md:sticky md:top-0 transition-all ease-in-out duration-300 bg-white">
+		<nav className="h-24 flex items-center justify-center md:sticky md:top-0 transition-all ease-in-out duration-300 bg-white z-50">
 			<div className="flex w-[90vw] justify-between md:w-[90%]">
 				<button
 					type="button"

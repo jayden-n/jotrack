@@ -5,7 +5,7 @@ import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import UserDashboardPage from './pages/user/UserDashboardPage';
 import AdminDashboard from './pages/admin/Dashboard';
-import AllJobsPage from './pages/user/AllJobsPage';
+import AllJobsPage from './pages/user/UserAllJobsPage';
 import HomePage from './pages/visitor/HomePage';
 import AdminJobs from './pages/admin/Jobs';
 import AdminUsers from './pages/admin/Users';

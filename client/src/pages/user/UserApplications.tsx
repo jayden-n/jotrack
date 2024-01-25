@@ -1,4 +1,10 @@
+import JobsContainer from '../../components/user/JobsContainer';
+
 const UserApplications: React.FC = () => {
-	return <div>UserApplications</div>;
+	return (
+		<>
+			<JobsContainer />
+		</>
+	);
 };
 export default UserApplications;

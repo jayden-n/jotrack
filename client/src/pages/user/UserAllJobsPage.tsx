@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigation } from 'react-router-dom';
+import JobsContainer from '../../components/user/JobsContainer';
 
 const AllJobsPage: React.FC = () => {
 	const navigation = useNavigation();
@@ -7,9 +8,9 @@ const AllJobsPage: React.FC = () => {
 	const isSubmitting = navigation.state === 'submitting';
 
 	return (
-		<section>
-			<h4>JobSearchPage</h4>
-		</section>
+		<>
+			<h1>Jobs Search page</h1>
+		</>
 	);
 };
 export default AllJobsPage;

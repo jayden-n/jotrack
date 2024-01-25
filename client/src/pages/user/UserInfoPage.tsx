@@ -13,7 +13,7 @@ const UserInfoPage: React.FC = () => {
 	};
 
 	return (
-		<section className="rounded-lg w-full bg-formGrey pb-16 pt-6 text-base ">
+		<section className="rounded-lg w-full bg-formGrey pb-16 pt-6 text-base shadow-[5px_5px_0px_0px_#CCCCCC]">
 			{/* IMPORTANT: names id must match with BACK-END SERVER */}
 			<form
 				onSubmit={handleSubmit}
@@ -41,13 +41,13 @@ const UserInfoPage: React.FC = () => {
 					<FormRow
 						type="text"
 						name="address"
-						defaultValue="111 Not Real St, Toronto, ON, M1L0J3, Earth"
+						defaultValue="Toronto, ON, Earth"
 					/>
 
 					<button
 						type="submit"
 						disabled={isSubmitting}
-						className="cursor-pointer bg-formSky text-white  rounded-md h-[45px] hover:bg-hoverSky transition-all duration-300 ease-in-out capitalize inline-block w-full mt-6 md:mt-0"
+						className="cursor-pointer bg-formSky text-white  rounded-md h-[45px] hover:shadow-xl transition-all duration-300 ease-in-out capitalize inline-block w-full mt-6 md:mt-0 shadow-lg"
 					>
 						{isSubmitting ? 'updating...' : 'save changes'}
 					</button>
