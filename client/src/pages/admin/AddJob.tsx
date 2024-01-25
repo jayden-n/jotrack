@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import NavBar from './NavBar';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-export default function AddJob() {
-	const [companyName, setCompanyName] = useState<string>('');
-	const [position, setPosition] = useState<string>('');
-	const [location, setLocation] = useState<string>('');
-	const [description, setDescription] = useState<string>('');
-	const [requirements, setRequirements] = useState<string>('');
 
-	const onAdd = (e: React.FormEvent<HTMLButtonElement>) => {
-		e.preventDefault();
+const AddJob: React.FC = () => {
+	const [companyName, setCompanyName] = useState<string>("");
+	const [position, setPosition] = useState<string>("");
+	const [location, setLocation] = useState<string>("");
+	const [description, setDescription] = useState<string>("");
+	const [requirements, setRequirements] = useState<string>("");
+
 
 		const onAdd = (e: React.FormEvent<HTMLButtonElement>) => {
 			e.preventDefault();
@@ -48,9 +46,9 @@ export default function AddJob() {
 
 		return (
 			<div>
-				<div className="mt-20 mb-5">
-					<form className="grid grid-cols-9 ">
-						<div className="col-start-2 col-end-5 row-span-full w-full">
+				<div className="mt-20 mb-5 mx-4 md:mx-0">
+					<form className="grid grid-col-1 md:grid-cols-9">
+						<div className="md:col-start-2 md:col-end-5 row-span-full w-full">
 							<input
 								placeholder="Company Name"
 								type="text"
@@ -63,7 +61,7 @@ export default function AddJob() {
 								placeholder="Position"
 								type="text"
 								value={position}
-								className="mb-5 w-full p-3 border border-gray"
+								className="mb-5 w-full p-3 border  border-gray"
 								onChange={(e) => setPosition(e.target.value)}
 							/>
 
@@ -78,23 +76,23 @@ export default function AddJob() {
 							<textarea
 								placeholder="Description..."
 								value={description}
-								className="mb-5 w-full h-3/5 p-3 border border-gray"
+								className="mb-5 w-full md:h-3/5 p-3 border border-gray"
 								onChange={(e) => setDescription(e.target.value)}
 							/>
 						</div>
 
-						<div className="col-start-6 col-end-9 row-span-full">
+						<div className="md:col-start-6 md:col-end-9 md:row-span-full row-start-3">
 							<textarea
 								placeholder="Requirements"
 								value={requirements}
 								className="w-full p-3 border border-gray"
-								rows={10}
+								rows={9}
 								onKeyDown={bulletPoint}
 								onChange={(e) => setRequirements(e.target.value)}
 							/>
 						</div>
 
-						<div className="col-start-7 col-end-9  mt-12 ml-12">
+						<div className="md:col-start-7 md:col-end-9  md:row-start-0  row-start-5 mt-12 md:ml-12 ">
 							<button
 								onClick={onAdd}
 								className="bg-green font-outfit text-white text-normal text-md w-full py-1
@@ -106,6 +104,8 @@ export default function AddJob() {
 					</form>
 				</div>
 			</div>
-		);
-	};
+		
+	);
 }
+
+export default AddJob;

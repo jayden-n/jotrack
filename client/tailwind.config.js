@@ -29,6 +29,8 @@ export default {
 			hoverSky: '#0369a1',
 			orange: '#FB7F0A',
 			bgOrange: '#fef3c7',
+			black: '#000000',
+			updateBtnColor: "#33A7EF"
 		},
 		listStyleType: {
 			none: 'none',
