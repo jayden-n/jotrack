@@ -1,12 +1,8 @@
-import { useNavigation } from 'react-router-dom';
 import FormRow from '../../components/user/FormRow';
 import { toast } from 'react-toastify';
+import AnimatedEncryptButton from '../../components/user/AnimatedEncryptButton';
 
 const UserInfoPage: React.FC = () => {
-	const navigation = useNavigation();
-	// displaying state when button is submitting
-	const isSubmitting = navigation.state === 'submitting';
-
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		toast.success('Profile updated successfully!');
@@ -19,7 +15,9 @@ const UserInfoPage: React.FC = () => {
 				onSubmit={handleSubmit}
 				className="max-w-[100vw] rounded  py-8 px-10 mx-auto"
 			>
-				<h4 className="mb-8 capitalize text-2xl font-semibold">profile</h4>
+				<h4 className="mb-8 capitalize text-2xl text-violet font-semibold">
+					Username's profile
+				</h4>
 
 				<div className="grid md:grid-cols-2 lg:grid-cols-3 md:items-end md:gap-x-8 md:gap-y-10 gap-y-8">
 					<FormRow type="text" name="name" defaultValue="john" />
@@ -44,13 +42,15 @@ const UserInfoPage: React.FC = () => {
 						defaultValue="Toronto, ON, Earth"
 					/>
 
-					<button
+					{/* <button
 						type="submit"
 						disabled={isSubmitting}
 						className="cursor-pointer bg-formSky text-white  rounded-md h-[45px] hover:shadow-xl transition-all duration-300 ease-in-out capitalize inline-block w-full mt-6 md:mt-0 shadow-lg"
 					>
 						{isSubmitting ? 'updating...' : 'save changes'}
-					</button>
+					</button> */}
+
+					<AnimatedEncryptButton />
 				</div>
 			</form>
 		</section>
