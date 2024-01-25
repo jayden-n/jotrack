@@ -7,10 +7,10 @@ const UserLogoutContainer: React.FC = () => {
 	const { logoutUser } = useDashboardContext();
 
 	const btn =
-		'cursor-pointer rounded text-white bg-purple px-2 py-1 transition-all duration-300 ease-in-out capitalize inline-block';
+		'cursor-pointer rounded text-white bg-violet px-2 py-1 transition-all duration-300 ease-in-out capitalize inline-block';
 
 	const dropdown =
-		'absolute top-[45px] left-0 w-full text-center rounded cursor-pointer px-2 py-2 text-white bg-purple';
+		'absolute top-[45px] left-0 w-full text-center rounded cursor-pointer px-2 py-2 text-white bg-violet';
 
 	return (
 		<div className="relative flex items-center justify-center">
@@ -29,15 +29,12 @@ const UserLogoutContainer: React.FC = () => {
 			<div
 				className={
 					showLogout
-						? `${dropdown} visible hover:bg-violet`
+						? `${dropdown} visible hover:bg-purple cursor-pointer`
 						: `${dropdown} invisible`
 				}
+				onClick={logoutUser}
 			>
-				<button
-					type="button"
-					className="w-full h-full capitalize cursor-pointer"
-					onClick={logoutUser}
-				>
+				<button type="button" className="w-full h-full capitalize ">
 					logout
 				</button>
 			</div>

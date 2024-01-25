@@ -27,6 +27,8 @@ export default {
 			formGrey: '#f5f5f5',
 			formSky: '#0ea5e9',
 			hoverSky: '#0369a1',
+			orange: '#FB7F0A',
+			bgOrange: '#fef3c7',
 		},
 		listStyleType: {
 			none: 'none',
