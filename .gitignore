@@ -1,7 +1,0 @@
-# node related
-package*.json
-# IDE and OS
-.idea/
-.vscode/
-.DS_Store
-node_modules/
