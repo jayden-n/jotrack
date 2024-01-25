@@ -27,6 +27,8 @@ export default {
 			formGrey: '#f5f5f5',
 			formSky: '#0ea5e9',
 			hoverSky: '#0369a1',
+			black: '#000000',
+			updateBtnColor: "#33A7EF"
 		},
 		listStyleType: {
 			none: 'none',

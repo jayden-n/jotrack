@@ -1,22 +1,21 @@
 import React, {useState} from 'react'
-import NavBar from './NavBar'
 
-export default function UserActivity() {
+const UserActivity: React.FC = () => {
 
     const [data, setData] = useState([])
 
   return (
     <div>
-        <NavBar/>
-        <div className=" mt-10">
+      
+        <div className=" mt-10 ml-5 md:ml-0">
             
-            <div className='grid grid-cols-9  '>
+            <div className='grid md:grid-cols-9 grid-col-1 '>
 
-            <p className='text-purple font-outfit font-md col-span-2 text-2xl text-center mb-10'>User Activity</p>
-                <table className='bg-white col-start-2 col-end-9 rounded-lg w-full  '>
-                    <thead className='border-b border-lightgrey'>
+            <p className='text-purple font-outfit font-md col-span-2 text-2xl md:text-center mb-10'>User Activity</p>
+                <table className='bg-white md:col-start-2 md:col-end-9 rounded-lg w-full  '>
+                    <thead className='border-b text-sm md:text-lg border-lightgrey'>
                         <tr className=''>
-                            <th className='p-3 font-outfit font-semibold'>Job Applied to</th>
+                            <th className='p-3 font-outfit text-sm md:text-lg font-semibold'>Job Applied to</th>
                             <th className='border-x-2 border-lightgrey font-semibold font-outfit'>Search History</th>
                             <th className='font-outfit font-semibold'>Visited Jobs</th>
                         </tr>
@@ -37,3 +36,6 @@ export default function UserActivity() {
     </div>    
   )
 }
+
+export
+ default UserActivity;

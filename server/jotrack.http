@@ -4,7 +4,7 @@
 
 @userId=
 @jobId=
-@access_token=
+@access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImZ1bGxOYW1lIjoiZmlyc3ROYW1lIGxhc3ROYW1lIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzA2MDQ5OTI1LCJleHAiOjE3MDY2NTQ3MjV9.EwjV3HMTwamL8L4zeUth7_zTBpD0RCFFG42Bri3mmMU
 
 ### create user
 
@@ -12,9 +12,9 @@ POST http://{{hostname}}:{{port}}/api/auth/signup HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "email@domain.com",
+  "email": "admin@domain.com",
   "password": "password",
-  "role": "user",
+  "role": "admin",
   "firstName": "firstName",
   "lastName": "lastName"
 }
@@ -25,7 +25,7 @@ POST http://{{hostname}}:{{port}}/api/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "email@domain.com",
+  "email": "admin@domain.com",
   "password": "password"
 }
 

@@ -1,13 +1,13 @@
 const DashboardLayout: React.FC = () => {
 	return (
-		<div className="mt-10 ml-10">
+		<div className="mt-10 md:ml-10 md:mr-0 mr-4 ml-4 ">
 			<p className="text-purple font-poppins font-bold text-3xl">
 				Hello
 				<span className="text-gray font-normal  text-3xl">, Admin</span>
 			</p>
 
-			<form className="border-white bg-white rounded-xl p-4 w-full md:w-3/6 mt-5 ">
-				<div className="mb-4 flex flex-wrap gap-x-16 pl-8 pt-5 ">
+			<form className="border-white bg-white rounded-xl p-4 w-full md:w-3/6 mt-5  ">
+				<div className="mb-4 flex flex-wrap gap-x-16 md:pl-8 pt-5 ">
 					<div className="w-full sm:w-2/5  mb-2 ">
 						<label className="block text-sm font-outfit mb-3">First name</label>
 						<input
@@ -31,7 +31,7 @@ const DashboardLayout: React.FC = () => {
 					</div>
 				</div>
 
-				<div className="mb-4 flex flex-wrap gap-x-16 pl-8 ">
+				<div className="mb-4 flex flex-wrap gap-x-16 md:pl-8 ">
 					<div className="w-full sm:w-2/5   mb-2 ">
 						<label className="block text-sm font-outfit mb-2">
 							Phone number
@@ -46,7 +46,7 @@ const DashboardLayout: React.FC = () => {
 					</div>
 
 					<div className="w-full sm:w-2/5 mb-2 ">
-						<label className="block text-sm font-outfit mb-2 font-outfit">
+						<label className="block text-sm mb-2 font-outfit">
 							Email
 						</label>
 
@@ -59,7 +59,7 @@ const DashboardLayout: React.FC = () => {
 					</div>
 				</div>
 
-				<div className="mb-4 pl-8">
+				<div className="mb-4 md:pl-8">
 					<label className="block text-sm font-outfit mb-2">Address</label>
 					<input
 						type="text"
