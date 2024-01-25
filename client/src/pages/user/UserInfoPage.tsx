@@ -9,7 +9,7 @@ const UserInfoPage: React.FC = () => {
 	};
 
 	return (
-		<section className="rounded-lg w-full bg-formGrey pb-16 pt-6 text-base shadow-[5px_5px_0px_0px_#CCCCCC]">
+		<section className="rounded-lg w-full bg-formGrey pb-16 pt-6 text-base shadow-[7px_7px_0px_0px_#CCCCCC]">
 			{/* IMPORTANT: names id must match with BACK-END SERVER */}
 			<form
 				onSubmit={handleSubmit}
