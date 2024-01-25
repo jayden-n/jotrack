@@ -30,6 +30,7 @@ export default {
 			orange: '#FB7F0A',
 			bgOrange: '#fef3c7',
 
+
 			// slate colors
 			slate300: '#CBD5E1',
 			slate500: '#64748B',
