@@ -15,7 +15,7 @@ const UserInfoPage: React.FC = () => {
 				onSubmit={handleSubmit}
 				className="max-w-[100vw] rounded  py-8 px-10 mx-auto"
 			>
-				<h4 className="mb-8 capitalize text-2xl text-violet font-semibold">
+				<h4 className="mb-8 capitalize text-2xl  font-semibold">
 					Username's profile
 				</h4>
 
