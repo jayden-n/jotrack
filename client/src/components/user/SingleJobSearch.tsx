@@ -2,28 +2,23 @@ import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
 import SingleJobInfo from './SingleJobInfo';
 
 interface SingleJobProps {
-	jobStatus: string;
 	company: string;
 	position: string;
 }
 
-const SingleJob: React.FC<SingleJobProps> = ({
-	jobStatus,
-	company,
-	position,
-}) => {
-	const getStatusColor: () => void = () => {
-		switch (jobStatus) {
-			case 'pending':
-				return 'bg-orange';
-			case 'declined':
-				return 'bg-red';
-			case 'accepted':
-				return 'bg-green';
-			default:
-				return 'bg-gray'; // default color for unknown statuses
-		}
-	};
+const SingleJobSearch: React.FC<SingleJobProps> = ({ company, position }) => {
+	// const getStatusColor: () => void = () => {
+	// 	switch (jobStatus) {
+	// 		case 'pending':
+	// 			return 'bg-orange';
+	// 		case 'declined':
+	// 			return 'bg-red';
+	// 		case 'accepted':
+	// 			return 'bg-green';
+	// 		default:
+	// 			return 'bg-gray'; // default color for unknown statuses
+	// 	}
+	// };
 
 	// company first letter
 	const initials: string = company
@@ -48,18 +43,12 @@ const SingleJob: React.FC<SingleJobProps> = ({
 			<div className="p-6">
 				<div className="grid mt-4 mb-2 grid-cols-1 gap-y-6 items-center md:grid-cols-2">
 					<SingleJobInfo icon={<FaLocationArrow />} text="Toronto, ON" />
-					<SingleJobInfo icon={<FaCalendarAlt />} text="Sep 30th, 2024" />
-					<SingleJobInfo icon={<FaBriefcase />} text="full-time" />
 
-					<div
-						className={`capitalize rounded-md w-[105px] h-[30px] grid place-items-center text-center ${getStatusColor()} text-notTooWhite shadow-md`}
-					>
-						{jobStatus}
-					</div>
+					<SingleJobInfo icon={<FaBriefcase />} text="full-time" />
 				</div>
 			</div>
 		</article>
 	);
 };
 
-export default SingleJob;
+export default SingleJobSearch;

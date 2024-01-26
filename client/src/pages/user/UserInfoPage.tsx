@@ -1,14 +1,16 @@
 import FormRow from '../../components/user/FormRow';
 import { toast } from 'react-toastify';
 import AnimatedEncryptButton from '../../components/user/AnimatedEncryptButton';
-import { useNavigation } from 'react-router-dom';
+import { Navigation, useNavigation } from 'react-router-dom';
 import PopUpModal from '../../components/user/PopUpModal';
 
 const UserInfoPage: React.FC = () => {
-	const navigation = useNavigation();
-	const isSubmitting = navigation.state === 'submitting';
+	const navigation: Navigation = useNavigation();
+	const isSubmitting: boolean = navigation.state === 'submitting';
 
-	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void = (
+		event: React.FormEvent<HTMLFormElement>,
+	) => {
 		event.preventDefault();
 		toast.success('Profile updated successfully!');
 	};
