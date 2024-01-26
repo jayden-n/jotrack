@@ -32,6 +32,8 @@ export default {
 			passwordGrey: '#E8E8E8',
 			updateBtnColor: '#33A7EF',
 			black: '#000000',
+			cancelRed: '#C71F08',
+			grey500: '#9e9e9e',
 			// slate colors
 			slate300: '#CBD5E1',
 			slate400: '#94a3b8',

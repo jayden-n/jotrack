@@ -17,11 +17,9 @@ export default function NavBar() {
       }
 
 
-	  const dropDownStyle: React.CSSProperties = {
-
-        transition: 'transform 0.3s ease-in-out', // fix transition later
+	  const dropDownStyle = 'transform duration-300 ease-in-out' // fix transition later
         
-    };
+    
 
   
 
@@ -82,7 +80,7 @@ export default function NavBar() {
 			{/*==== DropDown Menu for mobile screen ===*/}
 				<li className="ml-auto md:hidden">
 					<button onClick={dropDownOnClick}>
-					<RiArrowDropDownLine  />
+					<RiArrowDropDownLine size={45}  />
 					</button>
 					{dropDown && <DropDownMenu />}
 				</li>
