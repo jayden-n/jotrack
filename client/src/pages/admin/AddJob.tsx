@@ -18,7 +18,8 @@ const AddJob: React.FC = () => {
 				!description ||
 				!requirements
 			) {
-				alert('All fields must be filled');
+				toast.warning('All fields must be filled')
+				
 			} else {
 				setCompanyName('');
 				setPosition('');
@@ -43,48 +44,56 @@ const AddJob: React.FC = () => {
 			}
 		};
 
+		const divStyle = 'md:mb-4 md:flex md:flex-wrap  gap-x-12 pt-5 '
+		const btnStyle = 'font-outfit text-white text-normal text-center md:text-xl  md:px-5 md:py-1 rounded-lg p-2 hover:opacity-90 shadow-xl ring-1'
+
 		return (
 			<div>
-				<div className="md:mt-20 mt-10 mb-5 mx-4 md:mx-0">
-					<form className="grid grid-col-1 md:grid-cols-9 ">
-						<div className="md:col-start-2 md:col-end-5  row-span-full w-full">
-							<input
-								placeholder="Company Name"
-								type="text"
-								value={companyName}
-								className="md:mb-10 md:p-4 mb-5 p-3 w-full border rounded-md shadow-md 
-								shadow-black-500/50 border-gray"
-								onChange={(e) => setCompanyName(e.target.value)}
-							/>
+				<div className="sm:grid sm:grid-cols-1 md:mt-10 mt-10 mb-5 mx-4 md:mx-0">
+					<form className="md:mx-10 rounded-lg shadow-xl bg-white p-12  overflow-hidden	">
+						<div className=" ">
+							<div className={`${divStyle} `}>
+								<input
+									placeholder="Company Name"
+									type="text"
+									value={companyName}
+									className=" md:p-4 p-3 mb-5 md:w-1/4 w-full border rounded-md shadow-md 
+									shadow-black-500/50 border-gray"
+									onChange={(e) => setCompanyName(e.target.value)}
+								/>
 
-							<input
-								placeholder="Position"
-								type="text"
-								value={position}
-								className=" md:mb-10 md:p-4 mb-5 w-full p-3 border rounded-md shadow-md 
-								shadow-black-500/50  border-gray"
-								onChange={(e) => setPosition(e.target.value)}
-							/>
+								<input
+									placeholder="Position"
+									type="text"
+									value={position}
+									className=" md:p-4 mb-5 md:w-1/3 w-full p-3 border rounded-md shadow-md 
+									shadow-black-500/50  border-gray"
+									onChange={(e) => setPosition(e.target.value)}
+								/>
+							
 
-							<input
-								placeholder="Location"
-								type="text"
-								value={location}
-								className=" md:mb-10 md:p-4  mb-5 w-full p-3 border rounded-md shadow-md 
-								shadow-black-500/50  border-gray"
-								onChange={(e) => setLocation(e.target.value)}
-							/>
+								<input
+									placeholder="Location"
+									type="text"
+									value={location}
+									className="  md:p-4  mb-5  md:w-2/6	 w-full p-3 border rounded-md shadow-md 
+									shadow-black-500/50  border-gray"
+									onChange={(e) => setLocation(e.target.value)}
+								/>
+							</div>
 
-							<textarea
-								placeholder="Description..."
-								value={description}
-								className=" md:mb-0 mb-5 md:p-4 w-full md:h-2/5 p-3 border rounded-md 
-								shadow-md shadow-black-500/50 border-gray"
-								onChange={(e) => setDescription(e.target.value)}
-							/>
+							<div className={`${divStyle}`}>
+								<textarea
+									placeholder="Description..."
+									value={description}
+									className="  md:p-4 w-full md:h-44 p-3 border rounded-md 
+									shadow-md shadow-black-500/50 border-gray"
+									onChange={(e) => setDescription(e.target.value)}
+								/>
+							</div>
 						</div>
 
-						<div className="md:col-start-6 md:col-end-9 ">
+						<div className={`${divStyle}`}>
 							<textarea
 								placeholder="Requirements"
 								value={requirements}
@@ -95,12 +104,14 @@ const AddJob: React.FC = () => {
 								onChange={(e) => setRequirements(e.target.value)}
 							/>
 						</div>
-
-						<div className="md:col-start-3 md:col-end-8 md:mt-0 mt-5  ">
+						<hr className="my-5 md:mt-20 border-t border-grey500"/>
+						<div className=" flex md:mt-0 mt-5 md:justify-end gap-5 justify-center ">
+							<Link to={'/admin/jobs'} className={`bg-cancelRed ${btnStyle}`}>
+								Cancel
+							</Link>
 							<button
 								onClick={onAdd}
-								className="bg-green font-outfit text-white text-normal text-xl w-full py-3
-                                  rounded-lg hover:opacity-90 shadow-lg ring-1"
+								className={`bg-green ${btnStyle}` }
 							>
 								Add Job
 							</button>
