@@ -17,6 +17,14 @@ export class JobService {
     );
   }
 
+  public async retrieveJobsByDateTimePosted(): Promise<JobResponseDto[]> {
+    return (
+      await this.prismaService.job.findMany({
+        orderBy: { dateTimePosted: 'desc' },
+      })
+    ).map((job) => this.mapToJobResponseDto(job));
+  }
+
   public async createJob(jobRequestDto: JobRequestDto) {
     try {
       const job = await this.prismaService.job.create({
@@ -76,6 +84,7 @@ export class JobService {
   private mapToJobResponseDto(job: Job): JobResponseDto {
     const jobResponseDto: JobResponseDto = new JobResponseDto();
 
+    jobResponseDto.id = job.id;
     jobResponseDto.city = job.city;
     jobResponseDto.companyName = job.companyName;
     jobResponseDto.country = job.country;
@@ -86,6 +95,7 @@ export class JobService {
     jobResponseDto.requirements = job.requirements;
     jobResponseDto.street = job.street;
     jobResponseDto.title = job.title;
+    jobResponseDto.dateTimePosted = job.dateTimePosted;
 
     return jobResponseDto;
   }
