@@ -46,7 +46,7 @@ const LoginPage = () => {
 		}
 		else if (role === 'admin'){
 			console.log({ email, password, role });
-			navigate('/admin/dashboard');
+			navigate('/admin');
 		}
 	};
 
