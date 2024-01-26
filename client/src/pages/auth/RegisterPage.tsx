@@ -35,7 +35,7 @@ const RegisterPage = () => {
 			setError("Please fill in all fields.");
 			return;
 		}
-		navigate('/user/dashboard');
+		navigate('/login');
 		console.log({firstname, lastname, email, password, address, postal, city, country, province,phone})
 	};
 
