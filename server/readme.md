@@ -40,7 +40,7 @@
    npm run start:dev
    ```
 
-## Troubleshooting and Testing
+## Troubleshooting
 
 ### Seeding
 
@@ -53,13 +53,17 @@
 ### Restarting
 
 1. Stop the application.
-2. Restart database and re-apply migration.
+2. Rebuild the application.
+   ```shell
+   npm run build
+   ```
+3. Restart database and re-apply migration.
 
    ```shell
    npm run db:dev:restart
    ```
 
-3. Restart the application.
+4. Restart the application.
 
    ```shell
    npm run start:dev
@@ -86,40 +90,41 @@
 ### Auth - `/api/auth`
 
 | Endpoint  | Method | Description     | Role Access          |
-| --------- | ------ | --------------- | -------------------- |
+|-----------|--------|-----------------|----------------------|
 | `/signup` | `POST` | Register a user | <center>`V`</center> |
 | `/login`  | `POST` | Log in a user   | <center>`V`</center> |
 
 ### Users - `/api/users`
 
-| Endpoint      | Method   | Description     | Role Access                    |
-| ------------- | -------- | --------------- | ------------------------------ |
-| N/A           | `GET`    | Retrieve users  | <center>`V`, `U`, `A`</center> |
-| N/A           | `PUT`    | Change password | <center>`U`, `A`</center>      |
-| `/{{userId}}` | `PUT`    | Update a user   | <center>`A`</center>           |
-| `/{{userId}}` | `DELETE` | Remove a user   | <center>`A`</center>           |
-| `/{{userId}}` | `GET`    | Retrieve a user | <center>`V`, `U`, `A`</center> |
+| Endpoint           | Method   | Description     | Role Access                    |
+|--------------------|----------|-----------------|--------------------------------|
+| N/A                | `GET`    | Retrieve users  | <center>`V`, `U`, `A`</center> |
+| `/change-password` | `PUT`    | Change password | <center>`U`, `A`</center>      |
+| `/{{userId}}`      | `PUT`    | Update a user   | <center>`A`</center>           |
+| `/{{userId}}`      | `DELETE` | Remove a user   | <center>`A`</center>           |
+| `/{{userId}}`      | `GET`    | Retrieve a user | <center>`V`, `U`, `A`</center> |
 
 ### Jobs - `/api/jobs`
 
-| Endpoint     | Method   | Description    | Role Access                    |
-| ------------ | -------- | -------------- | ------------------------------ |
-| N/A          | `GET`    | Retrieve jobs  | <center>`V`, `U`, `A`</center> |
-| N/A          | `POST`   | Create a job   | <center>`A`</center>           |
-| `/{{jobId}}` | `PUT`    | Update a job   | <center>`A`</center>           |
-| `/{{jobId}}` | `DELETE` | Remove a user  | <center>`A`</center>           |
-| `/{{jobId}}` | `GET`    | Retrieve a job | <center>`V`, `U`, `A`</center> |
+| Endpoint           | Method   | Description    | Role Access                    |
+|--------------------|----------|----------------|--------------------------------|
+| `?filter=dateTime` | `GET`    | Retrieve jobs  | <center>`V`, `U`, `A`</center> |
+| N/A                | `POST`   | Create a job   | <center>`A`</center>           |
+| `/{{jobId}}`       | `PUT`    | Update a job   | <center>`A`</center>           |
+| `/{{jobId}}`       | `DELETE` | Remove a user  | <center>`A`</center>           |
+| `/{{jobId}}`       | `GET`    | Retrieve a job | <center>`V`, `U`, `A`</center> |
 
 ### Job Applications - `/api/job-applications`
 
 | Endpoint        | Method | Description                    | Role Access                    |
-| --------------- | ------ | ------------------------------ | ------------------------------ |
+|-----------------|--------|--------------------------------|--------------------------------|
 | N/A             | `GET`  | Retrieve job applications      | <center>`V`, `U`, `A`</center> |
 | `/applications` | `GET`  | Retrieve user job applications | <center>`U`</center>           |
 | `/apply`        | `POST` | Apply for a job                | <center>`U`</center>           |
+| `/accept`       | `POST` | Accept user job application    | <center>`A`</center>           |
+| `/reject`       | `POST` | Reject user job application    | <center>`A`</center>           |
 
 ### Non-Functional Endpoints
 
-| Endpoint        | Method | Description                    | Role Access          |
-| --------------- | ------ | ------------------------------ | -------------------- |
-| `/applications` | `GET`  | Retrieve user job applications | <center>`U`</center> |
+| Endpoint | Method | Description | Role Access |
+|----------|--------|-------------|-------------|

@@ -1,19 +1,23 @@
 import {
+  Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
-  Post,
-  Body,
-  Put,
-  Delete,
-  Param,
-  UseGuards,
   HttpStatus,
+  Param,
   ParseIntPipe,
+  Post,
+  Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { JobService } from './job.service';
-import { JobRequestDto, JobResponseDto } from './dto';
+import {
+  CreateJobRequestDto,
+  JobResponseDto,
+  UpdateJobRequestDto,
+} from './dto';
 import { AuthGuard, RolesGuard } from 'src/auth/guard';
 import { Roles } from 'src/auth/decorator';
 import { Role } from 'src/auth/enum';
@@ -24,10 +28,11 @@ export class JobController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  public retrieveJobs(@Query('filter') filter: string) {
-    if (filter === 'dateTime') {
+  public retrieveJobs(
+    @Query('filter') filter: string,
+  ): Promise<JobResponseDto[]> {
+    if (filter === 'dateTime')
       return this.jobService.retrieveJobsByDateTimePosted();
-    }
     return this.jobService.retrieveJobs();
   }
 
@@ -36,9 +41,9 @@ export class JobController {
   @Roles(Role.ADMIN)
   @HttpCode(HttpStatus.CREATED)
   public createJob(
-    @Body() jobResponseDto: JobRequestDto,
+    @Body() createJobRequestDto: CreateJobRequestDto,
   ): Promise<JobResponseDto> {
-    return this.jobService.createJob(jobResponseDto);
+    return this.jobService.createJob(createJobRequestDto);
   }
 
   @Put('/:jobId')
@@ -47,22 +52,24 @@ export class JobController {
   @HttpCode(HttpStatus.OK)
   public updateJob(
     @Param('jobId', ParseIntPipe) jobId: number,
-    @Body() jobRequestDto: JobRequestDto,
-  ) {
-    return this.jobService.updateJob(jobId, jobRequestDto);
+    @Body() updateJobRequestDto: UpdateJobRequestDto,
+  ): Promise<JobResponseDto> {
+    return this.jobService.updateJob(jobId, updateJobRequestDto);
   }
 
   @Delete('/:jobId')
   @UseGuards(AuthGuard, RolesGuard)
   @Roles(Role.ADMIN)
   @HttpCode(HttpStatus.NO_CONTENT)
-  public deleteJob(@Param('jobId', ParseIntPipe) jobId: number) {
+  public deleteJob(@Param('jobId', ParseIntPipe) jobId: number): Promise<void> {
     return this.jobService.removeJob(jobId);
   }
 
   @Get('/:jobId')
   @HttpCode(HttpStatus.OK)
-  public retrieveUser(@Param('jobId', ParseIntPipe) jobId: number) {
+  public retrieveUser(
+    @Param('jobId', ParseIntPipe) jobId: number,
+  ): Promise<JobResponseDto> {
     return this.jobService.retrieveJob(jobId);
   }
 }

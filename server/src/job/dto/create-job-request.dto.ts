@@ -1,6 +1,6 @@
-import { IsNotEmpty, IsPostalCode, IsString } from 'class-validator';
+import { IsArray, IsNotEmpty, IsPostalCode, IsString } from 'class-validator';
 
-export class JobRequestDto {
+export class CreateJobRequestDto {
   @IsString()
   @IsNotEmpty()
   title: string;
@@ -10,9 +10,9 @@ export class JobRequestDto {
   @IsString()
   @IsNotEmpty()
   position: string;
-  @IsString()
+  @IsArray()
   @IsNotEmpty()
-  requirements: string;
+  requirements: string[];
 
   @IsString()
   @IsNotEmpty()
