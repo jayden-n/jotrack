@@ -1,6 +1,5 @@
 import FormRow from '../../components/user/FormRow';
 import { toast } from 'react-toastify';
-import AnimatedEncryptButton from '../../components/user/AnimatedEncryptButton';
 import { Navigation, useNavigation } from 'react-router-dom';
 import PopUpModal from '../../components/user/PopUpModal';
 
@@ -22,7 +21,7 @@ const UserInfoPage: React.FC = () => {
 				onSubmit={handleSubmit}
 				className="max-w-[100vw] rounded  py-8 px-10 mx-auto"
 			>
-				<h4 className="mb-8 capitalize text-2xl  font-medium">
+				<h4 className="mb-8 capitalize text-3xl  font-semibold">
 					Username's profile
 				</h4>
 
