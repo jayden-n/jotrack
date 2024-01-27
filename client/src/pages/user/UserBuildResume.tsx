@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import FormRow from '../../components/user/FormRow';
 
 const UserBuildResumePage: React.FC = () => {
 	const navigate = useNavigate();
@@ -7,7 +8,7 @@ const UserBuildResumePage: React.FC = () => {
 		event: React.FormEvent<HTMLFormElement>,
 	) => {
 		event.preventDefault();
-		toast.success('Please upload your resume here.');
+		toast.success('Feel free to adjust your resume');
 		navigate('../view-resume');
 	};
 
@@ -21,31 +22,43 @@ const UserBuildResumePage: React.FC = () => {
 					</h4>
 
 					<div className="flex flex-col gap-12 text-lg">
-						{/* company info */}
-						<blockquote className="text-xl leading-8  font-medium italic text text-slate900">
-							Job Description is
-							<span className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-formSky relative inline-block mx-2">
-								<span className="relative text-white ">required</span>
-							</span>
-							for generating a resume.
-						</blockquote>
 						<div>
-							<p>Optional sections to provide:</p>
-							<div className="text">
-								<ol className="list-disc ml-5 ">
-									<li>Skills</li>
-									<li>Education</li>
-									<li>Experience</li>
-								</ol>
+							{/* company info */}
+							<blockquote className="text-xl leading-8  font-medium italic text text-slate900">
+								Job Description is
+								<span className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-formSky relative inline-block mx-2">
+									<span className="relative text-white ">required</span>
+								</span>
+								for generating a resume.
+							</blockquote>
+							<div className="mt-8">
+								<p>Optional sections to provide:</p>
+								<div className="text">
+									<ol className="list-disc ml-5 ">
+										<li>Skills</li>
+										<li>Education</li>
+										<li>Experience</li>
+									</ol>
+								</div>
 							</div>
 						</div>
+						<div className="mt-4">
+							<div>
+								<FormRow
+									type="text"
+									name="jobDescription"
+									labelText="job description"
+									defaultValue="provide here..."
+								/>
+							</div>
 
-						<button
-							type="submit"
-							className="cursor-pointer bg-formSky text-white rounded-md h-[50px] hover:shadow-xl transition-all duration-300 ease-in-out capitalize inline-block w-full mt-6 md:mt-0 shadow-lg"
-						>
-							apply
-						</button>
+							<button
+								type="submit"
+								className="cursor-pointer bg-formSky text-white rounded-md h-[50px] hover:shadow-xl transition-all duration-300 ease-in-out capitalize inline-block w-full mt-6 shadow-lg"
+							>
+								apply now!
+							</button>
+						</div>
 					</div>
 				</div>
 			</form>

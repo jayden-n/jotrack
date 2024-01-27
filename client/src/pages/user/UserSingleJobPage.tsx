@@ -1,11 +1,15 @@
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const UserSingleJobPage: React.FC = () => {
+	const navigate = useNavigate();
 	const handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void = (
 		event: React.FormEvent<HTMLFormElement>,
 	) => {
 		event.preventDefault();
-		toast.success('Please upload your resume');
+		toast.warning('Please upload your resume first');
+
+		navigate('../build-resume');
 	};
 
 	return (
@@ -49,7 +53,7 @@ const UserSingleJobPage: React.FC = () => {
 							type="submit"
 							className="cursor-pointer bg-formSky text-white rounded-md h-[50px] hover:shadow-xl transition-all duration-300 ease-in-out capitalize inline-block w-full mt-6 md:mt-0 shadow-lg"
 						>
-							apply
+							apply now!
 						</button>
 					</div>
 				</div>
