@@ -4,7 +4,7 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { LogInDto, SignUpDto } from './dto';
+import { LogInRequestDto, SignUpRequestDto } from './dto';
 import * as argon from 'argon2';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { JwtService } from '@nestjs/jwt';
@@ -18,24 +18,24 @@ export class AuthService {
   ) {}
 
   public async login(
-    authLogInDto: LogInDto,
+    logInRequestDto: LogInRequestDto,
   ): Promise<{ access_token: string }> {
-    const user = await this.prismaService.user.findUnique({
+    const user: User = await this.prismaService.user.findUnique({
       where: {
-        email: authLogInDto.email,
+        email: logInRequestDto.email,
       },
     });
     if (!user) throw new ForbiddenException('credentials are incorrect');
 
-    const passwordMatches = await argon.verify(
+    const passwordMatches: boolean = await argon.verify(
       user.hash,
-      authLogInDto.password,
+      logInRequestDto.password,
     );
 
     if (!passwordMatches)
       throw new ForbiddenException('credentials are incorrect');
 
-    const jwtPayload = {
+    const jwtPayload: { sub: number; role: string } = {
       sub: user.id,
       role: user.role,
     };
@@ -44,16 +44,21 @@ export class AuthService {
     return { access_token: token };
   }
 
-  public async signup(authSignUpDto: SignUpDto): Promise<User> {
+  public async signup(signUpRequestDto: SignUpRequestDto): Promise<User> {
     try {
-      const hash: string = await argon.hash(authSignUpDto.password);
+      const hash: string = await argon.hash(signUpRequestDto.password);
 
-      delete authSignUpDto.password;
+      delete signUpRequestDto.password;
 
-      const user = await this.prismaService.user.create({
+      const user: User = await this.prismaService.user.create({
         data: {
-          ...authSignUpDto,
+          ...this.mapToUserRequestDto(signUpRequestDto),
           hash,
+          address: {
+            create: {
+              ...this.mapToAddressRequestDto(signUpRequestDto),
+            },
+          },
         },
       });
 
@@ -62,9 +67,40 @@ export class AuthService {
       console.error(error);
       if (error instanceof PrismaClientKnownRequestError)
         if (error.code === 'P2002')
-          // code for field duplicate
           throw new ForbiddenException('credentials are taken');
       throw new BadRequestException();
     }
+  }
+
+  private mapToUserRequestDto(signUpRequestDto: SignUpRequestDto): {
+    email: string;
+    role: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: number;
+  } {
+    return {
+      email: signUpRequestDto.email,
+      role: signUpRequestDto.role,
+      firstName: signUpRequestDto.firstName,
+      lastName: signUpRequestDto.lastName,
+      phoneNumber: signUpRequestDto.phoneNumber,
+    };
+  }
+
+  private mapToAddressRequestDto(signUpRequestDto: SignUpRequestDto): {
+    postalCode: string;
+    street: string;
+    city: string;
+    province: string;
+    country: string;
+  } {
+    return {
+      postalCode: signUpRequestDto.postalCode,
+      street: signUpRequestDto.street,
+      city: signUpRequestDto.city,
+      province: signUpRequestDto.province,
+      country: signUpRequestDto.country,
+    };
   }
 }

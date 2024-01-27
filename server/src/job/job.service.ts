@@ -1,10 +1,14 @@
 import {
   BadRequestException,
-  NotFoundException,
   Injectable,
+  NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { JobRequestDto, JobResponseDto } from './dto';
+import {
+  CreateJobRequestDto,
+  JobResponseDto,
+  UpdateJobRequestDto,
+} from './dto';
 import { Job } from '@prisma/client';
 
 @Injectable()
@@ -12,7 +16,7 @@ export class JobService {
   constructor(private prismaService: PrismaService) {}
 
   public async retrieveJobs(): Promise<JobResponseDto[]> {
-    return (await this.prismaService.job.findMany()).map((job) =>
+    return (await this.prismaService.job.findMany()).map((job: Job) =>
       this.mapToJobResponseDto(job),
     );
   }
@@ -22,14 +26,16 @@ export class JobService {
       await this.prismaService.job.findMany({
         orderBy: { dateTimePosted: 'desc' },
       })
-    ).map((job) => this.mapToJobResponseDto(job));
+    ).map((job: Job) => this.mapToJobResponseDto(job));
   }
 
-  public async createJob(jobRequestDto: JobRequestDto) {
+  public async createJob(
+    createJobRequestDto: CreateJobRequestDto,
+  ): Promise<JobResponseDto> {
     try {
-      const job = await this.prismaService.job.create({
+      const job: Job = await this.prismaService.job.create({
         data: {
-          ...jobRequestDto,
+          ...createJobRequestDto,
         },
       });
 
@@ -40,14 +46,17 @@ export class JobService {
     }
   }
 
-  public async updateJob(jobId: number, jobRequestDto: JobRequestDto) {
+  public async updateJob(
+    jobId: number,
+    updateJobRequestDto: UpdateJobRequestDto,
+  ): Promise<JobResponseDto> {
     try {
-      const job = await this.prismaService.job.update({
+      const job: Job = await this.prismaService.job.update({
         where: {
           id: jobId,
         },
         data: {
-          ...jobRequestDto,
+          ...updateJobRequestDto,
         },
       });
 
@@ -57,7 +66,7 @@ export class JobService {
     }
   }
 
-  public async removeJob(jobId: number) {
+  public async removeJob(jobId: number): Promise<void> {
     try {
       await this.prismaService.job.delete({
         where: {
@@ -69,13 +78,13 @@ export class JobService {
     }
   }
 
-  public async retrieveJob(jobId: number): Promise<Job> {
+  public async retrieveJob(jobId: number): Promise<JobResponseDto> {
     try {
-      const job = await this.prismaService.job.findUnique({
+      const job: Job = await this.prismaService.job.findUnique({
         where: { id: jobId },
       });
 
-      return job;
+      return this.mapToJobResponseDto(job);
     } catch (error) {
       throw new NotFoundException('job does not exist');
     }
