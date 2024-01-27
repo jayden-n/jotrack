@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import SingleJob from './SingleJob';
 import SingleJobSearch from './SingleJobSearch';
 
@@ -49,11 +50,14 @@ const AllJobsComponent: React.FC<AllJobsComponentProps> = ({ searchText }) => {
 			<div className="grid grid-cols-1 gap-y-8 lg:grid-cols-2 lg:gap-8">
 				{/* NOTE: will eventually map over the jobs array from back-end */}
 				{filteredJobs.map((job, index) => (
-					<SingleJobSearch
-						key={index}
-						company={job.company}
-						position={job.position}
-					/>
+					// NOTE: will replace id with real data
+					<Link to="../job/123456789">
+						<SingleJobSearch
+							key={index}
+							company={job.company}
+							position={job.position}
+						/>
+					</Link>
 				))}
 			</div>
 		</section>

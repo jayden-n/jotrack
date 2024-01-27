@@ -48,6 +48,9 @@ export default {
 			indigo600: '#4f46e5',
 			// violet colors:
 			violet600: '#7c3aed',
+
+			// pink colors:
+			pink500: '#ec4899',
 		},
 		listStyleType: {
 			none: 'none',
