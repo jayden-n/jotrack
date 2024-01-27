@@ -18,7 +18,7 @@ const UserBuildResumePage: React.FC = () => {
 			<form onSubmit={handleSubmit}>
 				<div className="max-w-[100vw] rounded  py-8 px-10 mx-auto">
 					<h4 className="mb-12 text-3xl  font-semibold capitalize">
-						build you resume with AI
+						build your resume with AI
 					</h4>
 
 					<div className="flex flex-col gap-12 text-lg">
