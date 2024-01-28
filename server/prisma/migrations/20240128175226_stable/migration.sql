@@ -10,7 +10,6 @@ CREATE TABLE "users" (
     "firstName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
     "phoneNumber" DOUBLE PRECISION NOT NULL,
-    "userActivityUserId" INTEGER NOT NULL,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
@@ -61,11 +60,10 @@ CREATE TABLE "addresses" (
 -- CreateTable
 CREATE TABLE "userActivities" (
     "userId" INTEGER NOT NULL,
-    "jobsApplication" INTEGER[],
+    "jobApplications" INTEGER[],
     "searchHistory" TEXT[],
-    "jobVisited" INTEGER[],
+    "jobsVisited" INTEGER[],
     "dateTimeEmitted" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "jobId" INTEGER,
 
     CONSTRAINT "userActivities_pkey" PRIMARY KEY ("userId")
 );
@@ -102,9 +100,6 @@ ALTER TABLE "addresses" ADD CONSTRAINT "addresses_userId_fkey" FOREIGN KEY ("use
 
 -- AddForeignKey
 ALTER TABLE "userActivities" ADD CONSTRAINT "userActivities_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "userActivities" ADD CONSTRAINT "userActivities_jobId_fkey" FOREIGN KEY ("jobId") REFERENCES "jobs"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "resumes" ADD CONSTRAINT "resumes_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
