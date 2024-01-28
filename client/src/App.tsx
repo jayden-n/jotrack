@@ -17,7 +17,7 @@ import UserInfoPage from './pages/user/UserInfoPage';
 import UserViewResume from './pages/user/UserViewResume';
 import UserUpdatePasswordPage from './pages/user/UserUpdatePasswordPage';
 import UserAllJobsPage from './pages/user/UserAllJobsPage';
-// import UserSingleJobPage from './pages/user/UserSingleJobPage';
+import UserSingleJobPage from './pages/user/UserSingleJobPage';
 import EditJob from './pages/admin/EditJob';
 const router = createBrowserRouter([
 	{
