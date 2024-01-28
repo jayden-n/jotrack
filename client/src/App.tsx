@@ -20,6 +20,7 @@ import UserAllJobsPage from './pages/user/UserAllJobsPage';
 import UserSingleJobPage from './pages/user/UserSingleJobPage';
 
 import EditJob from './pages/admin/EditJob';
+import UserSingleJobPage from './pages/user/UserSingleJobPage';
 const router = createBrowserRouter([
 	{
 		path: '/',
