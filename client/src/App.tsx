@@ -19,6 +19,7 @@ import UserUpdatePasswordPage from './pages/user/UserUpdatePasswordPage';
 import UserAllJobsPage from './pages/user/UserAllJobsPage';
 import UserSingleJobPage from './pages/user/UserSingleJobPage';
 
+import EditJob from './pages/admin/EditJob';
 const router = createBrowserRouter([
 	{
 		path: '/',
@@ -97,6 +98,10 @@ const router = createBrowserRouter([
 						path: 'users/activity',
 						element: <UserActivity />,
 					},
+					{
+						path: 'jobs/edit',
+						element: <EditJob />
+					}
 				],
 			},
 		],
