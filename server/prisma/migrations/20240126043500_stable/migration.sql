@@ -26,22 +26,21 @@ CREATE TABLE "jobs" (
     "city" TEXT NOT NULL,
     "province" TEXT NOT NULL,
     "country" TEXT NOT NULL,
-    "dateTimeSubmitted" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "dateTimeUpdated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "dateTimePosted" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "dateTimeUpdated" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "jobs_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "userJobApplications" (
-    "id" SERIAL NOT NULL,
     "status" TEXT NOT NULL DEFAULT 'pending',
     "dateTimeApplied" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "dateTimeUpdated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "dateTimeUpdated" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
     "jobId" INTEGER NOT NULL,
 
-    CONSTRAINT "userJobApplications_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "userJobApplications_pkey" PRIMARY KEY ("userId","jobId")
 );
 
 -- CreateTable

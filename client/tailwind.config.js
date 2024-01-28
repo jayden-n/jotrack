@@ -36,6 +36,7 @@ export default {
 			grey500: '#9e9e9e',
 			// slate colors
 			slate300: '#CBD5E1',
+			slate400: '#94a3b8',
 			slate500: '#64748B',
 			slate600: '#475569',
 			slate700: '#334155',

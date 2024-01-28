@@ -46,7 +46,7 @@ const LoginPage = () => {
 		}
 		else if (role === 'admin'){
 			console.log({ email, password, role });
-			navigate('/admin/dashboard');
+			navigate('/admin');
 		}
 	};
 
@@ -68,7 +68,7 @@ const LoginPage = () => {
 					<h2 className="text-3xl font-semibold text-center mb-32">Sign in</h2>
 					<p className="text-2xl text-gray text-center opacity-60 mb-8">Don't Have An Account?</p>
 					<div className="flex justify-center items-center">
-						<button className="text-2xl text-white bg-btnPurple py-3 px-28" onClick={() => navigate('/register')}>Sign up</button>
+						<button className="text-2xl text-white bg-btnPurple py-3 px-28 hover:opacity-90" onClick={() => navigate('/register')}>Sign up</button>
 					</div>
 				</div>
 			</div>
@@ -80,10 +80,10 @@ const LoginPage = () => {
 					<input type="password" value={password} placeholder="password" className="p-4 text-2xl bg-white border border-gray-300 rounded shadow-inner w-full justify-self-center mb-6 mt-4 md:col-span-2" onChange={handlePasswordChange} />
 					<hr className="border-t border-gray-300 my-8 mb-4 mx-auto w-1/3 justify-self-center mt-4 md:col-span-2" />
 					<div className="flex justify-center gap-12 md:col-span-2">
-					<button type="button" className={`w-36 py-3 text-2xl bg-white font-regular rounded-xl ${role === 'admin' ? 'bg-gray' : 'bg-transparent'}`} onClick={handleAdminClick}>Admin</button>
-					<button type="button" className={`w-36 py-3 text-2xl bg-white font-regular rounded-xl ${role === 'user' ? 'bg-gray' : 'bg-transparent'}`} onClick={handleUserClick}>User</button>
+					<button type="button" className={`w-36 py-3 text-2xl bg-white font-regular rounded-xl hover:bg-indigo ${role === 'admin' ? 'bg-indigo' : 'bg-transparent'}`} onClick={handleAdminClick}>Admin</button>
+					<button type="button" className={`w-36 py-3 text-2xl bg-white font-regular rounded-xl hover:bg-indigo ${role === 'user' ? 'bg-indigo' : 'bg-transparent'}`} onClick={handleUserClick}>User</button>
 					</div>
-					<button type="submit" className="text-2xl text-white bg-btnPurple py-3 px-72 justify-self-center mt-10 md:col-span-2">Sign in</button>
+					<button type="submit" className="text-2xl text-white bg-btnPurple py-3 px-72 justify-self-center mt-10 md:col-span-2 hover:opacity-90">Sign in</button>
 					{error && <div className="text-red-500 py-2 px-6 justify-self-center md:col-span-2">{error}</div>}
 			</form>
 			</div>

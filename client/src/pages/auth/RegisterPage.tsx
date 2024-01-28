@@ -35,7 +35,7 @@ const RegisterPage = () => {
 			setError("Please fill in all fields.");
 			return;
 		}
-		navigate('/user/dashboard');
+		navigate('/login');
 		console.log({firstname, lastname, email, password, address, postal, city, country, province,phone})
 	};
 
@@ -56,7 +56,7 @@ const RegisterPage = () => {
 					<h2 className="text-3xl font-semibold text-center mb-32">Sign up</h2>
 					<p className="text-2xl text-gray text-center opacity-60 mb-8">Already an Member?</p>
 					<div className="flex justify-center items-center">
-					<button className="text-2xl text-white bg-btnPurple py-3 px-28" onClick={() => navigate('/login')}>Sign in</button>
+					<button className="text-2xl text-white bg-btnPurple py-3 px-28 hover:opacity-90" onClick={() => navigate('/login')}>Sign in</button>
 					</div>
 				</div>
 			</div>
@@ -72,7 +72,7 @@ const RegisterPage = () => {
 					<input type="text" value={country} placeholder="country" className="p-3 text-2xl bg-white border border-gray-300 shadow-inner w-full" onChange={handleCountryChange} />
 					<input type="text" value={province} placeholder="province" className="p-3 text-2xl bg-white border border-gray-300 shadow-inner w-full" onChange={handleProvinceChange} />
 					<input type="text" value={phone} placeholder="phone number" className="p-3 text-2xl bg-white border border-gray-300 shadow-inner w-full" onChange={handlePhoneChange} />
-					<button type="submit" className="text-2xl text-white bg-btnPurple py-3 px-72 justify-self-center mt-20 md:col-span-2">Sign up</button>
+					<button type="submit" className="text-2xl text-white bg-btnPurple py-3 px-72 justify-self-center mt-20 md:col-span-2 hover:opacity-90">Sign up</button>
 					{error && <div className="text-red-500 py-2 px-6 justify-self-center md:col-span-2">{error}</div>}
 				</form>
 			</div>
