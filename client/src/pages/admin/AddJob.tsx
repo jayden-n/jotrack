@@ -50,7 +50,7 @@ const AddJob: React.FC = () => {
 		return (
 			<div>
 				<div className="sm:grid sm:grid-cols-1 md:mt-10 mt-10 mb-5 mx-4 md:mx-0">
-					<form className="md:mx-10 rounded-lg shadow-xl bg-white p-12  overflow-hidden	">
+					<form className="md:mx-10 rounded-lg shadow-xl bg-white p-12  	">
 						<div className=" ">
 							<div className={`${divStyle} `}>
 								<input
