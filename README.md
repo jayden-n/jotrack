@@ -2,21 +2,24 @@
 
 ## Installation
 
-1. Navigate to the `server` directory and make a duplicate of `.env.template`.
+1. Make a duplicate of `.env.template` in the `server` directory.
 
    ```shell
-   cd server && cp .env.template .env
+   cp server/.env.template server/.env
    ```
 
-2. Initialize a database migration
+2. Change the fields in the `.env` file for security purposes.
 
-   ```shell
-   npx prisma migrate dev
+   ```makefile
+   # ...
+   # jwt
+   JWT_SECRET="your_jwt_secret"
    ```
 
 ## Running
 
 1. Build application docker images and run them as docker containers.
+
    ```shell
    docker-compose -f docker-compose.yml -p jotrack up -d
    ```
