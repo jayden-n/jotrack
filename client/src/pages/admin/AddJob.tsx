@@ -7,7 +7,7 @@ const AddJob: React.FC = () => {
 	const [position, setPosition] = useState<string>("");
 	const [location, setLocation] = useState<string>("");
 	const [description, setDescription] = useState<string>("");
-	const [requirements, setRequirements] = useState<string>("");
+	const [requirements, setRequirements] = useState<Array<string>>([]);
 
 		const onAdd = (e: React.FormEvent<HTMLButtonElement>) => {
 			e.preventDefault();
@@ -25,7 +25,7 @@ const AddJob: React.FC = () => {
 				setPosition('');
 				setLocation('');
 				setDescription('');
-				setRequirements('');
+				setRequirements([]);
 
 				toast.success('Job successfully added.');
 			}
@@ -50,9 +50,10 @@ const AddJob: React.FC = () => {
 		return (
 			<div>
 				<div className="sm:grid sm:grid-cols-1 md:mt-10 mt-10 mb-5 mx-4 md:mx-0">
-					<form className="md:mx-10 rounded-lg shadow-xl bg-white p-12  	">
+					<form className="md:mx-10 rounded-lg shadow-xl bg-white p-12  overflow-hidden	">
 						<div className=" ">
 							<div className={`${divStyle} `}>
+								{/* ================================= Company Name =================================*/}
 								<input
 									placeholder="Company Name"
 									type="text"
@@ -62,6 +63,7 @@ const AddJob: React.FC = () => {
 									onChange={(e) => setCompanyName(e.target.value)}
 								/>
 
+								{/* ================================= Position =================================*/}
 								<input
 									placeholder="Position"
 									type="text"
@@ -71,7 +73,7 @@ const AddJob: React.FC = () => {
 									onChange={(e) => setPosition(e.target.value)}
 								/>
 							
-
+								{/* ================================= Location =================================*/}
 								<input
 									placeholder="Location"
 									type="text"
@@ -82,6 +84,7 @@ const AddJob: React.FC = () => {
 								/>
 							</div>
 
+							{/* ================================= Description =================================*/}
 							<div className={`${divStyle}`}>
 								<textarea
 									placeholder="Description..."
@@ -91,8 +94,9 @@ const AddJob: React.FC = () => {
 									onChange={(e) => setDescription(e.target.value)}
 								/>
 							</div>
-						</div>
+						</div>	
 
+						{/* ================================= Requirements =================================*/}
 						<div className={`${divStyle}`}>
 							<textarea
 								placeholder="Requirements"
@@ -101,10 +105,12 @@ const AddJob: React.FC = () => {
 								shadow-md shadow-black-500/50"
 								rows={9}
 								onKeyDown={bulletPoint}
-								onChange={(e) => setRequirements(e.target.value)}
+								onChange={(e) => setRequirements(e.target.value.split('\n'))}
 							/>
 						</div>
+						
 						<hr className="my-5 md:mt-20 border-t border-grey500"/>
+						{/* ================================= Buttons =================================*/}
 						<div className=" flex md:mt-0 mt-5 md:justify-end gap-5 justify-center ">
 							<Link to={'/admin/jobs'} className={`bg-cancelRed ${btnStyle}`}>
 								Cancel
