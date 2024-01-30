@@ -40,6 +40,7 @@ export default {
 			slate500: '#64748B',
 			slate600: '#475569',
 			slate700: '#334155',
+			slate800: '#1e293b',
 			slate900: '#0F172A',
 			// indigo colors:
 			indigo300: '#A5B4FC',
@@ -48,6 +49,9 @@ export default {
 			indigo600: '#4f46e5',
 			// violet colors:
 			violet600: '#7c3aed',
+
+			// pink colors:
+			pink500: '#ec4899',
 		},
 		listStyleType: {
 			none: 'none',

@@ -1,6 +1,7 @@
 -- CreateTable
 CREATE TABLE "users" (
     "id" SERIAL NOT NULL,
+    "userName" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "hash" TEXT NOT NULL,
     "dateTimeCreated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -9,6 +10,7 @@ CREATE TABLE "users" (
     "firstName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
     "phoneNumber" DOUBLE PRECISION NOT NULL,
+    "userActivityUserId" INTEGER NOT NULL,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
@@ -19,7 +21,7 @@ CREATE TABLE "jobs" (
     "title" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "position" TEXT NOT NULL,
-    "requirements" TEXT NOT NULL,
+    "requirements" TEXT[],
     "companyName" TEXT NOT NULL,
     "postalCode" TEXT NOT NULL,
     "street" TEXT NOT NULL,
@@ -57,10 +59,27 @@ CREATE TABLE "addresses" (
 );
 
 -- CreateTable
-CREATE TABLE "Resume" (
-    "id" SERIAL NOT NULL,
+CREATE TABLE "userActivities" (
+    "userId" INTEGER NOT NULL,
+    "jobsApplication" INTEGER[],
+    "searchHistory" TEXT[],
+    "jobVisited" INTEGER[],
+    "dateTimeEmitted" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "jobId" INTEGER,
 
-    CONSTRAINT "Resume_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "userActivities_pkey" PRIMARY KEY ("userId")
+);
+
+-- CreateTable
+CREATE TABLE "resumes" (
+    "objective" TEXT NOT NULL,
+    "experience" TEXT[],
+    "education" TEXT[],
+    "skills" TEXT[],
+    "additionalInformation" TEXT[],
+    "userId" INTEGER NOT NULL,
+
+    CONSTRAINT "resumes_pkey" PRIMARY KEY ("userId")
 );
 
 -- CreateIndex
@@ -68,6 +87,9 @@ CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "addresses_userId_key" ON "addresses"("userId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "resumes_userId_key" ON "resumes"("userId");
 
 -- AddForeignKey
 ALTER TABLE "userJobApplications" ADD CONSTRAINT "userJobApplications_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -77,3 +99,12 @@ ALTER TABLE "userJobApplications" ADD CONSTRAINT "userJobApplications_jobId_fkey
 
 -- AddForeignKey
 ALTER TABLE "addresses" ADD CONSTRAINT "addresses_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "userActivities" ADD CONSTRAINT "userActivities_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "userActivities" ADD CONSTRAINT "userActivities_jobId_fkey" FOREIGN KEY ("jobId") REFERENCES "jobs"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "resumes" ADD CONSTRAINT "resumes_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

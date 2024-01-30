@@ -3,35 +3,48 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { User } from '@prisma/client';
 import * as argon from 'argon2';
 
 import { PrismaService } from '../prisma/prisma.service';
-import { ChangePasswordDto, UserRequestDto, UserResponseDto } from './dto';
+import {
+  ChangePasswordRequestDto,
+  UpdateUserRequestDto,
+  UserResponseDto,
+  UserWithAddressDto,
+} from './dto';
 
 @Injectable()
 export class UserService {
   constructor(private prismaService: PrismaService) {}
 
   public async retrieveUsers(): Promise<UserResponseDto[]> {
-    return (await this.prismaService.user.findMany()).map((user) =>
-      this.mapToUserResponseDto(user),
+    return (
+      await this.prismaService.user.findMany({ include: { address: true } })
+    ).map((userWithAddressDto: UserWithAddressDto) =>
+      this.mapToUserResponseDto(userWithAddressDto),
     );
   }
 
-  public async updateUser(
+  public async updateProfile(
     userId: number,
-    userRequestDto: UserRequestDto,
+    updateUserRequestDto: UpdateUserRequestDto,
   ): Promise<UserResponseDto> {
     try {
-      const user = await this.prismaService.user.update({
-        where: {
-          id: userId,
-        },
-        data: { ...userRequestDto },
-      });
+      const userWithAddressDto: UserWithAddressDto =
+        await this.prismaService.user.update({
+          where: {
+            id: userId,
+          },
+          data: {
+            ...this.mapToUserRequestDto(updateUserRequestDto),
+            address: {
+              update: { ...this.mapToAddressRequestDto(updateUserRequestDto) },
+            },
+          },
+          include: { address: true },
+        });
 
-      return this.mapToUserResponseDto(user);
+      return this.mapToUserResponseDto(userWithAddressDto);
     } catch (error) {
       throw new BadRequestException();
     }
@@ -45,28 +58,50 @@ export class UserService {
         },
       });
     } catch (error) {
-      throw new NotFoundException('user does not exist');
+      throw new NotFoundException();
     }
   }
 
-  public async retrieveUser(userId: number): Promise<User> {
+  public async retrieveUser(userId: number): Promise<UserResponseDto> {
     try {
-      const user = await this.prismaService.user.findUnique({
-        where: { id: userId },
-      });
+      const userWithAddressDto: UserWithAddressDto =
+        await this.prismaService.user.findUnique({
+          where: { id: userId },
+          include: { address: true },
+        });
 
-      return user;
+      return this.mapToUserResponseDto(userWithAddressDto);
     } catch (error) {
-      throw new NotFoundException('user does not exist');
+      throw new NotFoundException();
+    }
+  }
+
+  // todo: user in controller
+  public async retrieveUserByUserName(
+    userName: string,
+  ): Promise<UserResponseDto[]> {
+    try {
+      const userWithAddressDtos: UserWithAddressDto[] =
+        await this.prismaService.user.findMany({
+          where: { userName: { startsWith: userName } },
+          include: { address: true },
+        });
+
+      return userWithAddressDtos.map((userWithAddressDto: UserWithAddressDto) =>
+        this.mapToUserResponseDto(userWithAddressDto),
+      );
+    } catch (error) {
+      console.error();
+      throw new BadRequestException();
     }
   }
 
   public async changePassword(
     userId: number,
-    changePasswordDto: ChangePasswordDto,
-  ) {
+    changePasswordRequestDto: ChangePasswordRequestDto,
+  ): Promise<void> {
     try {
-      const hash: string = await argon.hash(changePasswordDto.password);
+      const hash: string = await argon.hash(changePasswordRequestDto.password);
 
       await this.prismaService.user.update({
         where: { id: userId },
@@ -77,15 +112,54 @@ export class UserService {
     }
   }
 
-  private mapToUserResponseDto(user: User) {
+  private mapToUserResponseDto(
+    userWithAddressDto: UserWithAddressDto,
+  ): UserResponseDto {
     const userResponseDto: UserResponseDto = new UserResponseDto();
 
-    userResponseDto.id = user.id;
-    userResponseDto.email = user.email;
-    userResponseDto.firstName = user.firstName;
-    userResponseDto.lastName = user.lastName;
-    userResponseDto.phoneNumber = user.phoneNumber;
+    userResponseDto.id = userWithAddressDto.id;
+    userResponseDto.userName = userWithAddressDto.userName;
+    userResponseDto.email = userWithAddressDto.email;
+    userResponseDto.firstName = userWithAddressDto.firstName;
+    userResponseDto.lastName = userWithAddressDto.lastName;
+    userResponseDto.phoneNumber = userWithAddressDto.phoneNumber;
+
+    userResponseDto.street = userWithAddressDto.address.street;
+    userResponseDto.postalCode = userWithAddressDto.address.postalCode;
+    userResponseDto.city = userWithAddressDto.address.city;
+    userResponseDto.province = userWithAddressDto.address.province;
+    userResponseDto.country = userWithAddressDto.address.country;
 
     return userResponseDto;
+  }
+
+  private mapToUserRequestDto(userRequestDto: UpdateUserRequestDto): {
+    email: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: number;
+  } {
+    return {
+      email: userRequestDto.email,
+      firstName: userRequestDto.firstName,
+      lastName: userRequestDto.lastName,
+      phoneNumber: userRequestDto.phoneNumber,
+    };
+  }
+
+  private mapToAddressRequestDto(userRequestDto: UpdateUserRequestDto): {
+    postalCode: string;
+    street: string;
+    city: string;
+    province: string;
+    country: string;
+  } {
+    return {
+      postalCode: userRequestDto.postalCode,
+      street: userRequestDto.street,
+      city: userRequestDto.city,
+      province: userRequestDto.province,
+      country: userRequestDto.country,
+    };
   }
 }

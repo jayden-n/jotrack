@@ -28,7 +28,7 @@ const SingleJobSearch: React.FC<SingleJobProps> = ({ company, position }) => {
 
 	return (
 		<article
-			className={`bg-formGrey rounded-md grid grid-rows-[1fr_auto] shadow-[7px_7px_0px_0px_#CCCCCC]`}
+			className={`bg-formGrey rounded-md grid grid-rows-[1fr_auto] shadow-[7px_7px_0px_0px_#CCCCCC] transform transition duration-200 hover:scale-105`}
 		>
 			<header className="pt-8 pb-6 px-6 border-b-[1px] grid grid-cols-[auto_1fr] items-center">
 				<div className="w-[60px] h-[60px] grid place-items-center bg-violet text-white capitalize font-bold text-2xl mr-8 rounded-md shadow-lg">

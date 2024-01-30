@@ -7,12 +7,12 @@ interface SingleJobInfoProps {
 
 const SingleJobInfo: React.FC<SingleJobInfoProps> = ({ icon, text }) => {
 	return (
-		<div className="flex items-center">
+		<section className="flex items-center">
 			<span className="text-xl mr-4 grid place-items-center text-violet">
 				{icon}
 			</span>
 			<span className="capitalize grid place-items-center">{text}</span>
-		</div>
+		</section>
 	);
 };
 export default SingleJobInfo;

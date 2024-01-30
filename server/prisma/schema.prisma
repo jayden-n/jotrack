@@ -13,6 +13,8 @@ datasource db {
 model User {
   id Int @id @default(autoincrement())
 
+  userName String
+
   email String @unique
   hash  String
 
@@ -26,8 +28,11 @@ model User {
 
   phoneNumber Float
 
-  jobs    UserJobApplication[]
-  address Address?
+  userActivities     UserActivity[]
+  jobs               UserJobApplication[]
+  address            Address?
+  resume             Resume?
+  userActivityUserId Int
 
   @@map("users")
 }
@@ -39,7 +44,7 @@ model Job {
 
   description  String
   position     String
-  requirements String
+  requirements String[]
 
   companyName String
 
@@ -52,7 +57,8 @@ model Job {
   dateTimePosted  DateTime @default(now())
   dateTimeUpdated DateTime @updatedAt
 
-  users UserJobApplication[]
+  users        UserJobApplication[]
+  UserActivity UserActivity[]
 
   @@map("jobs")
 }
@@ -87,8 +93,32 @@ model Address {
   @@map("addresses")
 }
 
-model Resume {
-  id Int @id @default(autoincrement())
+model UserActivity {
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
 
-  // todo
+  jobsApplication Int[]
+  searchHistory   String[]
+  jobVisited      Int[]
+
+  dateTimeEmitted DateTime @default(now())
+  Job             Job?     @relation(fields: [jobId], references: [id])
+  jobId           Int?
+
+  @@id([userId])
+  @@map("userActivities")
+}
+
+model Resume {
+  objective             String
+  experience            String[]
+  education             String[]
+  skills                String[]
+  additionalInformation String[]
+
+  userId Int  @unique
+  user   User @relation(fields: [userId], references: [id])
+
+  @@id([userId])
+  @@map("resumes")
 }

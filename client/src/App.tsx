@@ -18,6 +18,10 @@ import UserViewResume from './pages/user/UserViewResume';
 import UserUpdatePasswordPage from './pages/user/UserUpdatePasswordPage';
 import UserAllJobsPage from './pages/user/UserAllJobsPage';
 import UserSingleJobPage from './pages/user/UserSingleJobPage';
+<<<<<<< HEAD
+=======
+import EditJob from './pages/admin/EditJob';
+>>>>>>> development
 const router = createBrowserRouter([
 	{
 		path: '/',
@@ -47,6 +51,10 @@ const router = createBrowserRouter([
 					{
 						path: 'update-password/:id',
 						element: <UserUpdatePasswordPage />,
+					},
+					{
+						path: 'job/:id',
+						element: <UserSingleJobPage />,
 					},
 					{
 						path: 'all-jobs',
