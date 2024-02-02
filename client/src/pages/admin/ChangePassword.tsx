@@ -8,7 +8,11 @@ type StatusUpdateProps = {
 };
 
 const ChangePassword: React.FC<StatusUpdateProps> = ({ onClose }) => {
-  const [mobile, setMobile] = useState<boolean>(false);
+  const [oldPassword, setOldPassword] = useState('')
+  const [newPassword, setNewPassword] = useState('')
+  const [confirmPassword, setConfirmedPassword] = useState('')
+
+  const [mobile, setMobile] = useState(false);
   const controls = useAnimation();
 
   useEffect(() => {
@@ -23,8 +27,17 @@ const ChangePassword: React.FC<StatusUpdateProps> = ({ onClose }) => {
   }, [controls]);
 
   const onUpdate = () => {
-    toast.success('Password successfully updated.');
+    if(!oldPassword || !newPassword || !confirmPassword){
+      toast.warning('Please fill all fields.')
+    }
+    else if(newPassword != confirmPassword){
+      toast.error("Passwords don't match.")
+    }
+    else{
+      toast.success('Password successfully updated.');
     setTimeout(() => {onClose()}, 2000) 
+    }
+    
   };
 
   const inputStyle =
@@ -50,9 +63,25 @@ const ChangePassword: React.FC<StatusUpdateProps> = ({ onClose }) => {
 
         <hr style={{ width: '50%', border: '1px solid #ddd', margin: '15px ' }} />
 
-        <input type="text" className={`${inputStyle}`} placeholder="Old password" />
-        <input type="text" className={`${inputStyle}`} placeholder="New password" />
-        <input type="text" className={`${inputStyle}`} placeholder="Confirm password" />
+        <input type="password" className={`${inputStyle}`} 
+            placeholder="Old password" 
+            value={oldPassword} 
+            onChange={(e) => setOldPassword(e.target.value)}
+            />
+
+        <input type="password" className={`${inputStyle}`} 
+              placeholder="New password" 
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              />
+
+        <input type="password" className={`${inputStyle}`} 
+              placeholder="Confirm password" 
+              value={confirmPassword}
+              onChange={(e) => setConfirmedPassword(e.target.value)}
+             
+              />
+
         <button className={`bg-blue ${otherBtnStyle} mt-6 mb-3 `} onClick={onUpdate}>
           Update
         </button>

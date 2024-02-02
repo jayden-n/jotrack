@@ -1,50 +1,34 @@
-import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
-import SingleJobInfo from '../../components/user/SingleJobInfo';
-import { Link } from 'react-router-dom';
+import React from 'react';
 
-interface SingleJobProps {
-	company: string;
-	position: string;
+import { useNavigate } from 'react-router-dom';
+import Job from './Job';
+
+const Jobs: React.FC = () => {
+	const navigation = useNavigate()
+	
+	return (
+		<div>
+			<div className="grid grid-cols-5 mt-10">
+				<p className="text-purple font-outfit text-normal md:text-2xl text-2xl col-span-2 text-center ">
+					Job Listings
+				</p>
+				<button
+					onClick={() => {navigation('../add')}}
+					className="bg-green font-outfit text-white text-normal md:text-xl text-center py-1
+                        rounded-md shadow-xl hover:opacity-90  text-lg ring-0.5 md:ml-0 md:col-end-6 col-end-5 ml-10 w-full md:w-2/5 "
+				>
+					Add Job
+				</button>
+
+				<Job 
+				company={'Company Name'} position={'Front-end '} />
+				<Job 
+				company={'Company Name'} position={'Front-end '} />
+				<Job 
+				company={'Company Name'} position={'Front-end '} />
+			</div>
+		</div>
+	);
 }
 
-const JobList: React.FC<SingleJobProps> = ({ company, position }) => {
-	
-    const btnStyle = 'font-outfit text-white text-normal text-center md:text-md  md:w-2/4 md:py-1 rounded-lg p-1  hover:opacity-90 shadow-xl ring-1'
-
-	// company first letter
-	const initials: string = company
-		.split(/\s|-/)
-		.map((word) => word.charAt(0).toUpperCase())
-		.join('');
-
-	return (
-		<article
-			className={`bg-formGrey rounded-md grid grid-rows-[1fr_auto] col-start-2 col-end-5
-             md:mt-12 mt-4 shadow-[7px_7px_0px_0px_#CCCCCC]`}
-		>
-			<header className="pt-8 pb-6 px-6 border-b-[1px] grid grid-cols-[auto_1fr] items-center">
-				<div className="w-[60px] h-[60px] grid place-items-center bg-violet text-white capitalize font-bold text-2xl mr-8 rounded-md shadow-lg">
-					{initials}
-				</div>
-				<div>
-					<h5 className="text-xl w-max drop-shadow-lg">{position}</h5>
-					<p className="m-0 capitalize leading-6 text-gray">{company}</p>
-				</div>
-			</header>
-
-			<div className="p-6">
-				<div className="grid mt-4 mb-2 grid-cols-1 gap-y-6 items-center md:grid-cols-3">
-					<SingleJobInfo icon={<FaLocationArrow />} text="Toronto, ON" />
-
-					<SingleJobInfo icon={<FaBriefcase />} text="full-time" />
-                    <div  className='gap-x-5 flex float-end'>
-                        <Link to={'edit'} className={`${btnStyle} bg-updateBtnColor px-6 md:px-0`}>Edit</Link>
-                        <button className={`${btnStyle} bg-cancelRed px-4 md:px-0`}>Delete</button>
-                    </div>
-				</div>
-			</div>
-		</article>
-	);
-};
-
-export default JobList;
+export default Jobs

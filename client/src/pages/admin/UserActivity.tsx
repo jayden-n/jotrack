@@ -1,9 +1,12 @@
 import React, {useState} from 'react'
+import {  useNavigate } from 'react-router-dom';
 
 export default function UserActivity() {
-
+    
+    const navigation = useNavigate()
     const headerStyle = 'font-outfit font-semibold text-sm md:text-lg'
-    const tdStyle = 'text-center  font-outfit'
+    const tdStyle = 'text-center text-sm md:text-lg font-outfit'
+
   return (
     <div>
 
@@ -26,9 +29,17 @@ export default function UserActivity() {
                     <tbody >
                         {/* structure */}
                         <tr className='border-b border-lightgrey'>
-                            <td className={`p-3 ${tdStyle}`}>JobId</td> {/* add link later */}
+                            <td className={`p-3 ${tdStyle}`}>
+                                <button onClick={() => {navigation('../edit')}}
+                                 className='underline'>JobId</button>
+                            </td>
+
                             <td className={`${tdStyle} border-x-2 border-lightgrey`}>anything</td>
-                            <td className={`${tdStyle}`}>JobId</td>
+
+                            <td className={`${tdStyle}`}>
+                                <button onClick={() => {navigation('../edit')}}
+                                className='underline'>JobId</button>
+                            </td>
                         </tr>
 
                     </tbody>

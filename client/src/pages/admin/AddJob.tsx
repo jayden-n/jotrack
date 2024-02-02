@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 
 const AddJob: React.FC = () => {
@@ -8,6 +8,8 @@ const AddJob: React.FC = () => {
 	const [location, setLocation] = useState<string>("");
 	const [description, setDescription] = useState<string>("");
 	const [requirements, setRequirements] = useState<Array<string>>([]);
+
+	const navigation = useNavigate();
 
 		const onAdd = (e: React.FormEvent<HTMLButtonElement>) => {
 			e.preventDefault();
@@ -112,9 +114,9 @@ const AddJob: React.FC = () => {
 						<hr className="my-5 md:mt-20 border-t border-grey500"/>
 						{/* ================================= Buttons =================================*/}
 						<div className=" flex md:mt-0 mt-5 md:justify-end gap-5 justify-center ">
-							<Link to={'/admin/jobs'} className={`bg-cancelRed ${btnStyle}`}>
+							<button onClick={() => {navigation('../jobs')}} className={`bg-cancelRed ${btnStyle}`}>
 								Cancel
-							</Link>
+							</button>
 							<button
 								onClick={onAdd}
 								className={`bg-green ${btnStyle}` }

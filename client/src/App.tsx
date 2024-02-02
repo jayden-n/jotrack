@@ -6,8 +6,8 @@ import RegisterPage from './pages/auth/RegisterPage';
 import UserDashboardPage from './pages/user/UserDashboardPage';
 import AdminDashboard from './pages/admin/Dashboard';
 import HomePage from './pages/visitor/HomePage';
-import AdminJobs from './pages/admin/Jobs';
-import AdminUsers from './pages/admin/Users';
+import AdminJobs from './pages/admin/JobList';
+import AdminUsers from './pages/admin/UserSearch';
 import AddJob from './pages/admin/AddJob';
 import UserActivity from './pages/admin/UserActivity';
 import UserApplications from './pages/user/UserApplications';
@@ -86,7 +86,7 @@ const router = createBrowserRouter([
 						element: <AdminJobs />,
 					},
 					{
-						path: 'jobs/add',
+						path: 'add',
 						element: <AddJob />,
 					},
 					{
@@ -94,13 +94,13 @@ const router = createBrowserRouter([
 						element: <AdminUsers />,
 					},
 					{
-						path: 'users/activity',
+						path: 'activity',
 						element: <UserActivity />,
 					},
 					{
-						path: 'jobs/edit',
+						path: 'edit',
 						element: <EditJob />
-					}
+					},
 				],
 			},
 		],

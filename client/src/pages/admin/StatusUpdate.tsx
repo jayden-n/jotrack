@@ -50,7 +50,6 @@ const StatusUpdate: React.FC<StatusUpdateProps> = ({onClose}) => {
                 <button className= {`bg-red ${statusBtnStyle} `} onClick={() => onUpdate('Declined')}>Declined</button>
 
                 <button className= {`bg-lightblue ${otherBtnStyle} mt-6 mb-3 `}onClick={onNotify}>Notify User</button>
-
                 <button className= {`bg-cancelRed ${otherBtnStyle} md:mb-0 mb-5`} onClick={onClose}>Cancel</button>
             </div>
         </motion.div>
