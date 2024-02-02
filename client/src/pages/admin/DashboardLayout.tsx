@@ -1,9 +1,18 @@
+import { ReactEventHandler, useState } from 'react';
 import { toast } from 'react-toastify';
+import ChangePassword from './ChangePassword'
 
 const DashboardLayout: React.FC = () => {
 
-	const handleSave = (event: React.FormEvent<HTMLButtonElement>) => {
-		event.preventDefault();
+	const [openChange, setChange] = useState(false)
+
+	const handlePassword = (e: React.FormEvent<HTMLButtonElement>) => {
+		e.preventDefault()
+		setChange(!openChange)
+	}
+
+	const handleSave = (e: React.FormEvent<HTMLButtonElement>) => {
+		e.preventDefault()
 		toast.success('Changes successfully updated.');
 	};
 
@@ -11,13 +20,14 @@ const DashboardLayout: React.FC = () => {
 	const divStyle = 'mb-4 flex flex-wrap gap-x-16 md:pl-8 pt-5 '
 
 	return (
-		<div className="mt-10 md:ml-10 mx-5 md:mx-0 ">
+		<div className="mt-10 md:ml-10 mx-5 md:mx-0 grid md:grid-cols-6 grid-cols-1">
+			
 			<p className="text-purple font-poppins font-bold text-3xl">
 				Hello
 				<span className="text-gray font-normal  text-3xl">, Admin</span>
 			</p>
 
-			<form className="border-white bg-white rounded-xl p-4 w-full shadow-lg mb-6 md:w-2/3 mt-5 ">
+			<form className="border-white bg-white rounded-xl p-4 col-start-1 col-span-5 w-full shadow-lg mb-6 md:w-2/3 mt-5 ">
 				{/* ============================ Name div ============================ */}
 				<div className={`${divStyle}`}>
 
@@ -112,7 +122,9 @@ const DashboardLayout: React.FC = () => {
 								<p className="text-xl font-semibold font-outfit">Password</p>
 								{/* ============================ Change Button ============================ */}
 								<button className="border md:px-8 px-4 py-0.5 hover:bg-indigo 
-								 border-gray text-md shadow-md rounded-lg bg-white font-outfit text-normal">
+								 border-gray text-md shadow-md rounded-lg bg-white font-outfit text-normal"
+								 onClick={handlePassword}
+								 >
 									Change
 								</button>
 							</div>
@@ -124,6 +136,9 @@ const DashboardLayout: React.FC = () => {
 					</div>
 				</div>
 			</form>
+		
+			{openChange && <ChangePassword onClose={() => setChange(false)} />}
+			
 		</div>
 	);
 };

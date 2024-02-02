@@ -1,33 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import {Link} from "react-router-dom"
 import UserDetailsMobile from './UserDetailsMobile';
+import StatusUpdate from './StatusUpdate';
 
 const UserSearch: React.FC = () => {
 
-    const [userData, setData] = useState<any>(null);
-    const [details, setDetails] = useState(false)
+    // const [userData, setData] = useState<any>(null);
+    const [openDetails, setOpen] = useState(false)
+    const [openStatus, setStatus] = useState(false)
+
     const showDetails = () => {
-        setDetails(!details)
+        setOpen(!openDetails)
+    }
+    const showStatus = () => {
+        setStatus(!openStatus)
     }
 
     return (
-        <div className='grid grid-col-1 md:grid-cols-7 mt-10 '>
+        <div className='grid grid-col-1 md:grid-cols-7 md:mt-10 mt-5'>
            
             {/* ================================== User details button ================================= */}
-                 <div className='flex justify-end items-center mb-10 mr-4'>
+                 <div className='flex justify-end  mx-3 mb-4 md:hidden'>
                     <button 
                     className='bg-gray md:hidden font-outfit text-white text-normal text-center p-1.5
-                    rounded-lg  hover:opacity-90 ring-0.5  w-2/5 '
+                    rounded-xl  hover:opacity-90 ring-0.5  w-2/6 shadow-lg shadow-black-500/50'
                         onClick={showDetails}
                     >
-                        User Details
+                        User 
                     </button>
-                    {details && <UserDetailsMobile />}
-                </div>  
+                    {openDetails && <UserDetailsMobile />}
+                </div> 
+                
 
             {/*  ================================== User Applications  ================================= */}
 
-            <div className=' md:col-span-3 md:ml-10 bg-white rounded-lg w:2/5 mx-3 md:mx-0 md:w-full'>
+            <div className=' md:col-span-3 md:ml-10 bg-white rounded-lg w:2/5 mx-3 md:mx-0 md:w-full '>
                 <table className=' w-full text-center'>
 
                     <thead className='border-b text-sm md:text-lg  border-lightgrey'>
@@ -40,25 +47,31 @@ const UserSearch: React.FC = () => {
 
                     <tbody >
                         {/* structure */}
-                        <tr className='border-b  border-lightgrey'>
+                        <tr className={`border-b  border-lightgrey ${openStatus === true ? 'bg-lightgrey' : ''}`}>
                             <td className='text-center text-sm font-outfit md:text-lg '>JobId</td> {/* add link later */}
                             <td className=' md:p-2 p-1 border-l-2 border-lightgrey text-center'>
                                 <span className='md:text-lg text-sm '>Pending</span>
 
                                 <button className='bg-updateBtnColor hover:opacity-90 ring-0.5
-                                 text-white rounded-lg md:py-2 md:px-5 text-sm p-1 float-end'>
+                                 text-white rounded-lg md:py-2 md:px-5 text-sm p-1 float-end'
+                                 onClick={showStatus}
+                                 >
                                     Update</button>
                             </td>
                         </tr>
-                        
+                       
 
                     </tbody>
                 </table>
             </div>
+            
+             {openStatus && <StatusUpdate onClose={() => setStatus(false)}/>}
 
+            
+       
             {/* ===================================== User Details ================================== */}
 
-            <div className='md:col-end-8 md:col-span-3 mr-10 bg-white pl-5 py-5  rounded-l-lg hidden md:grid'>
+            <div className='md:col-end-8 md:col-span-3 md:col-start-6 mr-10 bg-white pl-5 py-5  rounded-l-lg hidden md:grid'>
                 <div  className='grid grid-cols-3'>
                   <div className='col-start-1'>
                     <p className='mb-10 '>User ID </p>

@@ -34,6 +34,7 @@ export default {
 			black: '#000000',
 			cancelRed: '#C71F08',
 			grey500: '#9e9e9e',
+			snow: '#FBFBFB',
 			// slate colors
 			slate300: '#CBD5E1',
 			slate400: '#94a3b8',
