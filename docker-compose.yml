@@ -33,7 +33,7 @@ services:
       - jotrack
 
   client:
-    image: client
+    image: client:1.0
     build:
       context: ./client
       dockerfile: ./Dockerfile
