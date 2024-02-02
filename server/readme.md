@@ -40,6 +40,8 @@
    npm run start:dev
    ```
 
+3. Navigate to <http://localhost:8000/api/>.
+
 ## Troubleshooting
 
 ### Restarting
@@ -70,7 +72,6 @@
    ```
 
 2. Navigate to <http://localhost:5555/>.
-3. Navigate to <http://localhost:8000/api/>.
 
 ### Seeding
 
