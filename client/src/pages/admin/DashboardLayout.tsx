@@ -16,7 +16,7 @@ const DashboardLayout: React.FC = () => {
 		toast.success('Changes successfully updated.');
 	};
 
-	const inputStyle = 'w-full border p-2 font-normal shadow-md font-outfit text-lg rounded-md border-gray '
+	const inputStyle = 'w-full border p-2 font-normal shadow-md font-outfit text-lg text-gray rounded-md border-gray '
 	const divStyle = 'mb-4 flex flex-wrap gap-x-16 md:pl-8 pt-5 '
 
 	return (
@@ -38,7 +38,7 @@ const DashboardLayout: React.FC = () => {
 							type="text"
 							readOnly
 							id="first-name"
-							placeholder="Any"
+							defaultValue="Any"
 							className={`${inputStyle}`}
 						/>
 					</div>
@@ -50,7 +50,7 @@ const DashboardLayout: React.FC = () => {
 							type="text"
 							readOnly
 							id="last-name"
-							placeholder="Body"
+							defaultValue="Body"
 							className={`${inputStyle}`}						/>
 					</div>
 				</div>
@@ -69,7 +69,7 @@ const DashboardLayout: React.FC = () => {
 							type="number"
 							id="phone"
 							className={`${inputStyle}`}			
-							placeholder="555555"
+							defaultValue="555555"
 						/>
 					</div>
 
@@ -83,7 +83,7 @@ const DashboardLayout: React.FC = () => {
 							type="email"
 							id="email"
 							className={`${inputStyle}`}
-							placeholder="anybody@gmail.com"
+							defaultValue="anybody@gmail.com"
 						/>
 					</div>
 				</div>
@@ -96,8 +96,8 @@ const DashboardLayout: React.FC = () => {
 						type="text"
 						id="address"
 						className="w-full md:w-2/3 font-normal font-outfit border p-2 
-						rounded-md border-gray text-lg shadow-md "
-						placeholder="123 st North, Toronto, ON, R2M4Z3"
+						rounded-md border-gray text-lg shadow-md text-gray "
+						defaultValue="123 st North, Toronto, ON, R2M4Z3"
 					/>
 				</div>
 
