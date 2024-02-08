@@ -24,6 +24,8 @@
    # ...
    # jwt
    JWT_SECRET="your_jwt_secret" # change
+   # open ai
+   OPEN_AI_API_KEY="your_open_ai_api_key" # change
    ```
 
 ## Running
