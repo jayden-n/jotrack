@@ -1,0 +1,16 @@
+{
+  "name": "jotrack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "copy:env:template" :"cd server && cp .env.template .env",
+    "start:dev": "npm run copy:env:template && npm run docker:dev:compose",
+    "docker:dev:compose": "docker-compose -f docker-compose.yml -p jotrack up -d",
+    "docker:dev:down": "docker-compose down -v",
+    "docker:dev:restart": "npm run docker:dev:down && npm run docker:dev:compose"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -59,7 +59,7 @@ export class ResumeController {
   @Put()
   @UseGuards(AuthGuard, RolesGuard, JwtGuard)
   @Roles(Role.USER)
-  @HttpCode(HttpStatus.CREATED)
+  @HttpCode(HttpStatus.OK)
   @UseInterceptors(FileInterceptor('resume'))
   public reUploadResume(
     @GetUser('id') userId: number,

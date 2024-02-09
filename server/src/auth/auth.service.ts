@@ -34,8 +34,9 @@ export class AuthService {
 
     if (!passwordMatches) throw new ForbiddenException();
 
-    const jwtPayload: { sub: number; role: string } = {
+    const jwtPayload: { sub: number; userName: string; role: string } = {
       sub: user.id,
+      userName: user.userName,
       role: user.role,
     };
     const token: string = await this.jwtService.signAsync(jwtPayload);

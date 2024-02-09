@@ -1,5 +1,3 @@
-# node related
-package*.json
 # IDE and OS
 .idea/
 .vscode/
