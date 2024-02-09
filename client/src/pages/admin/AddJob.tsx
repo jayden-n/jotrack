@@ -102,7 +102,7 @@ const AddJob: React.FC = () => {
 						<div className={`${divStyle}`}>
 							<textarea
 								placeholder="Requirements"
-								value={requirements}
+								value={requirements.join('\n')}
 								className=" w-full p-3 border border-gray rounded-md 
 								shadow-md shadow-black-500/50"
 								rows={9}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Link} from "react-router-dom"
 import { CiSearch } from "react-icons/ci";
-import UserSearch from './UserData';
+import UserData from './UserData';
 
 const Users: React.FC = () => {
 	const [search, setResult] = useState<boolean>(false)
@@ -25,7 +25,7 @@ const Users: React.FC = () => {
 					<CiSearch className="text-3xl"/>
 				</button>
 			</div>
-			{search && <UserSearch />}
+			{search && <UserData />}
 		</div>
 	);
 }
