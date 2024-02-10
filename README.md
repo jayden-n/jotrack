@@ -4,10 +4,16 @@
 
 ### Installation & Running
 
-1. Setup everything and run `docker-compose` to get started with the application.
+1. Start the client.
 
    ```shell
-   npm run start:dev
+   npm run client:start
+   ```
+
+2. Start the server and the database.
+
+   ```shell
+   npm run server:start
    ```
 
 ## Production Environment
@@ -17,7 +23,7 @@
 1. Make a duplicate of `.env.template` in the `server` directory.
 
    ```shell
-   npm run copy:env:template
+   npm run cp:env:template
    ```
 
 2. Change the fields in the `.env` file for security purposes.
@@ -38,6 +44,24 @@
 
 
 ## Troubleshooting
+
+### Server Development Environment
+
+1. Stop the server.
+
+2. Remove the database.
+
+   ```shell
+   npm run db:dev:rm
+   ```
+
+3. Start the server and the database.
+
+   ```shell
+   npm run server:start
+   ```
+
+### Production Environment
 
 1. Restart the application
 
