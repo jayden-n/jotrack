@@ -11,7 +11,7 @@
     "docker:dev:down": "docker-compose down -v",
     "docker:dev:restart": "npm run docker:dev:down && npm run docker:dev:compose",
     "client:start": "cd client && npm i && npm run dev",
-    "server:start": "npm run cp:env:template && cd server && npm i && npm run db:dev:up && npm run start:migrate:dev && npm run start:dev"
+    "server:start": "npm run cp:env:template && cd server && npm i && npm run db:dev:up && npm run start:dev"
   },
   "keywords": [],
   "author": "",
