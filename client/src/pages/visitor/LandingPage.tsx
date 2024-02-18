@@ -20,7 +20,7 @@ const LandingPage: React.FC = () => {
 	return (
 		<div className="flex flex-col items-center mt-20 h-screen bg-E6E0E0">
 			{/* Title */}
-			<h2 className="text-4xl font-orienta text-gray text-center mb-6">FIND SUITABLE JOB OPPORTUNITIES</h2>
+			<h2 className="text-3xl font-orienta text-gray text-center mb-6">FIND SUITABLE JOB OPPORTUNITIES</h2>
 			{/* Search bar */}
 			<form className="flex justify-center mt-8 w-full px-4 lg:px-0">
 				<div className="flex items-center w-full max-w-4xl border border-slate400 shadow-lg bg-white">
