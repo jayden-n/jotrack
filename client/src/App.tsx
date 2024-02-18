@@ -1,6 +1,8 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import LandingPage from './pages/visitor/LandingPage';
+import JobPage from './pages/visitor/JobPage';
+import AboutPage from './pages/visitor/AboutPage';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import UserDashboardPage from './pages/user/UserDashboardPage';
@@ -18,6 +20,7 @@ import UserViewResume from './pages/user/UserViewResume';
 import UserUpdatePasswordPage from './pages/user/UserUpdatePasswordPage';
 import UserAllJobsPage from './pages/user/UserAllJobsPage';
 import UserSingleJobPage from './pages/user/UserSingleJobPage';
+import VisitorSingleJobPage from './pages/visitor/VisitorSingleJobPage';
 import EditJob from './pages/admin/EditJob';
 const router = createBrowserRouter([
 	{
@@ -27,6 +30,18 @@ const router = createBrowserRouter([
 			{
 				index: true,
 				element: <LandingPage />,
+			},
+			{
+				path: 'jobs',
+				element: <JobPage />,
+			},
+			{
+				path: 'about-us',
+				element: <AboutPage />,
+			},
+			{
+				path: 'job/:id',
+				element: <VisitorSingleJobPage />,
 			},
 			{
 				path: 'login',
