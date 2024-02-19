@@ -6,7 +6,6 @@ import { debounce } from 'lodash';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-
 const JobPage: React.FC = () => {
     const [searchText, setSearchText] = useState<string>('');
 
@@ -37,7 +36,7 @@ const JobPage: React.FC = () => {
                 </div>
             </div>
 
-            <div >
+            <div className="px-6 py-4 max-w-[1500px] m-auto">
                 <AllJobsComponent searchText={searchText} />
             </div>
         </div>
