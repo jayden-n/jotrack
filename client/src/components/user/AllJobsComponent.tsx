@@ -80,4 +80,5 @@ const AllJobsComponent: React.FC<AllJobsComponentProps> = ({ searchText }) => {
       </section>
    );
 };
+
 export default AllJobsComponent;
