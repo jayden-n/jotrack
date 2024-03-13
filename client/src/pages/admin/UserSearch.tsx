@@ -15,7 +15,7 @@ const Users: React.FC = () => {
 				<input
 					type="search"
 					placeholder="search by user name/id"
-					className=" w-full  col-start-2 col-end-6 font-outfit text-normal text-sm px-3 py-3 rounded-l-xl "
+					className=" w-full  col-start-2 col-end-6 font-outfit text-normal text-md p-4 rounded-l-xl "
 				/>
 
 				 <button className="bg-btnPurple text-white font-outfit text-normal text-md w-full md:w-2/5

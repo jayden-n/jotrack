@@ -1,13 +1,39 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { toast } from 'react-toastify';
 
 const EditJob: React.FC = () => {
-    const [companyName, setCompanyName] = useState<string>("Any Name");
-    const [position, setPosition] = useState<string>("Front-end Developer");
-    const [location, setLocation] = useState<string>("Toronto, ON");
-    const [description, setDescription] = useState<string>("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut");
-    const [requirements, setRequirements] = useState<Array<string>>(['Lorem ipsum dolor sit amet', 'Lorem ipsum dolor sit amet', 'Lorem ipsum dolor sit amet']);
+    const { jobId } = useParams<{ jobId: string }>();
+    const [companyName, setCompanyName] = useState<string>("");
+    const [position, setPosition] = useState<string>("");
+    const [postalCode, setPostalCode] = useState<string>("");
+    const [street, setStreet] = useState<string>("");
+    const [city, setCity] = useState<string>("");
+    const [province, setProvince] = useState<string>("");
+    const [country, setCountry] = useState<string>("");
+    const [description, setDescription] = useState<string>("");
+    const [requirements, setRequirements] = useState<Array<string>>([]);
+
+    useEffect(() => {
+        axios.get(`http://localhost:8000/api/jobs/${jobId}`)
+            .then(response => {
+                const job = response.data;
+                setCompanyName(job.companyName);
+                setPosition(job.position);
+                setPostalCode(job.postalCode);
+                setStreet(job.street);
+                setCity(job.city);
+                setProvince(job.province);
+                setCountry(job.country);
+                setDescription(job.description);
+                setRequirements(job.requirements);
+            })
+            .catch(error => {
+                console.error(error);
+              
+            });
+    }, [jobId]);
 
     // const bulletPoint = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     //     const bullet = '\u2022';
@@ -24,7 +50,7 @@ const EditJob: React.FC = () => {
 
     const onUpdate = (e: React.FormEvent<HTMLButtonElement>) => { 
         e.preventDefault();
-        if (                //add if changes happened later
+        if (                
             companyName ||
             position ||
             location ||
@@ -52,6 +78,7 @@ const EditJob: React.FC = () => {
                         <div>
                             <label className={labelStyle}>Company Name</label>
                             <input
+                              placeholder="Company name"
                                 type="text"
                                 value={companyName}
                                 className={inputStyle}
@@ -73,15 +100,56 @@ const EditJob: React.FC = () => {
                     
                         {/* ================================= Location =================================*/}
                         <div>
-                            <label className={labelStyle}>Location</label>
+                            <label className={labelStyle}>Street</label>
                             <input
-                                placeholder="Location"
+                                placeholder="Street"
                                 type="text"
-                                value={location}
+                                value={street}
                                 className={inputStyle}
-                                onChange={(e) => setLocation(e.target.value)}
+                                onChange={(e) => setStreet(e.target.value)}
                             />
                         </div>
+                        <div>
+                            <label className={labelStyle}>City</label>
+                            <input
+                                placeholder="City"
+                                type="text"
+                                value={city}
+                                className={inputStyle}
+                                onChange={(e) => setCity(e.target.value)}
+                            />
+                        </div>
+                        <div>
+                            <label className={labelStyle}>Province</label>
+                            <input
+                                placeholder="Province"
+                                type="text"
+                                value={province}
+                                className={inputStyle}
+                                onChange={(e) => setProvince(e.target.value)}
+                            />
+                        </div>
+                        <div>
+                            <label className={labelStyle}>Country</label>
+                            <input
+                                placeholder="Country"
+                                type="text"
+                                value={country}
+                                className={inputStyle}
+                                onChange={(e) => setCountry(e.target.value)}
+                            />
+                        </div>
+                        <div>
+                            <label className={labelStyle}>Postal Code</label>
+                            <input
+                                placeholder="Postal Code"
+                                type="text"
+                                value={postalCode}
+                                className={inputStyle}
+                                onChange={(e) => setPostalCode(e.target.value)}
+                            />
+                        </div>
+                   
                     
                     </div>
                     {/* ================================= Description =================================*/}

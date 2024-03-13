@@ -1,11 +1,17 @@
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Job from './Job';
+import { CiSearch } from 'react-icons/ci';
+import AllJobsComponentAdmin from './AllJobsComponentAdmin';
 
 const Jobs: React.FC = () => {
 	const navigation = useNavigate()
+	const [searchText, setSearchText] = useState<string>('');
+
 	
+	const handleSearchText = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const inputText = e.target.value.trim();
+		setSearchText(inputText);
+	};
 	return (
 		<div>
 			<div className="grid grid-cols-5 mt-10">
@@ -19,13 +25,24 @@ const Jobs: React.FC = () => {
 				>
 					Add Job
 				</button>
+				<div className='col-span-3 col-start-2 flex items-center mt-10'>
+				<input
+					type="search"
+					onChange={handleSearchText}
+					placeholder="search job..."
+					className=" w-full font-outfit text-normal text-md h-[60px] p-4 rounded-l-xl "
+				/>
 
-				<Job 
-				company={'Company Name'} position={'Front-end '} />
-				<Job 
-				company={'Company Name'} position={'Front-end '} />
-				<Job 
-				company={'Company Name'} position={'Front-end '} />
+				 <button className="bg-btnPurple text-white font-outfit text-normal text-md w-[70px] h-[60px] 
+                        rounded-r-xl hover:opacity-90 ring-0.5 flex justify-center items-center"
+						>
+							
+					<CiSearch className="text-3xl"/>
+				</button>
+			</div>
+	
+				<AllJobsComponentAdmin searchText={searchText} />
+		
 			</div>
 		</div>
 	);
