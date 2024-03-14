@@ -6,6 +6,7 @@ export default {
 			fontFamily: {
 				outfit: ['outfit', 'sans-serif'], // logo font
 				poppins: ['poppins', 'sans-serif'], // app font
+				orienta: ['orienta', 'sans-serif'], //find job landin page logo
 			},
 		},
 
