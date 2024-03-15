@@ -9,12 +9,15 @@ import * as argon from 'argon2';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
+import { OpenAIService } from 'src/openai/openai.service';
+import OpenAI from 'openai';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly jwtService: JwtService,
+    private readonly openAIService: OpenAIService,
   ) {}
 
   public async login(
@@ -53,15 +56,25 @@ export class AuthService {
 
       const user: User = await this.prismaService.user.create({
         data: {
-          ...this.mapToUserRequestDto(signUpRequestDto),
+          ...this.mapToUserObject(signUpRequestDto),
           hash,
           userName,
           address: {
             create: {
-              ...this.mapToAddressRequestDto(signUpRequestDto),
+              ...this.mapToAddressObject(signUpRequestDto),
             },
           },
         },
+      });
+
+      const thread: OpenAI.Beta.Threads.Thread =
+        await this.openAIService.createThread();
+
+      const run: OpenAI.Beta.Threads.Runs.Run =
+        await this.openAIService.run(thread);
+
+      this.prismaService.openAI.create({
+        data: { userId: user.id, threadId: thread.id, runId: run.id },
       });
 
       return user;
@@ -73,7 +86,7 @@ export class AuthService {
     }
   }
 
-  private mapToUserRequestDto(signUpRequestDto: SignUpRequestDto): {
+  private mapToUserObject(signUpRequestDto: SignUpRequestDto): {
     email: string;
     role: string;
     firstName: string;
@@ -89,7 +102,7 @@ export class AuthService {
     };
   }
 
-  private mapToAddressRequestDto(signUpRequestDto: SignUpRequestDto): {
+  private mapToAddressObject(signUpRequestDto: SignUpRequestDto): {
     postalCode: string;
     street: string;
     city: string;

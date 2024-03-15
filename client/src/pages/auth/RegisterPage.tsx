@@ -70,12 +70,13 @@ const RegisterPage: FC = () => {
         phoneNumber: Number(phoneNumber),
       })
       .then((response) => {
-        // console.log(response.data);
         navigate('/login');
       })
       .catch(async (error) => {
-        console.error(await error);
-        setError(await error.response.data.message[0]);
+        setError(
+          (await error.response.data.message[0]) ||
+            (await error.response.data.message),
+        );
       });
   };
 
