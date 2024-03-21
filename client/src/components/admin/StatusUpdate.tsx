@@ -34,23 +34,23 @@ const StatusUpdate: React.FC<StatusUpdateProps> = ({onClose}) => {
 
 
     const statusBtnStyle = 
-    'font-outfit text-white text-center md:text-sm text-xs w-[55%] py-1  mb-3 rounded-md  hover:opacity-90 shadow-xl ring-1'
+    'font-outfit text-white text-center md:text-sm text-xs w-[55%] py-1  mb-1 rounded-md  hover:opacity-90 shadow-xl ring-1'
     const otherBtnStyle = 
-    'font-outfit text-white text-center md:text-sm text-xs md:w-[80%] w-[70%] py-1 rounded-md  hover:opacity-90 shadow-xl ring-1'
+    'font-outfit text-white text-center md:text-sm text-xs md:w-[70%] w-[70%] py-1 rounded-md  hover:opacity-90 shadow-xl ring-1'
 
     return(
-        <motion.div className="bg-snow md:w-[50%] md:h-[70%] w-[35%] h-full md:col-span-2 shadow-md border border-slate400 "
+        <motion.div className="bg-snow md:w-[45%] md:h-[290px] w-[35%] h-[250px] md:col-span-2 shadow-md border border-slate400 relative"
         animate={controls}
             transition={{ duration: 0.5}}
             layout style={{ borderRadius: 20 }} 
         >
-            <div className='grid grid-cols-1 place-items-center md:mt-10 mt-5'>
+            <div className='grid grid-cols-1 place-items-center md:mt-6 mt-5 absolute inset-0'>
                 <button className={`bg-orange ${statusBtnStyle}`} onClick={() => onUpdate('Pending')}>Pending</button>
                 <button className={`bg-green ${statusBtnStyle}`} onClick={() => onUpdate('Accepted')}>Accepted</button>
                 <button className= {`bg-red ${statusBtnStyle} `} onClick={() => onUpdate('Declined')}>Declined</button>
 
-                <button className= {`bg-lightblue ${otherBtnStyle} mt-6 mb-3 `}onClick={onNotify}>Notify User</button>
-                <button className= {`bg-cancelRed ${otherBtnStyle} md:mb-0 mb-5`} onClick={onClose}>Cancel</button>
+                <button className= {`bg-lightblue ${otherBtnStyle} mt-5 `}onClick={onNotify}>Notify User</button>
+                <button className= {`bg-cancelRed ${otherBtnStyle}  mb-5`} onClick={onClose}>Cancel</button>
             </div>
         </motion.div>
     )

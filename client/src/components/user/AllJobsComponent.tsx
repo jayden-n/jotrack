@@ -68,7 +68,7 @@ const AllJobsComponent: React.FC<AllJobsComponentProps> = ({ searchText }) => {
             {/* NOTE: will eventually map over the jobs array from back-end */}
             {filteredJobs.map((job, index) => (
                // NOTE: will replace id with real data
-               <Link to={job.id.toString()}>
+               <Link to={`../job/${job.id.toString()}`}>
                   <SingleJobSearch
                      key={index}
                      company={job.companyName}

@@ -53,24 +53,25 @@ const AllJobs: React.FC<AllJobs> = ({ searchText }) => {
    }
 
    const filteredJobs = jobs.filter((job) =>
-      `${job.companyName} ${job.position}`
+      `${job.companyName} ${job.position} ${job.id}`
          .toLowerCase()
          .includes(searchText.toLowerCase()),
    );
 
    return (
-      <>
+      <div>
             {filteredJobs.map((job, index) => (
-               <Link to={job.id.toString()}>
+           
                   <Job
                      key={index}
                      company={job.companyName}
                      position={job.position}
+                     id={job.id}
                   />
-               </Link>
+               
             ))}
         
-      </>
+      </div>
    );
 };
 

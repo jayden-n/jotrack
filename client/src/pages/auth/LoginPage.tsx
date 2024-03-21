@@ -1,4 +1,5 @@
-import React, { useState, FormEvent, ChangeEvent } from 'react';
+import axios from 'axios';
+import React, { useState, FormEvent, ChangeEvent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
@@ -11,7 +12,24 @@ const LoginPage = () => {
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 	const [role, setRole] = useState<UserRole>(null);
+	const [isLoading, setIsLoading] = useState<boolean>(true);
+
 	const navigate = useNavigate();
+	// get the role
+	const handleLogin = async () => {
+		await axios.post('http://localhost:8000/api/auth/login', { email, password })
+			.then(response => {
+				const { email, password } = response.data;
+				setEmail(email);
+				setPassword(password);
+			})
+			.catch((error): void => {
+				setError(error);
+			})
+			.finally(() => {
+				setIsLoading(false);
+			 });
+	}
 
 	// Ensure these handlers are used in the input fields
 	const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -83,7 +101,7 @@ const LoginPage = () => {
 					<button type="button" className={`w-36 py-3 text-2xl bg-white font-regular rounded-xl hover:bg-indigo ${role === 'admin' ? 'bg-indigo' : 'bg-transparent'}`} onClick={handleAdminClick}>Admin</button>
 					<button type="button" className={`w-36 py-3 text-2xl bg-white font-regular rounded-xl hover:bg-indigo ${role === 'user' ? 'bg-indigo' : 'bg-transparent'}`} onClick={handleUserClick}>User</button>
 					</div>
-					<button type="submit" className="text-2xl text-white bg-btnPurple py-3 px-72 justify-self-center mt-10 md:col-span-2 hover:opacity-90">Sign in</button>
+					<button type="submit" onClick={handleLogin} className="text-2xl text-white bg-btnPurple py-3 px-72 justify-self-center mt-10 md:col-span-2 hover:opacity-90">Sign in</button>
 					{error && <div className="text-red-500 py-2 px-6 justify-self-center md:col-span-2">{error}</div>}
 			</form>
 			</div>

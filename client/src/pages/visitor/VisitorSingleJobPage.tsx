@@ -1,15 +1,53 @@
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+interface Job {
+    id: number;
+    title: string;
+    description: string;
+    position: string;
+    requirements: string[];
+ 
+    companyName: string;
+ 
+    postalCode: string;
+    street: string;
+    city: string;
+    province: string;
+    country: string;
+    dateTimePosted: Date;
+ }
+
 const UserSingleJobPage: React.FC = () => {
+    const { id } = useParams<{ id: string }>();
+    const [singleJob, setSingleJob] = useState<Job | null>(null)
+    const [error, setError] = useState<string>('')
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        axios.get<Job | null>(`http://localhost:8000/api/jobs/${id}`)
+        .then((response) => {
+           setSingleJob(response.data)
+        })
+        .catch((error): void => {
+            toast.error('User not found')
+            setError(error);
+         })
+         .finally(() => {
+            setIsLoading(false);
+         });
+    },[id])
+
+   
+
     const handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void = (
         event: React.FormEvent<HTMLFormElement>,
     ) => {
         event.preventDefault();
         toast.warning('Please log-in or sign-up first');
-
-        navigate('/login');
     };
 
     return (
@@ -19,33 +57,28 @@ const UserSingleJobPage: React.FC = () => {
             <form onSubmit={handleSubmit}>
                 <div className="max-w-[100vw] rounded  py-8 px-10 mx-auto">
                     <h4 className="mb-12  text-2xl font-outfit font-bold capitalize">
-                        Company Name
+                    {singleJob?.companyName}
                     </h4>
 
                     <div className="flex text-xl font-outfit flex-col gap-12">
                         {/* company info */}
                         <div>
-                            <p className="capitalize">position: front-end developer</p>
-                            <p className="capitalize">company name: apple</p>
+                            <p className="capitalize">position: {singleJob?.position}</p>
+                            <p className="capitalize">location: {singleJob?.street}, {singleJob?.city} {singleJob?.province} {singleJob?.postalCode}, {singleJob?.country}</p>
                         </div>
                         <div>
                             <p className="capitalize font-bold">job description:</p>
                             <div>
-                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus
-                                officia labore, voluptatibus harum consectetur asperiores ut et
-                                exercitationem velit repellendus officiis, in voluptas adipisci
-                                hic numquam! Quo ipsum omnis in iusto sit molestias odio
-                                laboriosam!
+                               {singleJob?.description}
                             </div>
                         </div>
                         <div>
                             <p className="font-bold">Requirements:</p>
                             <div className="text">
                                 <ol className="list-disc ml-5">
-                                    <li>React</li>
-                                    <li>TypeScript</li>
-                                    <li>TailwindCSS</li>
-                                    <li>A car to commute</li>
+                                    {singleJob?.requirements.map((requirement, index) => (
+                                        <li key={index}>{requirement}</li>
+                                    ))}
                                 </ol>
                             </div>
                         </div>
@@ -65,3 +98,5 @@ const UserSingleJobPage: React.FC = () => {
     );
 };
 export default UserSingleJobPage;
+
+

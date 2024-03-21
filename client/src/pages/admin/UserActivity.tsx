@@ -30,14 +30,14 @@ export default function UserActivity() {
                         {/* structure */}
                         <tr className='border-b border-lightgrey'>
                             <td className={`p-3 ${tdStyle}`}>
-                                <button onClick={() => {navigation('../edit')}}
+                                <button onClick={() => {navigation('../edit/:id')}}
                                  className='underline'>JobId</button>
                             </td>
 
                             <td className={`${tdStyle} border-x-2 border-lightgrey`}>anything</td>
 
                             <td className={`${tdStyle}`}>
-                                <button onClick={() => {navigation('../edit')}}
+                                <button onClick={() => {navigation('../edit/:id')}}
                                 className='underline'>JobId</button>
                             </td>
                         </tr>

@@ -3,8 +3,10 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { toast } from 'react-toastify';
 
+
 const EditJob: React.FC = () => {
-    const { jobId } = useParams<{ jobId: string }>();
+    const { id } = useParams<{ id: string }>();
+
     const [companyName, setCompanyName] = useState<string>("");
     const [position, setPosition] = useState<string>("");
     const [postalCode, setPostalCode] = useState<string>("");
@@ -15,8 +17,8 @@ const EditJob: React.FC = () => {
     const [description, setDescription] = useState<string>("");
     const [requirements, setRequirements] = useState<Array<string>>([]);
 
-    useEffect(() => {
-        axios.get(`http://localhost:8000/api/jobs/${jobId}`)
+    useEffect(() => { 
+        axios.get(`http://localhost:8000/api/jobs/${id}`)
             .then(response => {
                 const job = response.data;
                 setCompanyName(job.companyName);
@@ -28,37 +30,37 @@ const EditJob: React.FC = () => {
                 setCountry(job.country);
                 setDescription(job.description);
                 setRequirements(job.requirements);
+               
             })
             .catch(error => {
+                toast.error('Failed retrieving job.')
+                //  console.log(id)
                 console.error(error);
               
             });
-    }, [jobId]);
+    }, [id]);
 
-    // const bulletPoint = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    //     const bullet = '\u2022';
-    //     const value = e.currentTarget.value.length;
-    //     if (value > 0) {
-    //         if (e.key === 'Enter') {
-    //             e.preventDefault();
-    //             e.currentTarget.value = `${e.currentTarget.value}\n${bullet} `;
-    //         } else if (value === 1) {
-    //             e.currentTarget.value = `${bullet} ${e.currentTarget.value}`;
-    //         }
-    //     }
-    // };
+    
 
-    const onUpdate = (e: React.FormEvent<HTMLButtonElement>) => { 
+    const onUpdate = async (e: React.FormEvent<HTMLButtonElement>) => { 
         e.preventDefault();
-        if (                
-            companyName ||
-            position ||
-            location ||
-            description ||
+
+        const updatedJob = {
+            companyName,
+            position,
+            postalCode, street, city, province, country,
+            description,
             requirements
-        ) {
-            toast.success('Job successfully updated.')
-            
+        };
+
+        try {
+            const response = await axios.put(`http://localhost:8000/api/jobs/${id}`, updatedJob);
+            if (response.status === 200) {
+                toast.success('Job successfully updated.');
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error('Error updating job.');
         }
     };
 
@@ -66,7 +68,7 @@ const EditJob: React.FC = () => {
     const labelStyle = 'mb-1 font-outfit text-lg block font-medium'
     const inputStyle = " md:p-4 mb-5  w-full p-3 border rounded-md shadow-md shadow-black-500/50  border-gray"
     const divStyle = ' md:flex md:flex-wrap  gap-x-5 pt-5 '
-    const locationStyle = "md:p-4 mb-5 md:w-1/2 w-full p-3 border rounded-md shadow-md shadow-black-500/50 border-gray"
+    const locationStyle = "md:p-4 mb-5  w-full p-3 border rounded-md shadow-md shadow-black-500/50 border-gray"
     const textareaStyle = 'md:p-4 w-full md:h-44 p-3 font-outfit text-lg rounded-md shadow-md shadow-black-500/50 '
     const btnStyle = 'font-outfit text-white text-center md:text-xl md:px-5 md:py-1 rounded-lg p-2 hover:opacity-90 shadow-xl ring-1'
     // =================================================== End ===================================================
@@ -78,7 +80,7 @@ const EditJob: React.FC = () => {
                     <div className=" ">
                         {/* ================================= Company Name =================================*/}
                         <div className={`${divStyle} `}>
-                            {/* <label className={labelStyle}>Company Name</label> */}
+                        <label className={labelStyle}>Company Name</label>
                             <input
                               placeholder="Company name"
                                 type="text"
@@ -89,8 +91,7 @@ const EditJob: React.FC = () => {
                         </div>
                     
                         {/* ================================= Position =================================*/}      
-                   
-                            {/* <label className={labelStyle}>Position</label> */}
+                        <label className={labelStyle}>Position</label>
                             <input
                                 placeholder="Position"
                                 type="text"
@@ -102,7 +103,7 @@ const EditJob: React.FC = () => {
                     
                         {/* ================================= Location =================================*/}
                         <div className={`${divStyle} `}>
-                            {/* <label className={labelStyle}>Street</label> */}
+                        <label className={labelStyle}>Street</label>
                             <input
 									placeholder="Street"
 									type="text"
@@ -110,49 +111,57 @@ const EditJob: React.FC = () => {
 									className={inputStyle}
 									onChange={(e) => setStreet(e.target.value)}
 								/>
-                       
-                            {/* <label className={labelStyle}>City</label> */}
-                            <input
-                                placeholder="City"
-                                type="text"
-                                value={city}
-                                className={`${locationStyle} `}
-                                onChange={(e) => setCity(e.target.value)}
-								/>
-                        
-                            {/* <label className={labelStyle}>Postal Code</label> */}
-                            <input
-                                placeholder="Postal Code"
-                                type="text"
-                                value={postalCode}
-                                className="md:p-4 mb-5 md:w-[48%] w-full p-3 border rounded-md shadow-md shadow-black-500/50 border-gray"
-                                onChange={(e) => setPostalCode(e.target.value)}
-                            />
-                       
-                            {/* <label className={labelStyle}>Country</label> */}
-                            <input
-                                placeholder="Country"
-                                type="text"
-                                value={country}
-                                className={`${locationStyle} `}
-                                onChange={(e) => setCountry(e.target.value)}
-                            />
-                        
-                            {/* <label className={labelStyle}>Province</label> */}
-                            <input
-                                placeholder="Province"
-                                type="text"
-                                value={province}
-                                className="md:p-4 mb-5 md:w-[48%] w-full p-3 border rounded-md shadow-md shadow-black-500/50 border-gray"
-                                onChange={(e) => setProvince(e.target.value)}
-                            />
+
+                            <div className="md:w-[48%]">
+                                <label className={labelStyle}>City</label>
+                                <input
+                                    placeholder="City"
+                                    type="text"
+                                    value={city}
+                                    className={`${locationStyle} `}
+                                    onChange={(e) => setCity(e.target.value)}
+                                    />
+                            </div>
+                            <div className="md:w-[48%] w-full">
+                                <label className={labelStyle}>Postal Code</label>
+                                <input
+                                    placeholder="Postal Code"
+                                    type="text"
+                                    value={postalCode}
+                                    className="md:p-4 mb-5  w-full p-3 border rounded-md shadow-md shadow-black-500/50 border-gray"
+                                    onChange={(e) => setPostalCode(e.target.value)}
+                                />
+                            </div>
+
+                            <div className="md:w-[48%]">
+                                <label className={labelStyle}>Country</label>
+                                <input
+                                    placeholder="Country"
+                                    type="text"
+                                    value={country}
+                                    className={`${locationStyle} `}
+                                    onChange={(e) => setCountry(e.target.value)}
+                                />
+                            </div>
+
+                            <div className="md:w-[48%]">
+                                <label className={labelStyle}>Province</label>
+                                <input
+                                    placeholder="Province"
+                                    type="text"
+                                    value={province}
+                                    className="md:p-4 mb-5  w-full p-3 border rounded-md shadow-md shadow-black-500/50 border-gray"
+                                    onChange={(e) => setProvince(e.target.value)}
+                                />
+                            </div>
+
                         </div>
                    
                     
                     </div>
                     {/* ================================= Description =================================*/}
                     <div className={`${divStyle} `}>
-                        {/* <label className={labelStyle}>Description</label> */}
+                    <label className={labelStyle}>Description</label>
                         <textarea
                             placeholder="Description..."
                             value={description}
@@ -163,8 +172,7 @@ const EditJob: React.FC = () => {
                     </div>
                     {/* ================================= Requirements =================================*/}
                     <div className={`${divStyle} `}>
-                        {/* <label className={labelStyle}>Requirements</label> */}
-                       
+                    <label className={labelStyle}>Requirements</label>
                         <textarea
                             placeholder="Requirements"
                             value={requirements.join('\n')}

@@ -1,14 +1,15 @@
 import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
-import SingleJobInfo from '../../components/user/SingleJobInfo';
+import SingleJobInfo from '../user/SingleJobInfo';
 import {  useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 interface SingleJobProps {
 	company: string;
 	position: string;
+	id: number;
 }
 
-const JobList: React.FC<SingleJobProps> = ({ company, position }) => {
+const Job: React.FC<SingleJobProps> = ({ company, position, id }) => {
 
 	const navigation = useNavigate();
 	
@@ -45,7 +46,7 @@ const JobList: React.FC<SingleJobProps> = ({ company, position }) => {
 					<SingleJobInfo icon={<FaBriefcase />} text="full-time" />
                     <div  className='gap-x-5 flex float-end'>
 						
-                        <button onClick={() => {navigation('../edit')}} 
+                        <button onClick={() => {navigation(`../edit/${id}`)}} 
 						className={`${btnStyle} bg-updateBtnColor px-6 md:px-0`}>Edit</button>
 
                         <button onClick={handleDelete}
@@ -58,4 +59,4 @@ const JobList: React.FC<SingleJobProps> = ({ company, position }) => {
 	);
 };
 
-export default JobList;
+export default Job;
