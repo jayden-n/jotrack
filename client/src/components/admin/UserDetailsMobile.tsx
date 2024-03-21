@@ -1,13 +1,18 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import {motion} from 'framer-motion'
+import { User } from './UserData'
 
-export default function UserDetailsMobile() {
+interface Props {
+  user: User | null;
+}
 
+const UserDetailsMobile: React.FC<Props> = ({user}) => {
+  
   const navigation = useNavigate()
 
   return (
-         <motion.div className='absolute h-[50%]  w-[90%] bg-white gap-2 mt-10'
+         <motion.div className='absolute h-[55%]  w-[90%] bg-white gap-2 mt-10'
          animate={{  
             opacity: [0, 0.5, 0.5, 1],
            
@@ -16,29 +21,33 @@ export default function UserDetailsMobile() {
             duration: 0.5,
             ease:"easeOut",
         }}
-         
-        //  exit={{ opacity: 0 }}
+      
           layout style={{ borderRadius: 20 }} 
             
          >
-                <div  className='grid grid-cols-3 items-center m-5 '>
-                  <div className='col-start-1'>
-                    <p className='mb-10 '>User ID </p>
+                 <div className='grid grid-cols-3 items-center m-5 '>
+                <div className='col-start-1'>
+                    <p className='mb-10'>User ID </p>
                     <p className='mb-10'>Name </p>
                     <p className='mb-10'>Email</p>
                     <p className='mb-10'>Address</p>
                     <p>Phone</p>
-                  </div>
+                </div>
                 {/* user data display here */}
                 <div className='col-start-2 col-span-2 '>
-                    <p className='mb-10 '>1 </p>
-                    <p className='mb-10'>any name </p>
-                    <p className='mb-10'>name@gmail.com</p>
-                    <p className='mb-10'>123 Any St North, Toronto, L8M3F4, ON</p>
-                    <p>55555555</p>
-                </div>    
-                  
+                    {user ? (
+                        <>
+                            <p className='mb-10'>{user.id}</p>
+                            <p className='mb-10'>{user.firstName} {user.lastName}</p>
+                            <p className='mb-10'>{user.email}</p>
+                            <p className='mb-10'>{user.street}, {user.city}, {user.postalCode}, {user.province} {user.country}</p>
+                            <p>{user.phoneNumber}</p>
+                        </>
+                    ) : (
+                        <p>No user data available</p>
+                    )}
                 </div>
+            </div>
 
                 <div className='flex justify-center items-center'>
                     <button onClick={() => {navigation('../activity')}}
@@ -54,3 +63,5 @@ export default function UserDetailsMobile() {
 
   )
 }
+
+export default UserDetailsMobile;

@@ -1,14 +1,51 @@
 import React, { useEffect, useState } from 'react';
-import {Link, useNavigate} from "react-router-dom"
+import {Link, useNavigate, useParams} from "react-router-dom"
 import UserDetailsMobile from './UserDetailsMobile';
 import StatusUpdate from './StatusUpdate';
+import axios from 'axios';
+import Job from './Job';
+import { toast } from 'react-toastify';
 
-const UserSearch: React.FC = () => {
-    const navigation = useNavigate()
-
-    // const [userData, setData] = useState<any>(null);
+interface UserInfo {
+    searchID: number;
+ }
+ 
+export interface User {
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    postalCode: string;
+    street: string;
+    city: string;
+    province: string;
+    country: string;
+    phoneNumber: number
+    
+}
+const UserData: React.FC<UserInfo> = ({searchID}) => {  
+    const [user, setUser] = useState<User | null>(null);
+    const [error, setError] = useState<string>('')
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [openDetails, setOpen] = useState(false)
     const [openStatus, setStatus] = useState(false)
+    const navigation = useNavigate()
+
+    useEffect(() => {
+       axios
+          .get<User | null>(`http://localhost:8000/api/users/${searchID}`)
+          .then((response): void => {         
+             setUser(response.data);
+          })
+          .catch((error): void => {
+             toast.error('User not found')
+             setError(error);
+          })
+          .finally(() => {
+             setIsLoading(false);
+          });
+    }, [searchID]);
+
 
     const showDetails = () => {
         setOpen(!openDetails)
@@ -17,6 +54,7 @@ const UserSearch: React.FC = () => {
         setStatus(!openStatus)
     }
 
+    const cellStyle = 'text-left text-sm font-outfit md:text-lg py-3'
     return (
         <div className='grid grid-col-1 md:grid-cols-7 md:mt-10 mt-5'>
            
@@ -29,7 +67,8 @@ const UserSearch: React.FC = () => {
                     >
                         User 
                     </button>
-                    {openDetails && <UserDetailsMobile />}
+                    {openDetails && <UserDetailsMobile user={user} />}
+
                 </div> 
                 
 
@@ -76,30 +115,35 @@ const UserSearch: React.FC = () => {
        
             {/* ===================================== User Details ================================== */}
 
-            <div className='md:col-end-8 md:col-span-3 md:col-start-6 mr-10 bg-white pl-5 py-5  rounded-l-lg hidden md:grid'>
-                <div  className='grid grid-cols-3'>
-                  <div className='col-start-1'>
-                    <p className='mb-10 '>User ID </p>
-                    <p className='mb-10'>Name </p>
-                    <p className='mb-10'>Email</p>
-                    <p className='mb-10'>Address</p>
-                    <p className='mb-10'>Phone</p>
-                  </div>
-                {/* user data display here */}
-                <div className='col-start-2 col-span-2'>
-                    <p className='mb-10 '>1 </p>
-                    <p className='mb-10'>any name </p>
-                    <p className='mb-10'>name@gmail.com</p>
-                    <p className='mb-10'>123 Any St North, Toronto, L8M3F4, ON</p>
-                    <p className='mb-10'>55555555</p>
-                </div>    
-                  
-                </div>
+            <div className={` md:col-end-8  ${openStatus ? 'md:col-start-6' : 'md:col-start-5' } mr-10 bg-white pl-5 py-5 h-[auto] w-[auto] rounded-l-lg hidden md:grid`}>
+                <table>
+                    <tr>
+                        <td className={`${cellStyle}`}>ID</td>
+                        <td className={`${cellStyle}`}>{user?.id} </td>
+                    </tr>
+                    <tr>
+                         <td className={`${cellStyle}`}>Name </td>
+                         <td className={`${cellStyle}`}>{user?.firstName} {user?.lastName} </td>
+                    </tr>
+                    <tr>
+                        <td className={`${cellStyle}`}>Email</td>                 
+                        <td className={`${cellStyle}`}>{user?.email}</td>
+                    </tr>
+                    <tr>
+                        <td className={`${cellStyle}`}>Address</td>
+                        <td className={`${cellStyle}`}>{user?.street}, {user?.city}, {user?.postalCode}, {user?.province} {user?.country}</td>
+                    </tr>
+                    <tr>
+                        <td className={`${cellStyle}`}>Phone</td>
+                        <td className={`${cellStyle}`}>{user?.phoneNumber}</td>
+                    </tr>
+                </table>
+               
 
                 <div className='flex justify-center items-center'>
                     <button onClick={() => {navigation('../activity')}}
-                    className='bg-green font-outfit text-white text-normal text-center p-1.5
-                    rounded-lg  hover:opacity-90 ring-0.5  w-3/5  '
+                    className='bg-green font-outfit text-white text-normal text-center mt-5 p-1.5
+                    rounded-lg  hover:opacity-90 ring-0.5  w-[40%]  '
                     >
                         User Activity
                     </button>
@@ -110,4 +154,4 @@ const UserSearch: React.FC = () => {
     )
 }
 
-export default UserSearch
+export default UserData

@@ -113,7 +113,7 @@ const router = createBrowserRouter([
 						element: <UserActivity />,
 					},
 					{
-						path: 'edit',
+						path: 'edit/:id',
 						element: <EditJob />
 					},
 				],

@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom';
-import SingleJob from './SingleJob';
-import SingleJobSearch from './SingleJobSearch';
+import Job from './Job'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-interface AllJobsComponentProps {
+interface AllJobs {
    searchText: string;
 }
 
@@ -25,7 +24,7 @@ interface Job {
    dateTimePosted: Date;
 }
 
-const AllJobsComponent: React.FC<AllJobsComponentProps> = ({ searchText }) => {
+const AllJobs: React.FC<AllJobs> = ({ searchText }) => {
    const [jobs, setJobs] = useState<Job[]>([]);
    const [error, setError] = useState<string>('');
    const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -44,41 +43,36 @@ const AllJobsComponent: React.FC<AllJobsComponentProps> = ({ searchText }) => {
          });
    }, []);
 
-   //  NOTE: hardcoded job data (replace this with actual job data from the server)
-
-   //  ================== check if there's a job from server first ==================
-   if (jobs.length === 0) {
-      return (
-         <>
-            <h2>No jobs to display</h2>
-         </>
-      );
+   if (jobs.length === 0) {  
+        return(
+            <div
+            className={` col-start-2 col-end-5`}>
+                <p>No jobs to display</p>
+            </div>
+        ) 
    }
 
-   // Filter jobs based on search text
    const filteredJobs = jobs.filter((job) =>
-      `${job.companyName} ${job.position}`
+      `${job.companyName} ${job.position} ${job.id}`
          .toLowerCase()
          .includes(searchText.toLowerCase()),
    );
 
    return (
-      <section className="mt-16 ">
-         <div className="grid grid-cols-1 gap-y-8 lg:grid-cols-2 lg:gap-8">
-            {/* NOTE: will eventually map over the jobs array from back-end */}
+      <div>
             {filteredJobs.map((job, index) => (
-               // NOTE: will replace id with real data
-               <Link to={`../job/${job.id.toString()}`}>
-                  <SingleJobSearch
+           
+                  <Job
                      key={index}
                      company={job.companyName}
                      position={job.position}
+                     id={job.id}
                   />
-               </Link>
+               
             ))}
-         </div>
-      </section>
+        
+      </div>
    );
 };
 
-export default AllJobsComponent;
+export default AllJobs;

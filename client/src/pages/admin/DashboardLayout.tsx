@@ -1,6 +1,6 @@
 import { ReactEventHandler, useState } from 'react';
 import { toast } from 'react-toastify';
-import ChangePassword from './ChangePassword'
+import ChangePassword from '../../components/admin/ChangePassword'
 
 const DashboardLayout: React.FC = () => {
 

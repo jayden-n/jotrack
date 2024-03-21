@@ -1,44 +1,74 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { toast } from 'react-toastify';
 
+
 const EditJob: React.FC = () => {
-    const [companyName, setCompanyName] = useState<string>("Any Name");
-    const [position, setPosition] = useState<string>("Front-end Developer");
-    const [location, setLocation] = useState<string>("Toronto, ON");
-    const [description, setDescription] = useState<string>("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut");
-    const [requirements, setRequirements] = useState<Array<string>>(['Lorem ipsum dolor sit amet', 'Lorem ipsum dolor sit amet', 'Lorem ipsum dolor sit amet']);
+    const { id } = useParams<{ id: string }>();
 
-    // const bulletPoint = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    //     const bullet = '\u2022';
-    //     const value = e.currentTarget.value.length;
-    //     if (value > 0) {
-    //         if (e.key === 'Enter') {
-    //             e.preventDefault();
-    //             e.currentTarget.value = `${e.currentTarget.value}\n${bullet} `;
-    //         } else if (value === 1) {
-    //             e.currentTarget.value = `${bullet} ${e.currentTarget.value}`;
-    //         }
-    //     }
-    // };
+    const [companyName, setCompanyName] = useState<string>("");
+    const [position, setPosition] = useState<string>("");
+    const [postalCode, setPostalCode] = useState<string>("");
+    const [street, setStreet] = useState<string>("");
+    const [city, setCity] = useState<string>("");
+    const [province, setProvince] = useState<string>("");
+    const [country, setCountry] = useState<string>("");
+    const [description, setDescription] = useState<string>("");
+    const [requirements, setRequirements] = useState<Array<string>>([]);
 
-    const onUpdate = (e: React.FormEvent<HTMLButtonElement>) => { 
+    useEffect(() => { 
+        axios.get(`http://localhost:8000/api/jobs/${id}`)
+            .then(response => {
+                const job = response.data;
+                setCompanyName(job.companyName);
+                setPosition(job.position);
+                setPostalCode(job.postalCode);
+                setStreet(job.street);
+                setCity(job.city);
+                setProvince(job.province);
+                setCountry(job.country);
+                setDescription(job.description);
+                setRequirements(job.requirements);
+               
+            })
+            .catch(error => {
+                toast.error('Failed retrieving job.')
+                //  console.log(id)
+                console.error(error);
+              
+            });
+    }, [id]);
+
+    
+
+    const onUpdate = async (e: React.FormEvent<HTMLButtonElement>) => { 
         e.preventDefault();
-        if (                //add if changes happened later
-            companyName ||
-            position ||
-            location ||
-            description ||
+
+        const updatedJob = {
+            companyName,
+            position,
+            postalCode, street, city, province, country,
+            description,
             requirements
-        ) {
-            toast.success('Job successfully updated.')
-            
+        };
+
+        try {
+            const response = await axios.put(`http://localhost:8000/api/jobs/${id}`, updatedJob);
+            if (response.status === 200) {
+                toast.success('Job successfully updated.');
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error('Error updating job.');
         }
     };
 
     // =================================================== Styles ===================================================
     const labelStyle = 'mb-1 font-outfit text-lg block font-medium'
-    const inputStyle = ' p-2  mb-5 md:w-3/4 w-full rounded-md shadow-md shadow-black-500/50 font-outfit text-lg'
+    const inputStyle = " md:p-4 mb-5  w-full p-3 border rounded-md shadow-md shadow-black-500/50  border-gray"
+    const divStyle = ' md:flex md:flex-wrap  gap-x-5 pt-5 '
+    const locationStyle = "md:p-4 mb-5  w-full p-3 border rounded-md shadow-md shadow-black-500/50 border-gray"
     const textareaStyle = 'md:p-4 w-full md:h-44 p-3 font-outfit text-lg rounded-md shadow-md shadow-black-500/50 '
     const btnStyle = 'font-outfit text-white text-center md:text-xl md:px-5 md:py-1 rounded-lg p-2 hover:opacity-90 shadow-xl ring-1'
     // =================================================== End ===================================================
@@ -47,11 +77,12 @@ const EditJob: React.FC = () => {
         <div>
             <div className="sm:grid sm:grid-cols-1 md:mt-10 mt-10 mb-5 mx-4 md:mx-0">
                 <form className="md:mx-10 rounded-lg shadow-xl bg-formGrey p-12 ">
-                    <div className="md:grid md:grid-cols-3 ">
+                    <div className=" ">
                         {/* ================================= Company Name =================================*/}
-                        <div>
-                            <label className={labelStyle}>Company Name</label>
+                        <div className={`${divStyle} `}>
+                        <label className={labelStyle}>Company Name</label>
                             <input
+                              placeholder="Company name"
                                 type="text"
                                 value={companyName}
                                 className={inputStyle}
@@ -60,8 +91,7 @@ const EditJob: React.FC = () => {
                         </div>
                     
                         {/* ================================= Position =================================*/}      
-                        <div>
-                            <label className={labelStyle}>Position</label>
+                        <label className={labelStyle}>Position</label>
                             <input
                                 placeholder="Position"
                                 type="text"
@@ -69,39 +99,85 @@ const EditJob: React.FC = () => {
                                 className={inputStyle}
                                 onChange={(e) => setPosition(e.target.value)}
                             />
-                        </div>
+                      
                     
                         {/* ================================= Location =================================*/}
-                        <div>
-                            <label className={labelStyle}>Location</label>
+                        <div className={`${divStyle} `}>
+                        <label className={labelStyle}>Street</label>
                             <input
-                                placeholder="Location"
-                                type="text"
-                                value={location}
-                                className={inputStyle}
-                                onChange={(e) => setLocation(e.target.value)}
-                            />
+									placeholder="Street"
+									type="text"
+									value={street}
+									className={inputStyle}
+									onChange={(e) => setStreet(e.target.value)}
+								/>
+
+                            <div className="md:w-[48%]">
+                                <label className={labelStyle}>City</label>
+                                <input
+                                    placeholder="City"
+                                    type="text"
+                                    value={city}
+                                    className={`${locationStyle} `}
+                                    onChange={(e) => setCity(e.target.value)}
+                                    />
+                            </div>
+                            <div className="md:w-[48%] w-full">
+                                <label className={labelStyle}>Postal Code</label>
+                                <input
+                                    placeholder="Postal Code"
+                                    type="text"
+                                    value={postalCode}
+                                    className="md:p-4 mb-5  w-full p-3 border rounded-md shadow-md shadow-black-500/50 border-gray"
+                                    onChange={(e) => setPostalCode(e.target.value)}
+                                />
+                            </div>
+
+                            <div className="md:w-[48%]">
+                                <label className={labelStyle}>Country</label>
+                                <input
+                                    placeholder="Country"
+                                    type="text"
+                                    value={country}
+                                    className={`${locationStyle} `}
+                                    onChange={(e) => setCountry(e.target.value)}
+                                />
+                            </div>
+
+                            <div className="md:w-[48%]">
+                                <label className={labelStyle}>Province</label>
+                                <input
+                                    placeholder="Province"
+                                    type="text"
+                                    value={province}
+                                    className="md:p-4 mb-5  w-full p-3 border rounded-md shadow-md shadow-black-500/50 border-gray"
+                                    onChange={(e) => setProvince(e.target.value)}
+                                />
+                            </div>
+
                         </div>
+                   
                     
                     </div>
                     {/* ================================= Description =================================*/}
-                    <div>
-                        <label className={labelStyle}>Description</label>
+                    <div className={`${divStyle} `}>
+                    <label className={labelStyle}>Description</label>
                         <textarea
                             placeholder="Description..."
                             value={description}
-                            className={textareaStyle}
+                            className="  md:p-4 w-full md:h-44 p-3 border rounded-md 
+									shadow-md shadow-black-500/50 border-gray"
                             onChange={(e) => setDescription(e.target.value)}
                         />
                     </div>
                     {/* ================================= Requirements =================================*/}
-                    <div>
-                        <label className={labelStyle}>Requirements</label>
-                       
+                    <div className={`${divStyle} `}>
+                    <label className={labelStyle}>Requirements</label>
                         <textarea
                             placeholder="Requirements"
                             value={requirements.join('\n')}
-                            className="w-full p-3  font-outfit text-lg rounded-md shadow-md shadow-black-500/50"
+                            className=" w-full p-3 border border-gray rounded-md 
+								shadow-md shadow-black-500/50"
                             rows={7}
                             // onKeyDown={bulletPoint}
                             onChange={(e) => setRequirements(e.target.value.split('\n'))}
