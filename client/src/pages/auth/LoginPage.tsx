@@ -1,73 +1,55 @@
 import axios from 'axios';
-import React, { useState, FormEvent, ChangeEvent, useEffect } from 'react';
+import React, { useState, FormEvent, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
-// Define a type for the user role
-type UserRole = 'admin' | 'user' | null;
+import { jwtDecode, JwtPayload } from 'jwt-decode';
 
 const LoginPage = () => {
   const [error, setError] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [role, setRole] = useState<UserRole>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const navigate = useNavigate();
-  // get the role
-  const handleLogin = async () => {
-    await axios
-      .post('http://localhost:8000/api/auth/login', { email, password })
-      .then((response) => {
-        const { email, password } = response.data;
-        setEmail(email);
-        setPassword(password);
 
-				// store jwt to local storage for future auth
-        localStorage.setItem('access_token', response.data['access_token']);
-      })
-      .catch((error): void => {
-        setError(error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!email || !password) {
+      setError('Please fill in all fields.');
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+
+      const response = await axios.post(
+        'http://localhost:8000/api/auth/login',
+        { email, password },
+      );
+
+      const accessToken: string = response.data['access_token'];
+
+      const decodedJwt: any = jwtDecode<JwtPayload>(accessToken);
+      const role = decodedJwt['role'];
+
+      localStorage.setItem('access_token', accessToken);
+
+      if (role === 'user') navigate('/user/dashboard');
+      else if (role === 'admin') navigate('/admin');
+    } catch (error: any) {
+      setError(error.response.data.message || 'An error occurred');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  // Ensure these handlers are used in the input fields
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
 
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
-  };
-
-  // When Admin button is clicked
-  const handleAdminClick = () => {
-    setRole('admin');
-  };
-
-  // When User button is clicked
-  const handleUserClick = () => {
-    setRole('user');
-  };
-
-  // Corrected type for the submit event
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setError('');
-    if (!email || !password || !role) {
-      setError('Please fill in all fields.');
-      return;
-    }
-    if (role === 'user') {
-      console.log({ email, password, role });
-      navigate('/user/dashboard');
-    } else if (role === 'admin') {
-      console.log({ email, password, role });
-      navigate('/admin');
-    }
   };
 
   return (
@@ -121,33 +103,12 @@ const LoginPage = () => {
             className="p-4 text-2xl bg-white border border-gray-300 rounded shadow-inner w-full justify-self-center mb-6 mt-4 md:col-span-2"
             onChange={handlePasswordChange}
           />
-          <hr className="border-t border-gray-300 my-8 mb-4 mx-auto w-1/3 justify-self-center mt-4 md:col-span-2" />
-          <div className="flex justify-center gap-12 md:col-span-2">
-            <button
-              type="button"
-              className={`w-36 py-3 text-2xl bg-white font-regular rounded-xl hover:bg-indigo ${
-                role === 'admin' ? 'bg-indigo' : 'bg-transparent'
-              }`}
-              onClick={handleAdminClick}
-            >
-              Admin
-            </button>
-            <button
-              type="button"
-              className={`w-36 py-3 text-2xl bg-white font-regular rounded-xl hover:bg-indigo ${
-                role === 'user' ? 'bg-indigo' : 'bg-transparent'
-              }`}
-              onClick={handleUserClick}
-            >
-              User
-            </button>
-          </div>
           <button
             type="submit"
-            onClick={handleLogin}
             className="text-2xl text-white bg-btnPurple py-3 px-72 justify-self-center mt-10 md:col-span-2 hover:opacity-90"
+            disabled={isLoading}
           >
-            Sign in
+            {isLoading ? 'Signing in...' : 'Sign in'}{' '}
           </button>
           {error && (
             <div className="text-red-500 py-2 px-6 justify-self-center md:col-span-2">
