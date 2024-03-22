@@ -12,7 +12,7 @@ const UserDetailsMobile: React.FC<Props> = ({user}) => {
   const navigation = useNavigate()
 
   return (
-         <motion.div className='absolute h-[55%]  w-[90%] bg-white gap-2 mt-10'
+         <motion.div className='absolute h-[45%]  w-[90%] bg-white gap-2 mt-10'
          animate={{  
             opacity: [0, 0.5, 0.5, 1],
            
@@ -40,7 +40,7 @@ const UserDetailsMobile: React.FC<Props> = ({user}) => {
                             <p className='mb-10'>{user.id}</p>
                             <p className='mb-10'>{user.firstName} {user.lastName}</p>
                             <p className='mb-10'>{user.email}</p>
-                            <p className='mb-10'>{user.street}, {user.city}, {user.postalCode}, {user.province} {user.country}</p>
+                            <p className='mb-10'>{user.street}, {user.city} {user.postalCode} {user.province}, {user.country}</p>
                             <p>{user.phoneNumber}</p>
                         </>
                     ) : (

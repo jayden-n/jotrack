@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 // Define a type for the user role
 type UserRole = 'admin' | 'user' | null;
 
+
 const LoginPage = () => {
 	const [error, setError] = useState<string>('');
 	const [email, setEmail] = useState<string>('');
@@ -18,10 +19,24 @@ const LoginPage = () => {
 	// get the role
 	const handleLogin = async () => {
 		await axios.post('http://localhost:8000/api/auth/login', { email, password })
-			.then(response => {
+			.then(async response => {
 				const { email, password } = response.data;
 				setEmail(email);
 				setPassword(password);
+
+				//get all users
+				// const usersResponse = await axios.get('http://localhost:8000/api/users');
+				// const allUsers = usersResponse.data;
+
+				// const user = allUsers.find((user: any) => user.email === email)
+
+				// if (user) {
+					
+				// 		setRole(role);
+					
+				// } else {
+				// 	setError('User not found');
+				// }
 			})
 			.catch((error): void => {
 				setError(error);
