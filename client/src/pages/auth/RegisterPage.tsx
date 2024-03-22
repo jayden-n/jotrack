@@ -74,8 +74,7 @@ const RegisterPage: FC = () => {
       })
       .catch(async (error) => {
         setError(
-          (await error.response.data.message[0]) ||
-            (await error.response.data.message),
+          await error.response.data.message[0]
         );
       });
   };

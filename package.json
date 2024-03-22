@@ -4,9 +4,9 @@
   "description": "",
   "scripts": {
     "cp:env:template": "cd server && cp .env.template .env",
-    "db:dev:up":"cd server && npm run db:dev:up",
-    "db:dev:restart":"cd server && npm run db:dev:restart",
-    "db:dev:rm":"cd server && npm run db:dev:rm",
+    "db:dev:up": "cd server && npm run db:dev:up",
+    "db:dev:restart": "cd server && npm run db:dev:restart",
+    "db:dev:rm": "cd server && npm run db:dev:rm",
     "docker:dev:compose": "docker-compose -f docker-compose.yml -p jotrack up -d",
     "docker:dev:down": "docker-compose down -v",
     "docker:dev:restart": "npm run docker:dev:down && npm run docker:dev:compose",
@@ -15,5 +15,8 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "jwt-decode": "^4.0.0"
+  }
 }

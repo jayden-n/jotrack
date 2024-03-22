@@ -10,7 +10,7 @@ import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
 import { OpenAIService } from 'src/openai/openai.service';
-import OpenAI from 'openai';
+// import OpenAI from 'openai';
 
 @Injectable()
 export class AuthService {
@@ -67,15 +67,15 @@ export class AuthService {
         },
       });
 
-      const thread: OpenAI.Beta.Threads.Thread =
-        await this.openAIService.createThread();
+      // const thread: OpenAI.Beta.Threads.Thread =
+      //   await this.openAIService.createThread();
 
-      const run: OpenAI.Beta.Threads.Runs.Run =
-        await this.openAIService.run(thread);
+      // const run: OpenAI.Beta.Threads.Runs.Run =
+      //   await this.openAIService.run(thread);
 
-      this.prismaService.openAI.create({
-        data: { userId: user.id, threadId: thread.id, runId: run.id },
-      });
+      // this.prismaService.openAI.create({
+      //   data: { userId: user.id, threadId: thread.id, runId: run.id },
+      // });
 
       return user;
     } catch (error) {
