@@ -2,6 +2,8 @@ import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
 import SingleJobInfo from '../user/SingleJobInfo';
 import {  useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Modal from './Modal';
+import { useState } from 'react';
 
 interface SingleJobProps {
 	company: string;
@@ -10,13 +12,13 @@ interface SingleJobProps {
 }
 
 const Job: React.FC<SingleJobProps> = ({ company, position, id }) => {
-
+	const [deleteBtn, setDeleteBtn] = useState<boolean>(false)
 	const navigation = useNavigate();
 	
     const btnStyle = 'font-outfit text-white text-normal text-center md:text-md  md:w-2/4 md:py-1 rounded-lg p-1  hover:opacity-90 shadow-xl ring-1'
 
 	const handleDelete = () => {
-		toast.success('Job Deleted.')
+		setDeleteBtn(true)
 	}
 	// company first letter
 	const initials: string = company
@@ -51,10 +53,12 @@ const Job: React.FC<SingleJobProps> = ({ company, position, id }) => {
 
                         <button onClick={handleDelete}
 						className={`${btnStyle} bg-cancelRed px-4 md:px-0`}>Delete</button>
+						
 
                     </div>
 				</div>
 			</div>
+				<Modal isOpen={deleteBtn} onClose={() => setDeleteBtn(false)} id={id} />
 		</article>
 	);
 };

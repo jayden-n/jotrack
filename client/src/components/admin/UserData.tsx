@@ -5,6 +5,7 @@ import StatusUpdate from './StatusUpdate';
 import axios from 'axios';
 import Job from './Job';
 import { toast } from 'react-toastify';
+import { motion } from 'framer-motion';
 
 interface UserInfo {
     searchID: number;
@@ -54,7 +55,8 @@ const UserData: React.FC<UserInfo> = ({searchID}) => {
         setStatus(!openStatus)
     }
 
-    const cellStyle = 'text-left text-sm font-outfit md:text-lg py-3'
+    const cellStyle = 'text-left text-sm px-3 font-outfit md:text-xl py-3 '
+
     return (
         <div className='grid grid-col-1 md:grid-cols-7 md:mt-10 mt-5'>
            
@@ -74,7 +76,7 @@ const UserData: React.FC<UserInfo> = ({searchID}) => {
 
             {/*  ================================== User Applications  ================================= */}
 
-            <div className=' md:col-span-3 md:ml-10 bg-white rounded-lg w:2/5 mx-3 md:mx-0 md:w-full '>
+            <div className=' md:col-span-3 md:ml-10 bg-white rounded-lg w:2/5 mx-3 md:mx-0 md:w-[full] '>
                 <table className=' w-full text-center'>
 
                     <thead className='border-b text-sm md:text-lg  border-lightgrey'>
@@ -89,7 +91,7 @@ const UserData: React.FC<UserInfo> = ({searchID}) => {
                         {/* structure */}
                         <tr className={`border-b  border-lightgrey ${openStatus === true ? 'bg-lightgrey' : ''}`}>
                             <td className='text-center text-sm font-outfit md:text-lg '>
-                                <button onClick={() => {navigation('../edit')}}
+                                <button onClick={() => {navigation('../edit/:id')}}
                                 className='underline'>JobId</button>
                             </td> 
 
@@ -115,8 +117,20 @@ const UserData: React.FC<UserInfo> = ({searchID}) => {
        
             {/* ===================================== User Details ================================== */}
 
-            <div className={` md:col-end-8  ${openStatus ? 'md:col-start-6' : 'md:col-start-5' } mr-10 bg-white pl-5 py-5 h-[auto] w-[auto] rounded-l-lg hidden md:grid`}>
-                <table>
+            <motion.div className={`relative bg-white gap-2 ${openStatus ? 'md:col-start-6  md:w-[450px]  md:h-[400px]' :'md:col-start-5  md:w-[600px]  md:h-[360px]' }`}
+                animate={{  
+                    opacity: [0, 0.5, 0.5, 1],
+                
+                 }}
+                transition={{
+                    duration: 0.5,
+                    ease:"easeOut",
+                }}
+            
+                layout style={{ borderRadius: 20 }} 
+                    
+                >
+                <table className='m-5'>
                     <tr>
                         <td className={`${cellStyle}`}>ID</td>
                         <td className={`${cellStyle}`}>{user?.id} </td>
@@ -131,7 +145,7 @@ const UserData: React.FC<UserInfo> = ({searchID}) => {
                     </tr>
                     <tr>
                         <td className={`${cellStyle}`}>Address</td>
-                        <td className={`${cellStyle}`}>{user?.street}, {user?.city}, {user?.postalCode}, {user?.province} {user?.country}</td>
+                        <td className={`${cellStyle}`}>{user?.street}, {user?.city} {user?.postalCode} {user?.province}, {user?.country}</td>
                     </tr>
                     <tr>
                         <td className={`${cellStyle}`}>Phone</td>
@@ -142,14 +156,14 @@ const UserData: React.FC<UserInfo> = ({searchID}) => {
 
                 <div className='flex justify-center items-center'>
                     <button onClick={() => {navigation('../activity')}}
-                    className='bg-green font-outfit text-white text-normal text-center mt-5 p-1.5
+                    className='bg-green font-outfit text-white text-normal text-center  p-1.5
                     rounded-lg  hover:opacity-90 ring-0.5  w-[40%]  '
                     >
                         User Activity
                     </button>
                 </div>
                 
-            </div>
+            </motion.div>
         </div>
     )
 }
