@@ -91,7 +91,7 @@ const UserData: React.FC<UserInfo> = ({searchID}) => {
                         {/* structure */}
                         <tr className={`border-b  border-lightgrey ${openStatus === true ? 'bg-lightgrey' : ''}`}>
                             <td className='text-center text-sm font-outfit md:text-lg '>
-                                <button onClick={() => {navigation('../edit')}}
+                                <button onClick={() => {navigation('../edit/:id')}}
                                 className='underline'>JobId</button>
                             </td> 
 
