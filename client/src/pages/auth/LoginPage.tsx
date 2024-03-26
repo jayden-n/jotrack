@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 
-
 const LoginPage = () => {
   const [error, setError] = useState<string>('');
   const [email, setEmail] = useState<string>('');
