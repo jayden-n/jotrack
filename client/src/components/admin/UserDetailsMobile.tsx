@@ -12,11 +12,10 @@ const UserDetailsMobile: React.FC<Props> = ({user}) => {
   const navigation = useNavigate()
 
   return (
-         <motion.div className='absolute h-[45%]  w-[90%] bg-white gap-2 mt-10'
+         <motion.div className='absolute h-[45%]  w-[70%] bg-white gap-2 mt-10'
          animate={{  
-            opacity: [0, 0.5, 0.5, 1],
-           
-            boxShadow: "0 2px 0 2px rgba(0, 0, 0, 0.2)",}}
+            opacity: [0, 0.5, 0.5, 1],      
+            }}
          transition={{
             duration: 0.5,
             ease:"easeOut",
@@ -52,7 +51,7 @@ const UserDetailsMobile: React.FC<Props> = ({user}) => {
                 <div className='flex justify-center items-center'>
                     <button onClick={() => {navigation('../activity')}}
                     className='bg-green font-outfit text-white text-normal text-center p-1.5
-                    rounded-lg  hover:opacity-90 ring-0.5  w-3/5 mt-5 mb-5 '
+                    rounded-lg  hover:opacity-90 ring-0.5  w-[40%]  mb-5 '
                     >
                         User Activity
                     </button>

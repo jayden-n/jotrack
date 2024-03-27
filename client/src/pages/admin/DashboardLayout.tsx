@@ -1,10 +1,48 @@
-import { ReactEventHandler, useState } from 'react';
+import { ReactEventHandler, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import ChangePassword from '../../components/admin/ChangePassword'
+import axios from 'axios';
+import { User } from '../../components/admin/UserData';
 
-const DashboardLayout: React.FC = () => {
+interface Admin {
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    postalCode: string;
+    street: string;
+    city: string;
+    province: string;
+    country: string;
+    phoneNumber: number
+    
+}
 
+const DashboardLayout: React.FC<Admin> = () => {
+	const [adminInfo, setAdmininfo] = useState<Admin | null>(null)
+	const [error, setError] = useState<string>('')
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [openChange, setChange] = useState(false)
+
+	// using for example
+	useEffect(() => {
+		axios
+		   .get<Admin | null>(`http://localhost:8000/api/users/1`) 
+		   .then((response): void => {         
+			  setAdmininfo(response.data);
+		   })
+		   .catch((error): void => {
+			  toast.error('User not found')
+			  setError(error);
+		   })
+		   .finally(() => {
+			  setIsLoading(false);
+		   });
+	 }, []);
+	 
+	const addressFormate = () => {
+		return `${adminInfo?.street}, ${adminInfo?.city} ${adminInfo?.province}, ${adminInfo?.postalCode}, ${adminInfo?.country}`
+	}
 
 	const handlePassword = (e: React.FormEvent<HTMLButtonElement>) => {
 		e.preventDefault()
@@ -38,7 +76,7 @@ const DashboardLayout: React.FC = () => {
 							type="text"
 							readOnly
 							id="first-name"
-							defaultValue="Any"
+							defaultValue={adminInfo?.firstName}
 							className={`${inputStyle}`}
 						/>
 					</div>
@@ -50,8 +88,8 @@ const DashboardLayout: React.FC = () => {
 							type="text"
 							readOnly
 							id="last-name"
-							defaultValue="Body"
-							className={`${inputStyle}`}						/>
+							defaultValue={adminInfo?.lastName}
+							className={`${inputStyle}`}	/>
 					</div>
 				</div>
 
@@ -69,7 +107,7 @@ const DashboardLayout: React.FC = () => {
 							type="number"
 							id="phone"
 							className={`${inputStyle}`}			
-							defaultValue="555555"
+							defaultValue={adminInfo?.phoneNumber}
 						/>
 					</div>
 
@@ -83,7 +121,7 @@ const DashboardLayout: React.FC = () => {
 							type="email"
 							id="email"
 							className={`${inputStyle}`}
-							defaultValue="anybody@gmail.com"
+							defaultValue={adminInfo?.email}
 						/>
 					</div>
 				</div>
@@ -97,7 +135,7 @@ const DashboardLayout: React.FC = () => {
 						id="address"
 						className="w-full md:w-2/3 font-normal font-outfit border p-2 
 						rounded-md border-gray text-lg shadow-md text-gray "
-						defaultValue="123 st North, Toronto, ON, R2M4Z3"
+						defaultValue={addressFormate()}
 					/>
 				</div>
 

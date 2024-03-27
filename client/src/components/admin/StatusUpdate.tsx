@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { motion, useAnimation } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -28,8 +29,31 @@ const StatusUpdate: React.FC<StatusUpdateProps> = ({onClose}) => {
         setTimeout(() => {onClose()}, 2000)      
     };
 
-    const onUpdate = ( status: string) => { 
-        toast.success(`User status updated to ${status}`)           
+    const onUpdate = async ( status: string) => { 
+        if(status == 'Declined'){
+            try {
+                const response = await axios.put(`http://localhost:8000/api/job-applications/reject`);
+                if (response.status === 200) {
+                    toast.success(`User status updated to ${status}`)  
+                }
+            } catch (error) {
+                console.error(error);
+                toast.error('Error updating job.');
+            }
+        }
+
+        if(status == 'Accepted'){
+            try {
+                const response = await axios.put(`http://localhost:8000/api/job-applications/accept`);
+                if (response.status === 200) {
+                    toast.success(`User status updated to ${status}`)  
+                }
+            } catch (error) {
+                console.error(error);
+                toast.error('Error updating job.');
+            }
+        }
+                     
     };
 
 
@@ -49,7 +73,7 @@ const StatusUpdate: React.FC<StatusUpdateProps> = ({onClose}) => {
                 <button className={`bg-green ${statusBtnStyle}`} onClick={() => onUpdate('Accepted')}>Accepted</button>
                 <button className= {`bg-red ${statusBtnStyle} `} onClick={() => onUpdate('Declined')}>Declined</button>
 
-                <button className= {`bg-lightblue ${otherBtnStyle} mt-5 `}onClick={onNotify}>Notify User</button>
+                <button className= {`bg-lightblue ${otherBtnStyle} mt-5 `} onClick={onNotify}>Notify User</button>
                 <button className= {`bg-cancelRed ${otherBtnStyle}  mb-5`} onClick={onClose}>Cancel</button>
             </div>
         </motion.div>

@@ -109,7 +109,7 @@ const router = createBrowserRouter([
 						element: <AdminUsers />,
 					},
 					{
-						path: 'activity',
+						path: 'activity/:id',
 						element: <UserActivity />,
 					},
 					{
