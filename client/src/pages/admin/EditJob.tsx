@@ -33,7 +33,7 @@ const EditJob: React.FC = () => {
                
             })
             .catch(error => {
-                toast.error('Failed retrieving job.')
+                toast.error('Failed retrieving job')
                 //  console.log(id)
                 console.error(error);
               
@@ -69,7 +69,6 @@ const EditJob: React.FC = () => {
     const inputStyle = " md:p-4 mb-5  w-full p-3 border rounded-md shadow-md shadow-black-500/50  border-gray"
     const divStyle = ' md:flex md:flex-wrap  gap-x-5 pt-5 '
     const locationStyle = "md:p-4 mb-5  w-full p-3 border rounded-md shadow-md shadow-black-500/50 border-gray"
-    const textareaStyle = 'md:p-4 w-full md:h-44 p-3 font-outfit text-lg rounded-md shadow-md shadow-black-500/50 '
     const btnStyle = 'font-outfit text-white text-center md:text-xl md:px-5 md:py-1 rounded-lg p-2 hover:opacity-90 shadow-xl ring-1'
     // =================================================== End ===================================================
 

@@ -64,7 +64,7 @@ const UserSingleJobPage: React.FC = () => {
                         {/* company info */}
                         <div>
                             <p className="capitalize">position: {singleJob?.position}</p>
-                            <p className="capitalize">location: {singleJob?.street}, {singleJob?.city} {singleJob?.province} {singleJob?.postalCode}, {singleJob?.country}</p>
+                            <p className="capitalize">location: {singleJob?.street}, {singleJob?.city} {singleJob?.province}, {singleJob?.postalCode}, {singleJob?.country}</p>
                         </div>
                         <div>
                             <p className="capitalize font-bold">job description:</p>

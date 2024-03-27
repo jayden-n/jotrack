@@ -24,10 +24,19 @@ export interface User {
     phoneNumber: number
     
 }
+
+export interface Application{
+    status: string;
+    dateTimeApplied: Date;
+    dateTimeUpdated: Date;
+    userId: number;
+    jobId: number;
+}
 const UserData: React.FC<UserInfo> = ({searchID}) => {  
     const [user, setUser] = useState<User | null>(null);
     const [error, setError] = useState<string>('')
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [jobApps, setJobApp] = useState<Application[]>([]);
     const [openDetails, setOpen] = useState(false)
     const [openStatus, setStatus] = useState(false)
     const navigation = useNavigate()
@@ -46,6 +55,21 @@ const UserData: React.FC<UserInfo> = ({searchID}) => {
              setIsLoading(false);
           });
     }, [searchID]);
+
+    useEffect(() => {
+        axios.get('http://localhost:8000/api/job-applications')
+        .then((response): void =>{
+            const filteredApps = response.data.filter((application: Application) => application.userId === searchID);
+            setJobApp(filteredApps);
+        })
+        .catch((error): void => {
+            toast.error('Could not retrieve applications')
+            setError(error);
+         })
+         .finally(() => {
+            setIsLoading(false);
+         });
+    }, [searchID])
 
 
     const showDetails = () => {
@@ -70,7 +94,6 @@ const UserData: React.FC<UserInfo> = ({searchID}) => {
                         User 
                     </button>
                     {openDetails && <UserDetailsMobile user={user} />}
-
                 </div> 
                 
 
@@ -87,27 +110,22 @@ const UserData: React.FC<UserInfo> = ({searchID}) => {
                         </tr>
                     </thead>
 
-                    <tbody >
-                        {/* structure */}
-                        <tr className={`border-b  border-lightgrey ${openStatus === true ? 'bg-lightgrey' : ''}`}>
-                            <td className='text-center text-sm font-outfit md:text-lg '>
-                                <button onClick={() => {navigation('../edit/:id')}}
-                                className='underline'>JobId</button>
-                            </td> 
-
-                            <td className=' md:p-2 p-1 border-l-2 border-lightgrey text-center'>
-                                <span className='md:text-lg text-sm '>Pending</span>
-
-                                <button className='bg-updateBtnColor hover:opacity-90 ring-0.5
-                                 text-white rounded-lg md:py-2 md:px-5 text-sm p-1 float-end'
-                                 onClick={showStatus}
-                                 >
-                                    Update</button>
-                            </td>
-                        </tr>
-                       
-
+                    <tbody>
+                        {jobApps.map((application, index) => (
+                            <tr key={index} className={`border-b border-lightgrey ${openStatus === true ? 'bg-lightgrey' : ''}`}>
+                                <td className='text-center text-sm font-outfit md:text-lg'>
+                                    <button onClick={() => { navigation(`../edit/${application.jobId}`) }} className='underline'>{application.jobId}</button>
+                                </td>
+                                <td className='md:p-2 p-1 border-l-2 border-lightgrey text-center'>
+                                    <span className='md:text-lg text-sm'>{application.status}</span>
+                                    <button className='bg-updateBtnColor hover:opacity-90 ring-0.5 text-white rounded-lg md:py-2 md:px-5 text-sm p-1 float-end' onClick={showStatus}>
+                                        Update
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
+
                 </table>
             </div>
             
@@ -116,8 +134,9 @@ const UserData: React.FC<UserInfo> = ({searchID}) => {
             
        
             {/* ===================================== User Details ================================== */}
-
-            <motion.div className={`relative bg-white gap-2 ${openStatus ? 'md:col-start-6  md:w-[450px]  md:h-[400px]' :'md:col-start-5  md:w-[600px]  md:h-[360px]' }`}
+                            
+            <motion.div 
+                className={`relative md:grid hidden bg-white gap-2 ${openStatus ? 'md:col-start-6  md:w-[450px]  md:h-[400px]' :'md:col-start-5  md:w-[600px]  md:h-[360px]'}`}
                 animate={{  
                     opacity: [0, 0.5, 0.5, 1],
                 
@@ -154,8 +173,8 @@ const UserData: React.FC<UserInfo> = ({searchID}) => {
                 </table>
                
 
-                <div className='flex justify-center items-center'>
-                    <button onClick={() => {navigation('../activity')}}
+                <div className='flex justify-center items-center mb-5'>
+                    <button onClick={() => {navigation(`../activity/${searchID}`)}}
                     className='bg-green font-outfit text-white text-normal text-center  p-1.5
                     rounded-lg  hover:opacity-90 ring-0.5  w-[40%]  '
                     >
